@@ -19,6 +19,12 @@
     <script src="{{ asset('admin-assets/js/scripts.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     @yield('js-content')
+    <script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script>
+        $(function() {
+            $("body").perfectScrollbar();
+        })
+    </script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -30,7 +36,7 @@
     @yield('css-content')
 </head>
 
-<body>
+<body class="sb-nav-fixed">
     @include('components.navigation')
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
