@@ -6,7 +6,7 @@
             <div class="col-md-8 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Users') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Administracion de usuarios') }}</h2>
                     </div>
                     <div class="col-auto">
                         @can('user-create')
@@ -25,7 +25,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Users') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Usuarios') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header text-center h1">
-                                Users list
+                                Lista de usuarios
                             </div>
                             <div class="card-body">
                                 <!-- table -->

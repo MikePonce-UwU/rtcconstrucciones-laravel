@@ -24,7 +24,7 @@ class BodegaController extends Controller
     {
         //
         $data = Bodega::orderBy('id', 'asc')->paginate(5);
-        return view('bodega.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('bodegas.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -36,7 +36,7 @@ class BodegaController extends Controller
     {
         //
         $proyectos = Proyecto::pluck('NOMBRE', 'id')->all();
-        return view('bodega.create', compact('proyectos'));
+        return view('bodegas.create', compact('proyectos'));
     }
 
     /**
@@ -74,7 +74,7 @@ class BodegaController extends Controller
         //
         $bodega = Bodega::find($id);
         $proyecto = Proyecto::find($bodega->ID_PROYECTO)->NOMBRE;
-        return view('bodega.show', compact('bodega', 'proyecto'));
+        return view('bodegas.show', compact('bodega', 'proyecto'));
     }
 
     /**
@@ -88,7 +88,7 @@ class BodegaController extends Controller
         //
         $bodega = Bodega::find($id);
         $proyectos = Proyecto::pluck('NOMBRE', 'id')->all();
-        return view('bodega.edit', compact('bodega', 'proyectos'));
+        return view('bodegas.edit', compact('bodega', 'proyectos'));
     }
 
     /**

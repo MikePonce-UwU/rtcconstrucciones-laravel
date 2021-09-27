@@ -42,7 +42,7 @@
                     </div>
                 @endif
                 <div class="card shadow mb-4">
-                    <div class="card-header tect-center h1">Create form</div>
+                    <div class="card-header text-center h1">Create form</div>
                     <div class="card-body">
                         {!! Form::open(['route' => 'users.store', 'method' => 'POST']) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12">

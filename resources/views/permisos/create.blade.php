@@ -5,11 +5,11 @@
             <div class="col-md-8 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Crear un nuevo rol') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Crear un nuevo permiso') }}</h2>
                     </div>
                     <div class="col-auto">
 
-                        <a href="{{ route('roles.index') }}" class="btn btn-primary" style="color:white">
+                        <a href="{{ route('permisos.index') }}" class="btn btn-primary" style="color:white">
                             <span style="color:white"></span> {{ __('Back') }}
                         </a>
 
@@ -23,9 +23,9 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
+                                            href="{{ route('roles.index') }}">{{ __('Permisos') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Crear nuevo rol') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Crear nuevo permiso') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -44,23 +44,12 @@
                 <div class="card shadow mb-4">
                     <div class="card-header text-center h1">Formulario de creacion</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => 'roles.store', 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => 'permisos.store', 'method' => 'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <strong>{{ __('Name') }}:</strong>
                                     {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>{{ __('Permission') }} :</strong>
-                                    <br />
-                                    @foreach ($permission as $value)
-                                        <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-                                            {{ $value->name }}</label>
-                                        <br />
-                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -1,5 +1,5 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <div class="container">
+    <div class="container-fluid">
         <a class="navbar-brand ps-3" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>

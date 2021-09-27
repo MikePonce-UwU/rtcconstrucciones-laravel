@@ -30,6 +30,16 @@
                 </a>
             @endcan
 
+            @can('permission-list')
+                <a class="nav-link @if (Route::current()->getName() === 'permisos.index')
+                active
+            @endif "
+                    href="{{ route('permisos.index', []) }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-parking"></i></div>
+                    Permisos
+                </a>
+            @endcan
+
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
