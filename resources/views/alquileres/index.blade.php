@@ -63,7 +63,7 @@
                                                 <td class="text-center">{{ $alquiler->HORAS_ALQUILER }}</td>
                                                 <td class="text-center">{{ $alquiler->PAGO_HORA }}</td>
                                                 <td class="text-center">
-                                                    <a class="btn btn-secondary mb-2 mb-md-0"
+                                                    <a class="btn btn-dark mb-2 mb-md-0"
                                                         href="{{ route('alquileres.show', $alquiler->ID_ALQUILER) }}">{{ __('Show') }}</a>
                                                     @can('alquiler-edit')
                                                         <a class="btn btn-primary mb-2 mb-md-0"
@@ -93,4 +93,15 @@
     </div> <!-- .container-fluid -->
 
 
+@endsection
+@section('css-content')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+@endsection
+@section('js-content')
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable-1').DataTable();
+        });
+    </script>
 @endsection

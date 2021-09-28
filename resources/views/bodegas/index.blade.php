@@ -96,3 +96,21 @@
 
 
 @endsection
+@section('css-content')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+@endsection
+@section('js-content')
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable-1')
+                .addClass('nowrap')
+                .dataTable({
+                    responsive: true,
+                    columnDefs: [{
+                        targets: [-1, -6],
+                    }]
+                });
+        });
+    </script>
+@endsection
