@@ -32,11 +32,6 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <div class="lds-facebook">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
     @include('components.navigation')
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">

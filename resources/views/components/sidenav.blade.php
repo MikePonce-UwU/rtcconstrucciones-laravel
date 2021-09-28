@@ -51,6 +51,13 @@
             @endif "
                 id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav">
+                    @can('alquiler-list')
+                        <a class="nav-link @if (Route::current()->getName() === 'alquileres.index')
+                active
+            @endif "
+                            href="{{ route('alquileres.index', ['id' => 1]) }}">Alquileres</a>
+                    @endcan
+
                     @can('bodega-list')
                         <a class="nav-link @if (Route::current()->getName() === 'bodegas.index')
                 active
@@ -89,9 +96,3 @@
         {{ Auth::user()->name }}
     </div>
 </nav>
-@section('js-content')
-    <script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
-    <script>
-        $('#sb-scrolling-div').perfectScrollbar();
-    </script>
-@endsection

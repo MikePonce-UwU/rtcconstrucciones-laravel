@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-10">
+            <div class="col-md-auto col-lg-auto col-auto">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Mostrar alquiler') }}</h2>

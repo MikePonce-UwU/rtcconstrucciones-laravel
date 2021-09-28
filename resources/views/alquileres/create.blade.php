@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-10">
+            <div class="col-md-auto col-lg-auto col-auto">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Crear nuevo alquiler') }}</h2>
@@ -21,7 +21,7 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('bodegas.index') }}">{{ __('Alquileres') }}</a>
+                                            href="{{ route('alquileres.index') }}">{{ __('Alquileres') }}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{ __('Crear nuevo alquiler') }}</li>
                                 </ol>
@@ -42,20 +42,20 @@
                 <div class="card shadow mb-4">
                     <div class="card-header text-center h1">Formulario de adicion</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => 'bodegas.store', 'method' => 'POST']) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                        {!! Form::open(['route' => 'alquileres.store', 'method' => 'POST']) !!}
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Nombre') }}:</strong>
                                 {!! Form::text('NOMBRE', null, ['placeholder' => 'Nombre', 'class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Cantidad a usar') }}:</strong>
                                 {!! Form::text('CANTIDAD', null, ['placeholder' => 'Cantidad', 'class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Fecha de alquiler') }}:</strong>
                                 <div class="input-group">
@@ -64,19 +64,28 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Pago por hora') }}:</strong>
-                                {!! Form::text('PAGO_HORA', null, ['placeholder' => 'Pago por hora', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Hora alquiler') }}:</strong>
+                                {!! Form::text('HORAS_ALQUILER', null, ['placeholder' => 'Hora alquiler', 'class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                            <div class="form-group">
+                                <strong>{{ __('Pago por hora') }}:</strong>
+                                <div class="input-group">
+                                    <span class="input-group-text">C$</span>
+                                    {!! Form::text('PAGO_HORA', null, ['placeholder' => 'Pago por hora', 'class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Bodega') }}:</strong>
                                 {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, [], ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <a class="btn grey btn-outline-secondary ms-2" href="{{ route('alquileres.index') }}">
                                 {{ __('Back') }}</a>
                             <button type="submit" class="btn btn-success ms-2">{{ __('Save') }}</button>
