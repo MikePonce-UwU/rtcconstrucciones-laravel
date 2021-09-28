@@ -46,7 +46,6 @@
                                 <table class="table table-bordered" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
                                             <th class="text-center">{{ __('Nombre') }}</th>
                                             <th class="text-center">{{ __('Cantidad') }}</th>
                                             <th class="text-center">{{ __('Fecha alquiler') }}</th>
@@ -58,7 +57,6 @@
                                     @foreach ($alquileres as $alquiler)
                                         <tbody>
                                             <tr>
-                                                <th class="text-center">{{ $alquiler->ID_ALQUILER }}</th>
                                                 <td class="text-center">{{ $alquiler->NOMBRE }}</td>
                                                 <td class="text-center">{{ $alquiler->CANTIDAD }}</td>
                                                 <td class="text-center">{{ $alquiler->FECHA_ALQUILER }}</td>

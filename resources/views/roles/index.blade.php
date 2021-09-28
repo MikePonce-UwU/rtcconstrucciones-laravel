@@ -44,7 +44,6 @@
                                 <table class="table table-bordered" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
                                             <th class="text-center">{{ __('Name') }}</th>
                                             <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr>
@@ -52,7 +51,6 @@
                                     @foreach ($roles as $role)
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">{{ ++$i }}</td>
                                                 <td class="text-center">{{ $role->name }}</td>
                                                 {{-- <td class="text-center">
                                                     @foreach ($rolesPermissions as $permisssion)

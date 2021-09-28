@@ -46,7 +46,6 @@
                                 <table class="table table-bordered" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
                                             <th class="text-center">{{ __('Nombre proyecto') }}</th>
                                             <th class="text-center">{{ __('Fecha inicio') }}</th>
                                             <th class="text-center">{{ __('Fecha finalizacion') }}</th>
@@ -57,7 +56,6 @@
                                     @foreach ($proyectos as $proyecto)
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">{{ $proyecto->ID_PROYECTO }}</td>
                                                 <td class="text-center">{{ $proyecto->NOMBRE }}</td>
                                                 <td class="text-center">
                                                     {{ $proyecto->FECHA_INICIO }}

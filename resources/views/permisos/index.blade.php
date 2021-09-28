@@ -43,7 +43,6 @@
                                 <table class="table table-bordered" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
                                             <th class="text-center">{{ __('Name') }}</th>
                                             <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr>
@@ -51,7 +50,6 @@
                                     @foreach ($permisos as $permiso)
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">{{ $permiso->id }}</td>
                                                 <td class="text-center">{{ $permiso->name }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-dark text-white"

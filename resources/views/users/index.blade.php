@@ -48,7 +48,6 @@
                                 <table class="table table-bordered" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
                                             <th class="text-center">{{ __('Name') }}</th>
                                             <th class="text-center">{{ __('Email') }}</th>
                                             <th class="text-center">{{ __('Roles') }}</th>
@@ -58,7 +57,6 @@
                                     @foreach ($data as $user)
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">{{ $user->id }}</td>
                                                 <td class="text-center">{{ $user->name }}</td>
                                                 <td class="text-center">{{ $user->email }}</td>
                                                 <td class="text-center">

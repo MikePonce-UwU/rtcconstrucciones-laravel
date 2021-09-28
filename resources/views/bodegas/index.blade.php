@@ -46,7 +46,6 @@
                                 <table class="table table-bordered" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">#</th>
                                             <th class="text-center">{{ __('Nombre bodega') }}</th>
                                             <th class="text-center">{{ __('Dirección') }}</th>
                                             <th class="text-center">{{ __('Encargado') }}</th>
@@ -56,10 +55,9 @@
                                             <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
-                                    @foreach ($data as $key => $bodega)
+                                    @foreach ($data as $bodega)
                                         <tbody>
                                             <tr>
-                                                <th class="text-center">{{ $bodega->ID_BODEGA_PROYECTO }}</th>
                                                 <td class="text-center">{{ $bodega->NOMBRE_BODEGA }}</td>
                                                 <td class="text-center">{{ $bodega->DIRECCION }}</td>
                                                 <td class="text-center">{{ $bodega->NOMBRE_ENCARGADO }}</td>
