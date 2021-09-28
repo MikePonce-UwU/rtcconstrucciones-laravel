@@ -55,7 +55,7 @@
                                             <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
-                                    @foreach ($data as $key => $user)
+                                    @foreach ($data as $user)
                                         <tbody>
                                             <tr>
                                                 <td class="text-center">{{ $user->id }}</td>
@@ -76,7 +76,7 @@
                                                             href="{{ route('users.edit', $user->id) }}">{{ __('Edit') }}</a>
                                                     @endcan
                                                     @if (Route::has('users.delete'))
-                                                        <a href="{{ route('users.delete', [$bodega->id]) }}"
+                                                        <a href="{{ route('users.delete', [$user->id]) }}"
                                                             class="btn btn-warning">{{ __('Eliminar') }}</a>
                                                     @endif
                                                     @can('user-delete')
@@ -89,7 +89,6 @@
                                         </tbody>
                                     @endforeach
                                 </table>
-                                {!! $data->render() !!}
                                 <!-- end table -->
                             </div>
                         </div>

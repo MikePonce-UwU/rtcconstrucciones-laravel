@@ -26,9 +26,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $roles = Role::pluck('name', 'name')->all();
-        $data = User::orderBy('id', 'asc')->paginate(5);
-        return view('users.index', compact('data', 'roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $data = User::all();
+        return view('users.index', compact('data', 'roles'));
     }
     /**
      * Show the form for creating a new resource.

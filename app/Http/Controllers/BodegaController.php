@@ -23,8 +23,8 @@ class BodegaController extends Controller
     public function index(Request $request)
     {
         //
-        $data = Bodega::orderBy('id', 'asc')->paginate(5);
-        return view('bodegas.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $data = Bodega::all();
+        return view('bodegas.index', compact('data'));
     }
 
     /**

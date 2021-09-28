@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bodega extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'ID_BODEGA_PROYECTO';
     protected $fillable = [
         'NOMBRE_BODEGA',
         'DIRECCION',

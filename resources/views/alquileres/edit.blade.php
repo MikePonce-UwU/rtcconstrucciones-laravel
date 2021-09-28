@@ -45,50 +45,35 @@
                         {!! Form::model($bodega, ['method' => 'PATCH', 'route' => ['bodegas.update', $bodega->id]]) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Nombre de la bodega') }}:</strong>
-                                {!! Form::text('NOMBRE_BODEGA', $bodega->NOMBRE_BODEGA, ['placeholder' => 'Nombre de la bodega', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Nombre') }}:</strong>
+                                {!! Form::text('NOMBRE', null, ['placeholder' => 'Nombre', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Direccion') }}:</strong>
-                                {!! Form::text('DIRECCION', $bodega->DIRECCION, ['placeholder' => 'Direccion', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Cantidad a usar') }}:</strong>
+                                {!! Form::text('CANTIDAD', null, ['placeholder' => 'Cantidad', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Encargado') }}:</strong>
-                                {!! Form::text('NOMBRE_ENCARGADO', $bodega->NOMBRE_ENCARGADO, ['placeholder' => 'Encargado de bodega', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Fecha de creacion') }}:</strong>
+                                <strong>{{ __('Fecha de alquiler') }}:</strong>
                                 <div class="input-group">
                                     <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Inicio</button>
-                                    {!! Form::text('FECHA_CREACION', $bodega->FECHA_CREACION, ['placeholder' => 'Fecha de creacion', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
+                                    {!! Form::text('FECHA_ALQUILER', null, ['placeholder' => 'Fecha de creacion', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Fecha de cierre') }}:</strong>
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary" id="toggle-dtp2">Fin</button>
-                                    {!! Form::text('FECHA_CIERRE', $bodega->FECHA_CIERRE, ['placeholder' => 'Fecha de cierre', 'class' => 'form-control', 'id' => 'datetimepicker2']) !!}
-                                </div>
+                                <strong>{{ __('Pago por hora') }}:</strong>
+                                {!! Form::text('PAGO_HORA', null, ['placeholder' => 'Pago por hora', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Capacidad') }}:</strong>
-                                {!! Form::text('CAPACIDAD', $bodega->CAPACIDAD, ['placeholder' => 'Capacidad', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Proyecto') }}:</strong>
-                                {!! Form::select('ID_PROYECTO', $proyectos, $bodega->ID_PROYECTO, ['class' => 'form-control', 'multiple']) !!}
+                                <strong>{{ __('Bodega') }}:</strong>
+                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, [], ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">

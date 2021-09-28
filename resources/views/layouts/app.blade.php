@@ -26,11 +26,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/otro mas xd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin-assets/css/styles.css') }}">
     @yield('css-content')
 </head>
 
 <body class="sb-nav-fixed">
+    <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
     @include('components.navigation')
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">

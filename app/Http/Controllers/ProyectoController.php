@@ -22,8 +22,8 @@ class ProyectoController extends Controller
     public function index(Request $request)
     {
         //
-        $proyectos = Proyecto::orderBy('id', 'asc')->paginate(5);
-        return view('proyectos.index', compact('proyectos'))->with('i', ($request->input('page', 1) - 1) * 5);
+        $proyectos = Proyecto::all();
+        return view('proyectos.index', compact('proyectos'));
     }
 
     /**

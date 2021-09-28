@@ -1,5 +1,5 @@
 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-    <div class="sb-sidenav-menu">
+    <div class="sb-sidenav-menu" id="sb-scrolling-div">
         <div class="nav">
             <div class="sb-sidenav-menu-heading">Core</div>
             <a class="nav-link @if (Route::current()->getName() === 'home')
@@ -43,7 +43,7 @@
             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
                 aria-expanded="false" aria-controls="collapseLayouts">
                 <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
-                Layouts
+                Módulos
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
             <div class="collapse @if (Route::current()->getName() === 'bodegas.index' || Route::current()->getName() === 'proyectos.index')
@@ -89,3 +89,9 @@
         {{ Auth::user()->name }}
     </div>
 </nav>
+@section('js-content')
+    <script src="{{ asset('js/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script>
+        $('#sb-scrolling-div').perfectScrollbar();
+    </script>
+@endsection

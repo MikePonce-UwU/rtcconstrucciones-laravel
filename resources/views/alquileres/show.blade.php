@@ -5,11 +5,11 @@
             <div class="col-md-8 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Mostrar Bodega') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Mostrar alquiler') }}</h2>
                     </div>
                     <div class="col-auto">
 
-                        <a href="{{ route('bodegas.index') }}" class="btn btn-primary" style="color:white">
+                        <a href="{{ route('alquileres.index') }}" class="btn btn-primary" style="color:white">
                             <span style="color:white"></span> {{ __('Back') }}
                         </a>
 
@@ -23,9 +23,9 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('bodegas.index') }}">{{ __('Bodegas') }}</a>
+                                            href="{{ route('bodegas.index') }}">{{ __('Alquileres') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Mostrar Bodega') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Mostrar alquiler') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -34,43 +34,48 @@
                 <div class="row my-4">
                     <div class="col-md-12">
                         <div class="card shadow">
-                            <div class="card-header text-center h1">{{ $bodega->NOMBRE_BODEGA }}</div>
+                            <div class="card-header text-center h1">Alquiler #{{ $alquiler->id }} de bodega</div>
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Direccion') }}:</strong>
-                                        {{ $bodega->DIRECCION }}
+                                        <strong>{{ __('Nombre de la bodega') }}:</strong>
+                                        {{ $bodega }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Fecha de creacion') }}:</strong>
-                                        {{ $bodega->FECHA_CREACION }}
+                                        <strong>{{ __('Nombre') }}:</strong>
+                                        {{ $alquiler->NOMBRE }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Fecha de cierre') }}:</strong>
-                                        {{ $bodega->FECHA_CIERRE }}
+                                        <strong>{{ __('Cantidad a usar') }}:</strong>
+                                        {{ $alquiler->CANTIDAD }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Capacidad') }}:</strong>
-                                        {{ $bodega->CAPACIDAD }}
+                                        <strong>{{ __('Fecha de alquiler') }}:</strong>
+                                        {{ $alquiler->FECHA_ALQUILER }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Proyecto al que pertenece') }}:</strong>
-                                        <label class="badge bg-success">{{ $proyecto }}</label>
+                                        <strong>{{ __('Horas de uso') }}:</strong>
+                                        {{ $alquiler->HORAS_ALQUILER }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>{{ __('Pago') }}<code>x</code>{{ __('hora') }}:</strong>
+                                        {{ $alquiler->PAGO_HORA }}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div> <!-- .col-md-12 -->
                 </div> <!-- end section row my-4 -->
-
             </div> <!-- .col-12 -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->

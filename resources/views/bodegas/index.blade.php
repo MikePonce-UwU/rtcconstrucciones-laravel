@@ -53,34 +53,32 @@
                                             <th class="text-center">{{ __('Fecha creación') }}</th>
                                             <th class="text-center">{{ __('Fecha cierre') }}</th>
                                             <th class="text-center">{{ __('Capacidad') }}</th>
-                                            <th class="text-center">{{ __('Proyecto ID') }}</th>
                                             <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
                                     @foreach ($data as $key => $bodega)
                                         <tbody>
                                             <tr>
-                                                <th class="text-center">{{ $bodega->id }}</th>
+                                                <th class="text-center">{{ $bodega->ID_BODEGA_PROYECTO }}</th>
                                                 <td class="text-center">{{ $bodega->NOMBRE_BODEGA }}</td>
                                                 <td class="text-center">{{ $bodega->DIRECCION }}</td>
                                                 <td class="text-center">{{ $bodega->NOMBRE_ENCARGADO }}</td>
                                                 <td class="text-center">{{ $bodega->FECHA_CREACION }}</td>
                                                 <td class="text-center">{{ $bodega->FECHA_CIERRE }}</td>
                                                 <td class="text-center">{{ $bodega->CAPACIDAD }}</td>
-                                                <td class="text-center">{{ $bodega->ID_PROYECTO }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-secondary mb-2 mb-md-0"
-                                                        href="{{ route('bodegas.show', $bodega->id) }}">{{ __('Show') }}</a>
+                                                        href="{{ route('bodegas.show', $bodega->ID_BODEGA_PROYECTO) }}">{{ __('Show') }}</a>
                                                     @can('bodega-edit')
                                                         <a class="btn btn-primary mb-2 mb-md-0"
-                                                            href="{{ route('bodegas.edit', $bodega->id) }}">{{ __('Edit') }}</a>
+                                                            href="{{ route('bodegas.edit', $bodega->ID_BODEGA_PROYECTO) }}">{{ __('Edit') }}</a>
                                                     @endcan
                                                     @if (Route::has('bodegas.delete'))
-                                                        <a href="{{ route('bodegas.delete', [$bodega->id]) }}"
+                                                        <a href="{{ route('bodegas.delete', [$bodega->ID_BODEGA_PROYECTO]) }}"
                                                             class="btn btn-warning">{{ __('Eliminar') }}</a>
                                                     @endif
                                                     @can('bodega-delete')
-                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['bodegas.destroy', $bodega->id], 'style' => 'display:inline']) !!}
+                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['bodegas.destroy', $bodega->ID_BODEGA_PROYECTO], 'style' => 'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger mb-2 mb-md-0']) !!}
                                                         {!! Form::close() !!}
                                                     @endcan
@@ -89,7 +87,6 @@
                                         </tbody>
                                     @endforeach
                                 </table>
-                                {!! $data->render() !!}
                                 <!-- end table -->
                             </div>
                         </div>

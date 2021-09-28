@@ -45,31 +45,31 @@
                     <div class="card-header text-center h1">Edit form</div>
                     <div class="card-body">
                         {!! Form::model($user, ['method' => 'PATCH', 'route' => ['users.update', $user->id]]) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Name') }}:</strong>
                                 {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Email') }}:</strong>
                                 {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Password') }}:</strong>
                                 {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Confirm Password') }}:</strong>
                                 {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Role') }}:</strong>
                                 {!! Form::select('roles[]', $roles, $userRole, ['class' => 'form-control', 'multiple']) !!}

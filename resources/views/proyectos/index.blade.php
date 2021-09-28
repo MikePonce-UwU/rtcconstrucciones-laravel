@@ -54,10 +54,10 @@
                                             <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
-                                    @foreach ($proyectos as $key => $proyecto)
+                                    @foreach ($proyectos as $proyecto)
                                         <tbody>
                                             <tr>
-                                                <td class="text-center">{{ $proyecto->id }}</td>
+                                                <td class="text-center">{{ $proyecto->ID_PROYECTO }}</td>
                                                 <td class="text-center">{{ $proyecto->NOMBRE }}</td>
                                                 <td class="text-center">
                                                     {{ $proyecto->FECHA_INICIO }}
@@ -65,22 +65,22 @@
                                                 <td class="text-center">{{ $proyecto->FECHA_FINALIZACION }}</td>
                                                 <td class="text-center">{{ $proyecto->DIRECCION }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('proyectos.show', $proyecto->id) }}"
+                                                    <a href="{{ route('proyectos.show', $proyecto->ID_PROYECTO) }}"
                                                         class="btn btn-dark text-white mb-2 mb-md-0">
                                                         <span></span> {{ __('Show') }}
                                                     </a>
                                                     @can('proyecto-edit')
-                                                        <a href="{{ route('proyectos.edit', $proyecto->id) }}"
+                                                        <a href="{{ route('proyectos.edit', $proyecto->ID_PROYECTO) }}"
                                                             class="btn btn-success text-white mb-2 mb-md-0">
                                                             <span></span> {{ __('Edit') }}
                                                         </a>
                                                     @endcan
                                                     @if (Route::has('proyecto.delete'))
-                                                        <a href="{{ route('proyecto.delete', [$bodega->id]) }}"
+                                                        <a href="{{ route('proyecto.delete', [$bodega->ID_PROYECTO]) }}"
                                                             class="btn btn-warning">{{ __('Eliminar') }}</a>
                                                     @endif
                                                     @can('proyecto-delete')
-                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['proyectos.destroy', $proyecto->id], 'style' => 'display:inline']) !!}
+                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['proyectos.destroy', $proyecto->ID_PROYECTO], 'style' => 'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger text-white mb-2 mb-md-0']) !!}
                                                         {!! Form::close() !!}
                                                     @endcan
@@ -89,7 +89,6 @@
                                         </tbody>
                                     @endforeach
                                 </table>
-                                {!! $proyectos->render() !!}
                                 <!-- end table -->
                             </div>
                         </div>
