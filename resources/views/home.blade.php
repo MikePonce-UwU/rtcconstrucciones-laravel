@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-10">
+            <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Vista principal') }}</h2>
@@ -31,11 +31,12 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-
-                        {{ __('You are logged in! ') }}
-                        @php
-                            echo Auth::user()->getRoleNames();
-                        @endphp
+                        Bienvenido, usted es:
+                        "@if (!empty(Auth::user()->getRoleNames()))
+                            @foreach (Auth::user()->getRoleNames() as $v)
+                                {{ $v }}
+                            @endforeach
+                            @endif"
                     </div>
                 </div>
             </div>

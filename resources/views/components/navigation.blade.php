@@ -2,7 +2,7 @@
     <a class="navbar-brand ps-3" href="{{ url('/') }}">
         <i class="far fa-gem"></i> {{ config('app.name', 'Laravel') }}
     </a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!">
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 ms-md-4" id="sidebarToggle" href="#!">
         <i class="fas fa-bars"></i>
     </button>
     <!-- Right Side Of Navbar -->

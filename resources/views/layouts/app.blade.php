@@ -31,7 +31,7 @@
     @yield('css-content')
 </head>
 
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed font-montserrat">
     @include('components.navigation')
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">

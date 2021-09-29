@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>{{ config('app.name', 'Laravel') }} - {{ Route::current()->getName() }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="{{ asset('admin-assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/otro mas xd.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="bg-primary">
+<body class=" font-montserrat">
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
