@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-sm-12 col-lg-12">
+            <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Mostrar Bodega') }}</h2>

@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-sm-12 col-lg-12">
+            <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Editar bodega') }}</h2>
@@ -42,7 +42,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header text-center h1">Formulario de edicion</div>
                     <div class="card-body">
-                        {!! Form::model($bodega, ['method' => 'PATCH', 'route' => ['bodegas.update', $bodega->id]]) !!}
+                        {!! Form::model($bodega, ['method' => 'PATCH', 'route' => ['bodegas.update', $bodega->ID_BODEGA_PROYECTO]]) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Nombre de la bodega') }}:</strong>

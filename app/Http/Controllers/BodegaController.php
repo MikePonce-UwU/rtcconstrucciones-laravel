@@ -87,7 +87,7 @@ class BodegaController extends Controller
     {
         //
         $bodega = Bodega::find($id);
-        $proyectos = Proyecto::pluck('NOMBRE', 'id')->all();
+        $proyectos = Proyecto::pluck('NOMBRE', 'ID_PROYECTO')->all();
         return view('bodegas.edit', compact('bodega', 'proyectos'));
     }
 
