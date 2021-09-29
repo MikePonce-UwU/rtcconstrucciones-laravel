@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-auto col-lg-auto col-auto">
+            <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="row align-items-center my-4">
-                    <div class="col">
+                    <div class="col-12">
                         <h2 class="h3 mb-0 page-title">{{ __('Alquileres') }}</h2>
                     </div>
                     <div class="col-auto">
@@ -43,7 +43,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- table -->
-                                <table class="table table-bordered" id="dataTable-1">
+                                <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
                                             <th class="text-center">{{ __('Nombre') }}</th>
@@ -54,8 +54,8 @@
                                             <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
-                                    @foreach ($alquileres as $alquiler)
-                                        <tbody>
+                                    <tbody>
+                                        @foreach ($alquileres as $alquiler)
                                             <tr>
                                                 <td class="text-center">{{ $alquiler->NOMBRE }}</td>
                                                 <td class="text-center">{{ $alquiler->CANTIDAD }}</td>
@@ -80,8 +80,8 @@
                                                     @endcan
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                    @endforeach
+                                        @endforeach
+                                    </tbody>
                                 </table>
                                 <!-- end table -->
                             </div>
@@ -101,7 +101,10 @@
     <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('#dataTable-1').DataTable();
+            $('#dataTable-1')
+                .dataTable({
+                    responsive: true,
+                });
         });
     </script>
 @endsection

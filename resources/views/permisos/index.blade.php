@@ -1,9 +1,8 @@
 @extends('layouts.app')
-{{--  --}}
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-auto col-lg-auto col-auto">
+            <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Administracion de permisos') }}</h2>
@@ -40,15 +39,15 @@
                             <div class="card-header text-center h1">Lista de permisos</div>
                             <div class="card-body">
                                 <!-- table -->
-                                <table class="table table-bordered" id="dataTable-1">
+                                <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
                                             <th class="text-center">{{ __('Name') }}</th>
-                                            <th width="280px" class="text-center">{{ __('Action') }}</th>
+                                            <th class="text-center">{{ __('Action') }}</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($permisos as $permiso)
-                                        <tbody>
+                                    <tbody>
+                                        @foreach ($permisos as $permiso)
                                             <tr>
                                                 <td class="text-center">{{ $permiso->name }}</td>
                                                 <td class="text-center">
@@ -61,8 +60,8 @@
                                                     @endcan
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                    @endforeach
+                                        @endforeach
+                                    </tbody>
                                 </table>
                                 <!-- end table -->
                             </div>
@@ -73,4 +72,18 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
+@endsection
+@section('css-content')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+@endsection
+@section('js-content')
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable-1')
+                .dataTable({
+                    responsive: true,
+                });
+        });
+    </script>
 @endsection

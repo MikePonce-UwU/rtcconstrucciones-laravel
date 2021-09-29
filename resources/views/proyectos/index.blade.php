@@ -1,9 +1,8 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-auto col-lg-auto col-auto">
+            <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Proyectos') }}</h2>
@@ -43,23 +42,21 @@
                             </div>
                             <div class="card-body">
                                 <!-- table -->
-                                <table class="table table-bordered" id="dataTable-1">
+                                <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
                                             <th class="text-center">{{ __('Nombre proyecto') }}</th>
                                             <th class="text-center">{{ __('Fecha inicio') }}</th>
                                             <th class="text-center">{{ __('Fecha finalizacion') }}</th>
                                             <th class="text-center">{{ __('Direccion') }}</th>
-                                            <th width="280px" class="text-center">{{ __('Action') }}</th>
+                                            <th class="text-center">{{ __('Actions') }}</th>
                                         </tr class="text-center">
                                     </thead>
-                                    @foreach ($proyectos as $proyecto)
-                                        <tbody>
+                                    <tbody>
+                                        @foreach ($proyectos as $proyecto)
                                             <tr>
                                                 <td class="text-center">{{ $proyecto->NOMBRE }}</td>
-                                                <td class="text-center">
-                                                    {{ $proyecto->FECHA_INICIO }}
-                                                </td>
+                                                <td class="text-center">{{ $proyecto->FECHA_INICIO }}</td>
                                                 <td class="text-center">{{ $proyecto->FECHA_FINALIZACION }}</td>
                                                 <td class="text-center">{{ $proyecto->DIRECCION }}</td>
                                                 <td class="text-center">
@@ -84,8 +81,8 @@
                                                     @endcan
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                    @endforeach
+                                        @endforeach
+                                    </tbody>
                                 </table>
                                 <!-- end table -->
                             </div>
@@ -98,6 +95,17 @@
 
 
 @endsection
+@section('css-content')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+@endsection
 @section('js-content')
-
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable-1')
+                .dataTable({
+                    responsive: true,
+                });
+        });
+    </script>
 @endsection

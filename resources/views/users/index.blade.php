@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-auto col-lg-auto col-auto">
+            <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Administracion de usuarios') }}</h2>
@@ -45,17 +45,22 @@
                             </div>
                             <div class="card-body">
                                 <!-- table -->
-                                <table class="table table-bordered" id="dataTable-1">
+                                <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
                                             <th class="text-center">{{ __('Name') }}</th>
                                             <th class="text-center">{{ __('Email') }}</th>
                                             <th class="text-center">{{ __('Roles') }}</th>
-                                            <th width="280px" class="text-center">{{ __('Action') }}</th>
+                                            <th class="text-center">{{ __('Created date') }}</th>
+                                            <th class="text-center">{{ __('Updated date') }}</th>
+                                            @if (!empty($user->email_verified_at))
+                                                <th class="text-center">{{ __('Email verified date') }}</th>
+                                            @endif
+                                            <th class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
-                                    @foreach ($data as $user)
-                                        <tbody>
+                                    <tbody>
+                                        @foreach ($data as $user)
                                             <tr>
                                                 <td class="text-center">{{ $user->name }}</td>
                                                 <td class="text-center">{{ $user->email }}</td>
@@ -66,6 +71,11 @@
                                                         @endforeach
                                                     @endif
                                                 </td>
+                                                <td class="text-center">{{ $user->created_at }}</td>
+                                                <td class="text-center">{{ $user->updated_at }}</td>
+                                                @if (!empty($user->email_verified_at))
+                                                    <td class="text-center">{{ $user->email_verified_at }}</td>
+                                                @endif
                                                 <td class="text-center">
                                                     <a class="btn btn-secondary"
                                                         href="{{ route('users.show', $user->id) }}">{{ __('Show') }}</a>
@@ -84,8 +94,8 @@
                                                     @endcan
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                    @endforeach
+                                        @endforeach
+                                    </tbody>
                                 </table>
                                 <!-- end table -->
                             </div>
@@ -96,4 +106,17 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
+@endsection
+@section('css-content')
+    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
+@endsection
+@section('js-content')
+    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable-1').dataTable({
+                responsive: true,
+            });
+        });
+    </script>
 @endsection

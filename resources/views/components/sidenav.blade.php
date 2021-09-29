@@ -46,7 +46,7 @@
                 Módulos
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse @if (Route::current()->getName() === 'bodegas.index' || Route::current()->getName() === 'proyectos.index')
+            <div class="collapse @if (Route::current()->getName() === 'bodegas.index' || Route::current()->getName() === 'proyectos.index' || Route::current()->getName() === 'alquileres.index')
                 show
             @endif "
                 id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">

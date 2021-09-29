@@ -35,7 +35,7 @@ class BodegaController extends Controller
     public function create()
     {
         //
-        $proyectos = Proyecto::pluck('NOMBRE', 'id')->all();
+        $proyectos = Proyecto::pluck('NOMBRE', 'ID_PROYECTO')->all();
         return view('bodegas.create', compact('proyectos'));
     }
 

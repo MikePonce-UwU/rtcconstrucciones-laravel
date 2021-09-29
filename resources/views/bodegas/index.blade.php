@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-auto col-lg-auto col-auto">
+            <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="row align-items-center my-4">
                     <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Bodegas') }}</h2>
@@ -43,7 +43,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- table -->
-                                <table class="table table-bordered" id="dataTable-1">
+                                <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
                                             <th class="text-center">{{ __('Nombre bodega') }}</th>
@@ -52,11 +52,11 @@
                                             <th class="text-center">{{ __('Fecha creación') }}</th>
                                             <th class="text-center">{{ __('Fecha cierre') }}</th>
                                             <th class="text-center">{{ __('Capacidad') }}</th>
-                                            <th width="280px" class="text-center">{{ __('Action') }}</th>
+                                            <th class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
-                                    @foreach ($data as $bodega)
-                                        <tbody>
+                                    <tbody>
+                                        @foreach ($data as $bodega)
                                             <tr>
                                                 <td class="text-center">{{ $bodega->NOMBRE_BODEGA }}</td>
                                                 <td class="text-center">{{ $bodega->DIRECCION }}</td>
@@ -82,8 +82,8 @@
                                                     @endcan
                                                 </td>
                                             </tr>
-                                        </tbody>
-                                    @endforeach
+                                        @endforeach
+                                    </tbody>
                                 </table>
                                 <!-- end table -->
                             </div>
@@ -104,12 +104,8 @@
     <script>
         $(document).ready(function() {
             $('#dataTable-1')
-                .addClass('nowrap')
                 .dataTable({
                     responsive: true,
-                    columnDefs: [{
-                        targets: [-1, -6],
-                    }]
                 });
         });
     </script>
