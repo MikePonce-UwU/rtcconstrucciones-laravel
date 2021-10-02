@@ -9,6 +9,7 @@ class Proyecto extends Model
 {
     use HasFactory;
     protected $primaryKey = 'ID_PROYECTO';
+    protected $table = 'proyecto';
     protected $fillable = [
         'NOMBRE',
         'FECHA_INICIO',

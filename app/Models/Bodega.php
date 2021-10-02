@@ -9,6 +9,7 @@ class Bodega extends Model
 {
     use HasFactory;
     protected $primaryKey = 'ID_BODEGA_PROYECTO';
+    protected $table = 'bodega_proyecto';
     protected $fillable = [
         'NOMBRE_BODEGA',
         'DIRECCION',
