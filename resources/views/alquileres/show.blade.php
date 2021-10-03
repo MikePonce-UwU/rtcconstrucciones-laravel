@@ -38,8 +38,10 @@
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Nombre de la bodega') }}:</strong>
-                                        <span class="badge bg-success">{{ $bodega }}</span>
+                                        <strong>{{ __('Detalles de bodega') }}:</strong>
+                                        <span class="badge bg-success">{{ $bodega->NOMBRE_BODEGA }}</span>
+                                        <span class="badge bg-success">{{ $bodega->NOMBRE_ENCARGADO }}</span>
+                                        <span class="badge bg-success">{{ $bodega->CAPACIDAD_DISPONIBLE }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">

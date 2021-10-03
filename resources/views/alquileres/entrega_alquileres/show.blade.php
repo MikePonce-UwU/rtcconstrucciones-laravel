@@ -40,8 +40,11 @@
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Nombre de la bodega') }}:</strong>
-                                        <span class="badge bg-success">{{ $alquiler }}</span>
+                                        <strong>{{ __('Detalles de alquiler') }}:</strong>
+                                        <span class="badge bg-success">{{ $alquiler->NOMBRE }}</span>
+                                        <span class="badge bg-success">{{ $alquiler->CANTIDAD }}</span>
+                                        <span
+                                            class="badge bg-success">C${{ $alquiler->PAGO_HORA }}*{{ $alquiler->HORAS_ALQUILER }}hrs</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">

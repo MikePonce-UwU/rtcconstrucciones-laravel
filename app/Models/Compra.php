@@ -9,7 +9,7 @@ class Compra extends Model
 {
     use HasFactory;
     protected $primaryKey = 'ID_COMPRA';
-    protected $tableName = 'compra';
+    protected $table = 'compra';
     public $timestamps = false;
     protected $fillable = [
         'ID_COMPRA',

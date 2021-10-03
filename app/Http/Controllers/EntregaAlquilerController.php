@@ -24,7 +24,7 @@ class EntregaAlquilerController extends Controller
     {
         //
         $entregas = EntregaAlquiler::all();
-        return view('entrega_alquileres.index', compact('entregas'));
+        return view('alquileres.entrega_alquileres.index', compact('entregas'));
     }
 
     /**
@@ -36,7 +36,7 @@ class EntregaAlquilerController extends Controller
     {
         //
         $alquileres = Alquiler::pluck('NOMBRE', 'ID_ALQUILER');
-        return view('entrega_alquileres.create', compact('alquileres'));
+        return view('alquileres.entrega_alquileres.create', compact('alquileres'));
     }
 
     /**
@@ -68,8 +68,8 @@ class EntregaAlquilerController extends Controller
     {
         //
         $entrega = EntregaAlquiler::find($id);
-        $alquiler = Alquiler::find($entrega->ID_ENTREGA_ALQUILER)->NOMBRE;
-        return view('entrega_alquileres.show', compact('entrega', 'alquiler'));
+        $alquiler = Alquiler::find($entrega->ID_ENTREGA_ALQUILER);
+        return view('alquileres.entrega_alquileres.show', compact('entrega', 'alquiler'));
     }
 
     /**
@@ -83,7 +83,7 @@ class EntregaAlquilerController extends Controller
         //
         $entrega = EntregaAlquiler::find($id);
         $alquileres = Alquiler::pluck('NOMBRE', 'ID_ALQUILER');
-        return view('entrega_alquileres.edit', compact('entrega', 'alquileres'));
+        return view('alquileres.entrega_alquileres.edit', compact('entrega', 'alquileres'));
     }
 
     /**

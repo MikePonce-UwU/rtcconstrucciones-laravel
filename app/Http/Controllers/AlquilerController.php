@@ -72,7 +72,7 @@ class AlquilerController extends Controller
     {
         //
         $alquiler = Alquiler::find($id);
-        $bodega = Bodega::find($alquiler->ID_ALQUILER)->NOMBRE_BODEGA;
+        $bodega = Bodega::find($alquiler->ID_ALQUILER);
         return view('alquileres.show', compact('alquiler', 'bodega'));
     }
 

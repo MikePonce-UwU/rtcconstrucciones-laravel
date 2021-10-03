@@ -82,6 +82,15 @@
                 </nav>
             </div>
             <div class="sb-sidenav-menu-heading">Addons</div>
+            @can('compra-list')
+                <a class="nav-link @if (Route::current()->getName() === 'compras.index')
+                active
+            @endif "
+                    href="{{ route('compras.index', []) }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    Compras
+                </a>
+            @endcan
             <a class="nav-link @if (Route::current()->getName() === 'salidas.index')
                 active
             @endif "
