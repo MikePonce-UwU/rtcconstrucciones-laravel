@@ -28,4 +28,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('proyectos', App\Http\Controllers\ProyectoController::class);
     Route::resource('permisos', App\Http\Controllers\PermisoController::class)->except(['edit', 'update']);
     Route::resource('alquileres', App\Http\Controllers\AlquilerController::class);
+    Route::resource('entrega-alquileres', App\Http\Controllers\EntregaAlquilerController::class);
 });

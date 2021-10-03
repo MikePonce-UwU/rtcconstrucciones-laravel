@@ -17,6 +17,7 @@ class Bodega extends Model
         'FECHA_CREACION',
         'FECHA_CIERRE',
         'CAPACIDAD',
+        'CAPACIDAD_DISPONIBLE',
         'ID_PROYECTO',
     ];
     public $timestamps = false;

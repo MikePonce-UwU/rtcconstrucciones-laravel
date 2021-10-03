@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-auto">
 
-                        <a href="{{ route('alquileres.index') }}" class="btn btn-primary" style="color:white">
+                        <a href="{{ route('entrega-alquileres.index') }}" class="btn btn-primary" style="color:white">
                             <span style="color:white"></span> {{ __('Back') }}
                         </a>
 
@@ -23,7 +23,7 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('bodegas.index') }}">{{ __('Alquileres') }}</a>
+                                            href="{{ route('entrega-alquileres.index') }}">{{ __('Entrega Alquileres') }}</a>
                                     </li>
                                     <li class="breadcrumb-item active">{{ __('Mostrar alquiler') }}</li>
                                 </ol>
@@ -34,12 +34,12 @@
                 <div class="row my-4">
                     <div class="col-md-12">
                         <div class="card shadow">
-                            <div class="card-header text-center h1">Alquiler #{{ $alquiler->id }} de bodega</div>
+                            <div class="card-header text-center h1">Alquiler #{{ $alquiler->ID_ALQUILER }} de bodega</div>
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Nombre de la bodega') }}:</strong>
-                                        {{ $bodega }}
+                                        <span class="badge bg-success">{{ $bodega }}</span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -63,13 +63,13 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Horas de uso') }}:</strong>
-                                        {{ $alquiler->HORAS_ALQUILER }}
+                                        {{ $alquiler->HORAS_ALQUILER }}hr(s)
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Pago') }}<code>x</code>{{ __('hora') }}:</strong>
-                                        {{ $alquiler->PAGO_HORA }}
+                                        C${{ $alquiler->PAGO_HORA }}
                                     </div>
                                 </div>
                             </div>

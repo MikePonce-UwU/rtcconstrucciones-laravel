@@ -50,7 +50,9 @@ class ProyectoController extends Controller
             'NOMBRE' => 'required|max:50',
             'FECHA_INICIO' => 'required',
             'FECHA_FINALIZACION' => 'required',
+            'DESCRIPCION' => 'required',
             'DIRECCION' => 'required|max:50',
+            'TIPO' => 'required|max:50',
         ]);
         $input = $request->all();
         Proyecto::create($input);
@@ -97,7 +99,9 @@ class ProyectoController extends Controller
             'NOMBRE' => 'required',
             'FECHA_INICIO' => 'required',
             'FECHA_FINALIZACION' => 'required',
+            'DESCRIPCION' => 'required',
             'DIRECCION' => 'required',
+            'TIPO' => 'required',
         ]);
         $input = $request->all();
 

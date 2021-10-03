@@ -62,6 +62,12 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
+                                        <strong>{{ __('Capacidad') }}:</strong>
+                                        {{ $bodega->CAPACIDAD_DISPONIBLE }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
                                         <strong>{{ __('Proyecto al que pertenece') }}:</strong>
                                         <label class="badge bg-success">{{ $proyecto }}</label>
                                     </div>

@@ -46,7 +46,7 @@
                 Módulos
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse @if (Route::current()->getName() === 'bodegas.index' || Route::current()->getName() === 'proyectos.index' || Route::current()->getName() === 'alquileres.index')
+            <div class="collapse @if (Route::current()->getName() === 'bodegas.index' || Route::current()->getName() === 'proyectos.index' || Route::current()->getName() === 'alquileres.index' || Route::current()->getName() === 'entrega-alquileres.index')
                 show
             @endif "
                 id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -56,6 +56,13 @@
                 active
             @endif "
                             href="{{ route('alquileres.index', ['id' => 1]) }}">Alquileres</a>
+                    @endcan
+
+                    @can('alquiler-list')
+                        <a class="nav-link @if (Route::current()->getName() === 'entrega-alquileres.index')
+                active
+            @endif "
+                            href="{{ route('entrega-alquileres.index', ['id' => 1]) }}">Entrega alquileres</a>
                     @endcan
 
                     @can('bodega-list')

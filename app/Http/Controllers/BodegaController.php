@@ -55,6 +55,7 @@ class BodegaController extends Controller
             'FECHA_CREACION' => 'required|date',
             'FECHA_CIERRE' => 'required|date',
             'CAPACIDAD' => 'required|max:50',
+            'CAPACIDAD_DISPONIBLE' => 'required|max:50',
             'ID_PROYECTO' => 'required',
         ]);
         $input = $request->all();

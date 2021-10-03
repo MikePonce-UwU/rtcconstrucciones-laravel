@@ -85,6 +85,12 @@
                                 {!! Form::text('CAPACIDAD', null, ['placeholder' => 'Direccion', 'class' => 'form-control']) !!}
                             </div>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3 d-none">
+                            <div class="form-group">
+                                <strong>{{ __('Capacidad disponible') }}:</strong>
+                                {!! Form::text('CAPACIDAD_DISPONIBLE', 'TOTAL', ['placeholder' => 'Capacidad disponible', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
                             <div class="form-group">
                                 <strong>{{ __('Proyecto') }}:</strong>

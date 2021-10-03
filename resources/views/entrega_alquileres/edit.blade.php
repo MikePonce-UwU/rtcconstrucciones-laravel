@@ -5,10 +5,10 @@
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Editar alquiler') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Editar entrega de alquiler') }}</h2>
                     </div>
                     <div class="col-auto">
-                        <a href="{{ route('alquileres.index') }}" class="btn btn-primary" style="color:white">
+                        <a href="{{ route('entrega-alquileres.index') }}" class="btn btn-primary" style="color:white">
                             <span style="color:white"></span> {{ __('Back') }}
                         </a>
                     </div>
@@ -21,9 +21,9 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('alquileres.index') }}">{{ __('Alquileres') }}</a>
+                                            href="{{ route('alquileres.index') }}">{{ __('Entrega Alquileres') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Editar alquiler') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Editar entrega alquiler') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -42,47 +42,29 @@
                 <div class="card shadow mb-4">
                     <div class="card-header text-center h1">Formulario de edicion</div>
                     <div class="card-body">
-                        {!! Form::model($alquiler, ['method' => 'PATCH', 'route' => ['alquileres.update', $alquiler->ID_ALQUILER]]) !!}
+                        {!! Form::model($entrega, ['method' => 'PATCH', 'route' => ['entrega-alquileres.update', $entrega->ID_ENTREGA_ALQUILER]]) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Nombre') }}:</strong>
-                                {!! Form::text('NOMBRE', $alquiler->NOMBRE, ['placeholder' => 'Nombre', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Cantidad a usar') }}:</strong>
-                                {!! Form::text('CANTIDAD', $alquiler->CANTIDAD, ['placeholder' => 'Cantidad', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Fecha de alquiler') }}:</strong>
+                                <strong>{{ __('Horas excedidas') }}:</strong>
                                 <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Inicio</button>
-                                    {!! Form::text('FECHA_ALQUILER', $alquiler->FECHA_ALQUILER, ['placeholder' => 'Fecha de creacion', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
+                                    {!! Form::text('HORAS_EXCEDIDAS', $entrega->HORAS_EXCEDIDAS, ['placeholder' => 'Horas excedidas', 'class' => 'form-control']) !!}
+                                    <span class="input-group-text">HORAS</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Hora alquiler') }}:</strong>
-                                {!! Form::text('HORAS_ALQUILER', $alquiler->HORAS_ALQUILER, ['placeholder' => 'Hora alquiler', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Pago por hora') }}:</strong>
+                                <strong>{{ __('Pago excedido') }}:</strong>
                                 <div class="input-group">
                                     <span class="input-group-text">C$</span>
-                                    {!! Form::text('PAGO_HORA', $alquiler->PAGO_HORA, ['placeholder' => 'Pago por hora', 'class' => 'form-control']) !!}
+                                    {!! Form::text('PAGO_EXCEDIDO', $entrega->PAGO_EXCEDIDO, ['placeholder' => 'Pago excedido', 'class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Bodega') }}:</strong>
-                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, $alquiler->ID_BODEGA, ['class' => 'form-control', 'multiple']) !!}
+                                {!! Form::select('ID_ALQUILER', $alquileres, $entrega->ID_ALQUILER, ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">

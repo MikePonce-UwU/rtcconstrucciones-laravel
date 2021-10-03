@@ -60,7 +60,7 @@
                                 <strong>{{ __('Fecha de alquiler') }}:</strong>
                                 <div class="input-group">
                                     <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Inicio</button>
-                                    {!! Form::text('FECHA_ALQUILER', null, ['placeholder' => 'Fecha de creacion', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
+                                    {!! Form::text('FECHA_ALQUILER', null, ['placeholder' => 'Fecha de alquiler', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
                                 </div>
                             </div>
                         </div>

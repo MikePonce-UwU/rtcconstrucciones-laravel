@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
-                    <div class="col-12">
+                    <div class="col">
                         <h2 class="h3 mb-0 page-title">{{ __('Alquileres') }}</h2>
                     </div>
                     <div class="col-auto">
@@ -50,8 +50,8 @@
                                             <th class="text-center">{{ __('Cantidad') }}</th>
                                             <th class="text-center">{{ __('Fecha alquiler') }}</th>
                                             <th class="text-center">{{ __('Hora alquiler') }}</th>
-                                            <th class="text-center">{{ __('pago por hora') }}</th>
-                                            <th width="280px" class="text-center">{{ __('Action') }}</th>
+                                            <th class="text-center">{{ __('Pago por hora') }}</th>
+                                            <th class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
                                     <tbody>
@@ -60,8 +60,8 @@
                                                 <td class="text-center">{{ $alquiler->NOMBRE }}</td>
                                                 <td class="text-center">{{ $alquiler->CANTIDAD }}</td>
                                                 <td class="text-center">{{ $alquiler->FECHA_ALQUILER }}</td>
-                                                <td class="text-center">{{ $alquiler->HORAS_ALQUILER }}</td>
-                                                <td class="text-center">{{ $alquiler->PAGO_HORA }}</td>
+                                                <td class="text-center">{{ $alquiler->HORAS_ALQUILER }}hr</td>
+                                                <td class="text-center">C${{ $alquiler->PAGO_HORA }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-dark mb-2 mb-md-0"
                                                         href="{{ route('alquileres.show', $alquiler->ID_ALQUILER) }}">{{ __('Show') }}</a>

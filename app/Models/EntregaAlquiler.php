@@ -9,7 +9,7 @@ class EntregaAlquiler extends Model
 {
     use HasFactory;
     protected $primaryKey = 'ID_ENTREGA_ALQUILER';
-    protected $tableName = 'entrega_alquiler';
+    protected $table = 'entrega_alquiler';
     public $timestamps = false;
     protected $fillable = [
         'HORAS_EXCEDIDAS',

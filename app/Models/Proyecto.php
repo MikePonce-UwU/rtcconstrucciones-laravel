@@ -14,7 +14,9 @@ class Proyecto extends Model
         'NOMBRE',
         'FECHA_INICIO',
         'FECHA_FINALIZACION',
+        'DESCRIPCION',
         'DIRECCION',
+        'TIPO',
     ];
     public $timestamps = false;
 }

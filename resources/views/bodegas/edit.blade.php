@@ -87,6 +87,12 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
+                                <strong>{{ __('Capacidad disponible') }}:</strong>
+                                {!! Form::text('CAPACIDAD_DISPONIBLE', $bodega->CAPACIDAD_DISPONIBLE, ['placeholder' => 'Capacidad disponible', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                            <div class="form-group">
                                 <strong>{{ __('Proyecto') }}:</strong>
                                 {!! Form::select('ID_PROYECTO', $proyectos, $bodega->ID_PROYECTO, ['class' => 'form-control', 'multiple']) !!}
                             </div>

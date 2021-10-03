@@ -1,15 +1,16 @@
 @extends('layouts.app')
+
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Proyectos') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Entrega de Alquileres') }}</h2>
                     </div>
                     <div class="col-auto">
-                        @can('proyecto-create')
-                            <a href="{{ route('proyectos.create') }}" class="btn btn-success text-white">
+                        @can('alquiler-create')
+                            <a href="{{ route('entrega-alquileres.create') }}" class="btn btn-success text-white">
                                 <span></span> {{ __('New') }}
                             </a>
                         @endcan
@@ -22,7 +23,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Proyectos') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Entrega Alquileres') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -38,49 +39,37 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header text-center h1">
-                                Listado de proyectos activos
+                                Listado de mora de alquileres
                             </div>
                             <div class="card-body">
                                 <!-- table -->
-                                <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
+                                <table class="table table-bordered mx-auto" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">{{ __('Nombre proyecto') }}</th>
-                                            <th class="text-center">{{ __('Fecha inicio') }}</th>
-                                            <th class="text-center">{{ __('Fecha finalizacion') }}</th>
-                                            <th class="text-center">{{ __('Descripcion') }}</th>
-                                            <th class="text-center">{{ __('Direccion') }}</th>
-                                            <th class="text-center">{{ __('Tipo') }}</th>
-                                            <th class="text-center">{{ __('Actions') }}</th>
+                                            <th class="text-center">{{ __('Hora alquiler') }}</th>
+                                            <th class="text-center">{{ __('pago por hora') }}</th>
+                                            <th width="280px" class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
                                     <tbody>
-                                        @foreach ($proyectos as $proyecto)
+                                        @foreach ($entregas as $entrega)
                                             <tr>
-                                                <td class="text-center">{{ $proyecto->NOMBRE }}</td>
-                                                <td class="text-center">{{ $proyecto->FECHA_INICIO }}</td>
-                                                <td class="text-center">{{ $proyecto->FECHA_FINALIZACION }}</td>
-                                                <td class="text-center">{{ $proyecto->DESCRIPCION }}</td>
-                                                <td class="text-center">{{ $proyecto->DIRECCION }}</td>
-                                                <td class="text-center">{{ $proyecto->TIPO }}</td>
+                                                <td class="text-center">{{ $entrega->HORAS_EXCEDIDAS }}hr</td>
+                                                <td class="text-center">C${{ $entrega->PAGO_EXCEDIDO }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('proyectos.show', $proyecto->ID_PROYECTO) }}"
-                                                        class="btn btn-dark text-white mb-2 mb-md-0">
-                                                        <span></span> {{ __('Show') }}
-                                                    </a>
-                                                    @can('proyecto-edit')
-                                                        <a href="{{ route('proyectos.edit', $proyecto->ID_PROYECTO) }}"
-                                                            class="btn btn-success text-white mb-2 mb-md-0">
-                                                            <span></span> {{ __('Edit') }}
-                                                        </a>
+                                                    <a class="btn btn-dark mb-2 mb-md-0"
+                                                        href="{{ route('entrega-alquileres.show', $entrega->ID_ENTREGA_ALQUILER) }}">{{ __('Show') }}</a>
+                                                    @can('alquiler-edit')
+                                                        <a class="btn btn-primary mb-2 mb-md-0"
+                                                            href="{{ route('entrega-alquileres.edit', $entrega->ID_ENTREGA_ALQUILER) }}">{{ __('Edit') }}</a>
                                                     @endcan
-                                                    @if (Route::has('proyecto.delete'))
-                                                        <a href="{{ route('proyecto.delete', [$bodega->ID_PROYECTO]) }}"
+                                                    @if (Route::has('entrega-alquileres.delete'))
+                                                        <a href="{{ route('entrega-alquileres.delete', [$entrega->ID_ENTREGA_ALQUILER]) }}"
                                                             class="btn btn-warning">{{ __('Eliminar') }}</a>
                                                     @endif
-                                                    @can('proyecto-delete')
-                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['proyectos.destroy', $proyecto->ID_PROYECTO], 'style' => 'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger text-white mb-2 mb-md-0']) !!}
+                                                    @can('alquiler-delete')
+                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['entrega-alquileres.destroy', $entrega->ID_ENTREGA_ALQUILER], 'style' => 'display:inline']) !!}
+                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger mb-2 mb-md-0']) !!}
                                                         {!! Form::close() !!}
                                                     @endcan
                                                 </td>

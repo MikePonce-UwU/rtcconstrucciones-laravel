@@ -71,8 +71,20 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
                             <div class="form-group">
+                                <strong>{{ __('Descripcion') }}:</strong>
+                                {!! Form::text('DESCRIPCION', null, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                            <div class="form-group">
                                 <strong>{{ __('Direccion') }}:</strong>
                                 {!! Form::text('DIRECCION', null, ['placeholder' => 'Direccion', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
+                            <div class="form-group">
+                                <strong>{{ __('Tipo') }}:</strong>
+                                {!! Form::text('TIPO', null, ['placeholder' => 'Tipo', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
