@@ -293,16 +293,16 @@
     <section class="page-section bg-light" id="team">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h2 class="section-heading text-uppercase">NUESTRO INCRE&Iacute;BLE EQUIPO</h2>
+                <h3 class="section-subheading text-muted">Somos Una empresa especializada en el DISEÑO, SUPERVISI&Oacute;N y CONSTRUCCI&Oacute;N de obras civiles.</h3>
             </div>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="team-member">
                         <img class="mx-auto rounded-circle" src="{{ asset('agency-assets') }}/assets/img/team/1.jpg"
                             alt="..." />
-                        <h4>Parveen Anand</h4>
-                        <p class="text-muted">Lead Designer</p>
+                        <h4>Ing. Arq. R&oacute;ger T&eacute;llez &Aacute;lvarez</h4>
+                        <p class="text-muted">Gerente Y Propietario</p>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -312,8 +312,8 @@
                     <div class="team-member">
                         <img class="mx-auto rounded-circle" src="{{ asset('agency-assets') }}/assets/img/team/2.jpg"
                             alt="..." />
-                        <h4>Diana Petersen</h4>
-                        <p class="text-muted">Lead Marketer</p>
+                        <h4>Nombre Empleado</h4>
+                        <p class="text-muted">Cargo</p>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -323,8 +323,8 @@
                     <div class="team-member">
                         <img class="mx-auto rounded-circle" src="{{ asset('agency-assets') }}/assets/img/team/3.jpg"
                             alt="..." />
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Lead Developer</p>
+                        <h4>Nombre Empleado</h4>
+                        <p class="text-muted">Cargo </p>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
@@ -333,41 +333,18 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque,
-                        laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                    <p class="large text-muted">RT Construcciones se pone a sus gratas ordenes para cualquier servicio que necesite en el ramo de la construcci&oacute;n.</p>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Clients-->
-    <div class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-3 col-sm-6 my-3">
-                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
-                            src="{{ asset('agency-assets') }}/assets/img/logos/microsoft.svg" alt="..." /></a>
-                </div>
-                <div class="col-md-3 col-sm-6 my-3">
-                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
-                            src="{{ asset('agency-assets') }}/assets/img/logos/google.svg" alt="..." /></a>
-                </div>
-                <div class="col-md-3 col-sm-6 my-3">
-                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
-                            src="{{ asset('agency-assets') }}/assets/img/logos/facebook.svg" alt="..." /></a>
-                </div>
-                <div class="col-md-3 col-sm-6 my-3">
-                    <a href="#!"><img class="img-fluid img-brand d-block mx-auto"
-                            src="{{ asset('agency-assets') }}/assets/img/logos/ibm.svg" alt="..." /></a>
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <!-- Contact-->
     <section class="page-section" id="contact">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-heading text-uppercase">Contact Us</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h2 class="section-heading text-uppercase">Cont&aacute;ctenos</h2>
+                <h3 class="section-subheading text-muted">Nos Ponemos a la disposici&oacute;n para todo personal que requiera de nuestros servicios.</h3>
             </div>
             <!-- * * * * * * * * * * * * * * *-->
             <!-- * * SB Forms Contact Form * *-->
@@ -381,31 +358,31 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <!-- Name input-->
-                            <input class="form-control" id="name" type="text" placeholder="Your Name *"
+                            <input class="form-control" id="name" type="text" placeholder="Nombre*"
                                 data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">EL Nombre Es Requerido.</div>
                         </div>
                         <div class="form-group">
                             <!-- Email address input-->
-                            <input class="form-control" id="email" type="email" placeholder="Your Email *"
+                            <input class="form-control" id="email" type="email" placeholder="Correo*"
                                 data-sb-validations="required,email" />
-                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">El Correo Es Requerrido.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">El Correo No Es Valido.</div>
                         </div>
                         <div class="form-group mb-md-0">
                             <!-- Phone number input-->
-                            <input class="form-control" id="phone" type="tel" placeholder="Your Phone *"
+                            <input class="form-control" id="phone" type="tel" placeholder="Telefono*"
                                 data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">El Numero Es Requerido.
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group form-group-textarea mb-md-0">
                             <!-- Message input-->
-                            <textarea class="form-control" id="message" placeholder="Your Message *"
+                            <textarea class="form-control" id="message" placeholder="Mensaje*"
                                 data-sb-validations="required"></textarea>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.
+                            <div class="invalid-feedback" data-sb-feedback="message:required">El Mensaje Es Requerido.
                             </div>
                         </div>
                     </div>
@@ -432,7 +409,7 @@
                 </div>
                 <!-- Submit Button-->
                 <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled"
-                        id="submitButton" type="submit">Send Message</button></div>
+                        id="submitButton" type="submit">Enviar Mensaje</button></div>
             </form>
         </div>
     </section>
@@ -443,7 +420,7 @@
                 <div class="col-lg-4 text-lg-start">Copyright &copy; {{ config('app.name') }} 2021</div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/rtconstrucciones3"><i class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <div class="col-lg-4 text-lg-end">
