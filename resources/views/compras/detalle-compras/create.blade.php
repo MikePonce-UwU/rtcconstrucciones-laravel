@@ -39,29 +39,43 @@
                         </ul>
                     </div>
                 @endif
+                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                    <div class="form-group">
+                        <strong>{{ __('Compra #') }}:</strong>
+                        {{ $compra->DESCRIPCION }}
+                    </div>
+                    <div class="form-group">
+                        <strong>{{ __('Fecha compra') }}:</strong>
+                        {{ $compra->FECHA_COMPRA }}
+                    </div>
+                </div>
                 <div class="card shadow mb-4">
                     <div class="card-header text-center h1">Formulario de compra</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => 'compras.store', 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => 'detalle-compras.store', 'method' => 'POST']) !!}
+                        {!! Form::number('ID_COMPRA', $compra->ID_COMPRA, ['placeholder' => 'Compra', 'class' => 'form-control d-none']) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Descripcion') }}:</strong>
-                                {!! Form::text('DESCRIPCION', null, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Nombre producto') }}:</strong>
+                                {!! Form::text('NOMBRE', null, ['placeholder' => 'Nombre producto', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Fecha de compra') }}:</strong>
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Fecha</button>
-                                    {!! Form::text('FECHA_COMPRA', null, ['placeholder' => 'Fecha de compra', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
-                                </div>
+                                <strong>{{ __('Cantidad') }}:</strong>
+                                {!! Form::number('CANTIDAD', null, ['placeholder' => 'Cantidad', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                            <div class="form-group">
+                                <strong>{{ __('Precio producto') }}:</strong>
+                                {!! Form::text('PRECIO', null, ['placeholder' => 'Precio producto', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Bodega') }}:</strong>
-                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, [], ['class' => 'form-control', 'multiple']) !!}
+                                {!! Form::select('ID_CATEGORIA', $categorias, [], ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">

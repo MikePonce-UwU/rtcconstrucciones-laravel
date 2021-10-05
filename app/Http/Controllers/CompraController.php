@@ -56,8 +56,9 @@ class CompraController extends Controller
             'ID_BODEGA_PROYECTO' => 'required',
         ]);
         $input = $request->all();
-        Compra::create($input);
-        return redirect()->route('entrega-alquileres.index')->with('success', 'Compra realizada satisfactoriamente!');
+        $compra = Compra::create($input);
+        $compraID = $compra->ID_COMPRA;
+        return redirect()->route('detalle-compras.create', [$compraID])->with('success', 'Compra realizada satisfactoriamente!');
     }
 
     /**
@@ -86,7 +87,8 @@ class CompraController extends Controller
         //
         $compra = Compra::find($id);
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        return view('compras.edit', compact('compra', 'bodegas'));
+        $detalles = DetalleCompra::all()->where('ID_COMPRA', $compra->ID_COMPRA);
+        return view('compras.edit', compact('compra', 'bodegas', 'detalles'));
     }
 
     /**
@@ -121,6 +123,6 @@ class CompraController extends Controller
     {
         //
         $compra = Compra::find($id)->delete();
-        return redirect()->route('entrega-alquileres.index')->with('success', 'Compra eliminada exitosamente!!');
+        return redirect()->route('compras.index')->with('success', 'Compra eliminada exitosamente!!');
     }
 }

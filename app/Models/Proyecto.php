@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Proyecto extends Model
 {
@@ -19,4 +20,8 @@ class Proyecto extends Model
         'TIPO',
     ];
     public $timestamps = false;
+    public function bodega_proyecto()
+    {
+        return $this->HasOne(Bodega::class);
+    }
 }

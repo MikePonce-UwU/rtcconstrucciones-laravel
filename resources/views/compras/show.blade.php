@@ -56,10 +56,21 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <div class="h3 mb-3">Detalle de compra:</div>
+                                <div class="row align-items-center my-3">
+                                    <div class="col">
+                                        <h3 class="card-title">Detalle de compra</h3>
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="{{ route('detalle-compras.create', $compra->ID_COMPRA) }}"
+                                            class="btn btn-success">
+                                            <span style="color:white"></span> {{ __('Nuevo registro') }}
+                                        </a>
+                                    </div>
+                                </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <table class="table table-bordered mx-auto" id="dataTable-1">
                                         <thead>
+                                            <th class="text-center">#</th>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Cantidad</th>
                                             <th class="text-center">Precio</th>
@@ -69,20 +80,16 @@
                                         <tbody>
                                             @foreach ($detalles as $detalle)
                                                 <tr>
+                                                    <td class="text-center">{{ $detalle->ID_DETALLE_COMPRA }}</td>
                                                     <td class="text-center">{{ $detalle->NOMBRE }}</td>
                                                     <td class="text-center">{{ $detalle->CANTIDAD }}</td>
                                                     <td class="text-center">{{ $detalle->PRECIO }}</td>
                                                     <td class="text-center">{{ $detalle->ID_CATEGORIA }}</td>
                                                     <td class="text-center">
-                                                        @can('compra-edit')
-                                                            <a href="{{-- {{ route('detalle-compra.edit', [$detalle->ID_DETALLE_COMPRA]) }} --}}#" class="btn btn-warning">
-                                                                <i class="fas fa-exclamation-circle"></i>
-                                                            </a>
-                                                        @endcan
                                                         @can('compra-delete')
-                                                            {{-- {!! Form::open(['method' => 'DELETE', 'route' => ['detalle.destroy', $detalle->ID_DETALLE_COMPRA], 'style' => 'display:inline']) !!}
-                                                            {!! Form::submit('<i class="fas fa-trash"></i>', ['class' => 'btn btn-danger mb-2 mb-md-0']) !!}
-                                                            {!! Form::close() !!} --}}
+                                                            {!! Form::open(['method' => 'DELETE', 'route' => ['detalle-compras.destroy', $detalle->ID_DETALLE_COMPRA], 'style' => 'display:inline']) !!}
+                                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger mb-2 mb-md-0']) !!}
+                                                            {!! Form::close() !!}
                                                         @endcan
                                                     </td>
                                                 </tr>
@@ -107,8 +114,13 @@
     <script>
         $(document).ready(function() {
             $('#dataTable-1')
+                .addClass('nowrap')
                 .dataTable({
                     responsive: true,
+                    columnDefs: [{
+                        targets: [0, 1, 5],
+                        className: 'dt-body-right'
+                    }]
                 });
         });
     </script>

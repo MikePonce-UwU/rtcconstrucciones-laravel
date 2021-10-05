@@ -12,7 +12,6 @@ class DetalleCompra extends Model
     protected $table = 'detalle_compra';
     public $timestamps = false;
     protected $fillable = [
-        'ID_DETALLE_COMPRA',
         'ID_COMPRA',
         'NOMBRE',
         'CANTIDAD',

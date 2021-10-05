@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetalleCompraController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +31,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('alquileres', App\Http\Controllers\AlquilerController::class);
     Route::resource('entrega-alquileres', App\Http\Controllers\EntregaAlquilerController::class);
     Route::resource('compras', App\Http\Controllers\CompraController::class);
+    Route::apiResource('detalle-compras', DetalleCompraController::class)->only(['store', 'destroy']);
+    Route::prefix('detalle-compras')->group(function () {
+        Route::get('crear/{id}', [App\Http\Controllers\DetalleCompraController::class, 'crear'])->name('detalle-compras.create');
+    });
 });

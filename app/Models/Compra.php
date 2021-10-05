@@ -18,4 +18,12 @@ class Compra extends Model
         'GASTO_TOTAL',
         'ID_BODEGA_PROYECTO',
     ];
+    public function detalle_compra()
+    {
+        return $this->hasMany(DetalleCompra::class);
+    }
+    public function bodega_proyecto()
+    {
+        return $this->belongsTo(Bodega::class);
+    }
 }
