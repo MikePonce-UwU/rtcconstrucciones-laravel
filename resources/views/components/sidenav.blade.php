@@ -91,20 +91,26 @@
                     Compras
                 </a>
             @endcan
-            <a class="nav-link @if (Route::current()->getName() === 'salidas.index')
+            @can('salida-list')
+                <a class="nav-link @if (Route::current()->getName() === 'salidas.index')
                 active
             @endif "
-                href="#">
-                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                Solicitudes de salidas
-            </a>
-            <a class="nav-link @if (Route::current()->getName() === 'entradas.index')
+                    href="{{ route('salidas.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                    Salidas
+                </a>
+            @endcan
+            @can('entrada-list')
+                <a class="nav-link @if (Route::current()->getName() === 'entradas.index')
                 active
             @endif "
-                href="#">
-                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                Solicitudes de entradas
-            </a>
+                    href="{{ route('entradas.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                    Entradas
+                </a>
+            @endcan
+
+
         </div>
     </div>
     <div class="sb-sidenav-footer">

@@ -9,12 +9,11 @@ class DetalleSalida extends Model
 {
     use HasFactory;
     protected $primaryKey = 'ID_ENTREGA_ALQUILER';
-    protected $tableName = 'entrega_alquiler';
+    protected $table = 'entrega_alquiler';
     public $timestamps = false;
     protected $fillable = [
-        'ID_DETALLE_SALIDA',
-        'CANTIDAD',
         'ESTADO_DESC',
+        'CANTIDAD',
         'ID_PRODUCTO',
         'ID_SALIDA',
     ];

@@ -17,6 +17,7 @@ class Compra extends Model
         'FECHA_COMPRA',
         'GASTO_TOTAL',
         'ID_BODEGA_PROYECTO',
+        'ID_USUARIO',
     ];
     public function detalle_compra()
     {
@@ -25,5 +26,9 @@ class Compra extends Model
     public function bodega_proyecto()
     {
         return $this->belongsTo(Bodega::class);
+    }
+    public function users()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -5,10 +5,10 @@
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Editar compra') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Crear nueva entrada') }}</h2>
                     </div>
                     <div class="col-auto">
-                        <a href="{{ route('compras.index') }}" class="btn btn-primary" style="color:white">
+                        <a href="{{ route('entradas.index') }}" class="btn btn-primary" style="color:white">
                             <span style="color:white"></span> {{ __('Back') }}
                         </a>
                     </div>
@@ -21,9 +21,9 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('compras.index') }}">{{ __('Compras') }}</a>
+                                            href="{{ route('entradas.index') }}">{{ __('Entradas') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Editar compra') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Crear nueva entrada') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -40,32 +40,40 @@
                     </div>
                 @endif
                 <div class="card shadow mb-4">
-                    <div class="card-header text-center h1">Formulario de edicion</div>
-                    <div class="card-body">
-                        {!! Form::model($compra, ['method' => 'PATCH', 'route' => ['compras.update', $compra->ID_COMPRA]]) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                    <div class="card-header text-center h1">Formulario de entrada</div>
+                    <div class="card-body ">
+                        {!! Form::open(['route' => 'entradas.store', 'method' => 'POST']) !!}
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3 d-none">
                             <div class="form-group">
-                                <strong>{{ __('Descripcion') }}:</strong>
+                                <strong>{{ __('ID usuario') }}:</strong>
+                                {!! Form::number('ID_USUARIO', Auth::user()->id, ['placeholder' => 'id usuario', 'class' => 'form-control']) !!}
                             </div>
-                            {!! Form::text('DESCRIPCION', $compra->DESCRIPCION, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Fecha de compra') }}:</strong>
+                                <strong>{{ __('Descripcion') }}:</strong>
+                                {!! Form::text('DESCRIPCION_ENTRADA', null, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                            <div class="form-group">
+                                <strong>{{ __('Fecha entrada') }}:</strong>
                                 <div class="input-group">
                                     <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Fecha</button>
-                                    {!! Form::text('FECHA_COMPRA', $compra->FECHA_COMPRA, ['placeholder' => 'Fecha de compra', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
+                                    {!! Form::text('FECHA_ENTRADA', null, ['placeholder' => 'Fecha entrada', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Bodega') }}:</strong>
-                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, $compra->ID_BODEGA_PROYECTO, ['class' => 'form-control', 'multiple']) !!}
+                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, [], ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
-                            <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
+                        <div class="col-xs-12 col-sm-12 col-md-12 ">
+                            <a class="btn grey btn-outline-secondary ms-2" href="{{ route('entradas.index') }}">
+                                {{ __('Back') }}</a>
+                            <button type="submit" class="btn btn-success ms-2">{{ __('Save') }}</button>
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -77,11 +85,9 @@
 @endsection
 @section('css-content')
     <link rel="stylesheet" href="{{ asset('datetimepicker-master/jquery.datetimepicker.css') }}">
-    <link rel="stylesheet" href="{{ asset('Editor-2.0.5/css/editor.dataTables.css') }}">
 @endsection
 @section('js-content')
     <script src="{{ asset('datetimepicker-master/jquery.js') }}"></script>
-    <script src="{{ asset('Editor-2.0.5/js/dataTables.editor.js') }}"></script>
     <script src="{{ asset('datetimepicker-master/build/jquery.datetimepicker.full.min.js') }}"></script>
     <script>
         $(function() {
@@ -99,12 +105,6 @@
             $("#toggle-dtp2").on('click', function() {
                 $("#datetimepicker2").datetimepicker('show');
             });
-        })
-    </script>
-    <script>
-        $("#nueva-linea").on('click', function(ev) {
-            ev.preventDefault();
-            $("#dataTable-1").table().add();
         })
     </script>
 @endsection

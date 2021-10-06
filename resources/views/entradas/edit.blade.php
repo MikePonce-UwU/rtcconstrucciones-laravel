@@ -5,10 +5,10 @@
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Editar compra') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Editar entrada') }}</h2>
                     </div>
                     <div class="col-auto">
-                        <a href="{{ route('compras.index') }}" class="btn btn-primary" style="color:white">
+                        <a href="{{ route('entradas.index') }}" class="btn btn-primary" style="color:white">
                             <span style="color:white"></span> {{ __('Back') }}
                         </a>
                     </div>
@@ -21,9 +21,9 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('compras.index') }}">{{ __('Compras') }}</a>
+                                            href="{{ route('entradas.index') }}">{{ __('Entradas') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Editar compra') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Editar entrada') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -42,27 +42,33 @@
                 <div class="card shadow mb-4">
                     <div class="card-header text-center h1">Formulario de edicion</div>
                     <div class="card-body">
-                        {!! Form::model($compra, ['method' => 'PATCH', 'route' => ['compras.update', $compra->ID_COMPRA]]) !!}
+                        {!! Form::model($entrada, ['method' => 'PATCH', 'route' => ['entradas.update', $entrada->ID_ENTRADA]]) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Descripcion') }}:</strong>
+                                <strong>{{ __('Descripcion de entrada') }}:</strong>
                             </div>
-                            {!! Form::text('DESCRIPCION', $compra->DESCRIPCION, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
+                            {!! Form::text('DESCRIPCION_ENTRADA', $entrada->DESCRIPCION_ENTRADA, ['placeholder' => 'Descripcion de entrada', 'class' => 'form-control']) !!}
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Fecha de compra') }}:</strong>
+                                <strong>{{ __('Fecha entrada') }}:</strong>
                                 <div class="input-group">
                                     <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Fecha</button>
-                                    {!! Form::text('FECHA_COMPRA', $compra->FECHA_COMPRA, ['placeholder' => 'Fecha de compra', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
+                                    {!! Form::text('FECHA_ENTRADA', $entrada->FECHA_ENTRADA, ['placeholder' => 'Fecha entrada', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Bodega') }}:</strong>
-                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, $compra->ID_BODEGA_PROYECTO, ['class' => 'form-control', 'multiple']) !!}
+                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, $entrada->ID_BODEGA_PROYECTO, ['class' => 'form-control', 'multiple']) !!}
                             </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3 d-none">
+                            <div class="form-group">
+                                <strong>{{ __('ID usuario') }}:</strong>
+                            </div>
+                            {!! Form::text('ID_USUARIO', $entrada->ID_USUARIO, ['placeholder' => 'ID usuario', 'class' => 'form-control']) !!}
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
                             <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
