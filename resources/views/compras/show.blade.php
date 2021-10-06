@@ -70,7 +70,6 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <table class="table table-bordered mx-auto" id="dataTable-1">
                                         <thead>
-                                            <th class="text-center">#</th>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Cantidad</th>
                                             <th class="text-center">Precio</th>
@@ -80,7 +79,6 @@
                                         <tbody>
                                             @foreach ($detalles as $detalle)
                                                 <tr>
-                                                    <td class="text-center">{{ $detalle->ID_DETALLE_COMPRA }}</td>
                                                     <td class="text-center">{{ $detalle->NOMBRE }}</td>
                                                     <td class="text-center">{{ $detalle->CANTIDAD }}</td>
                                                     <td class="text-center">{{ $detalle->PRECIO }}</td>

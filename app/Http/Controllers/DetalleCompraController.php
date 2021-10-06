@@ -38,6 +38,13 @@ class DetalleCompraController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, [
+            'ID_COMPRA' => 'required',
+            'NOMBRE' => 'required',
+            'CANTIDAD' => 'required',
+            'PRECIO' => 'required',
+            'ID_CATEGORIA' => 'required',
+        ]);
         $input = $request->all();
         $detalle = DetalleCompra::create($input);
         return redirect()->route('compras.show', $detalle->ID_COMPRA)->with('success', 'Detalles de compra registradas satisfactoriamente!!');

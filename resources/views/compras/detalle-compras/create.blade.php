@@ -41,7 +41,7 @@
                 @endif
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
-                        <strong>{{ __('Compra #') }}:</strong>
+                        <strong>{{ __('Compra #' . $compra->ID_COMPRA) }}:</strong>
                         {{ $compra->DESCRIPCION }}
                     </div>
                     <div class="form-group">
@@ -74,7 +74,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
-                                <strong>{{ __('Bodega') }}:</strong>
+                                <strong>{{ __('Categorias') }}:</strong>
                                 {!! Form::select('ID_CATEGORIA', $categorias, [], ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
