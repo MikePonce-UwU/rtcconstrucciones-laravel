@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bodega;
+use App\Models\Categoria;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
 use Illuminate\Http\Request;
@@ -71,9 +72,10 @@ class CompraController extends Controller
     {
         //
         $compra = Compra::find($id);
+        $categorias = Categoria::pluck('NOMBRE', 'ID_CATEGORIA');
         $bodega = Bodega::find($compra->ID_BODEGA_PROYECTO);
         $detalles = DetalleCompra::where('ID_COMPRA', $id)->get();
-        return view('compras.show', compact('compra', 'bodega', 'detalles'));
+        return view('compras.show', compact('compra', 'bodega', 'detalles', 'categorias'));
     }
 
     /**

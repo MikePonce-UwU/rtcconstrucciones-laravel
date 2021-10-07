@@ -9,12 +9,24 @@ class Salida extends Model
 {
     use HasFactory;
     protected $primaryKey = 'ID_SALIDA';
-    protected $tableName = 'salida';
+    protected $table = 'salida';
     public $timestamps = false;
     protected $fillable = [
-        'ID_SALIDA',
-        'FECHA_SALIDA',
         'DESCRIPCION_SALIDA',
+        'FECHA_SALIDA',
         'ID_BODEGA_PROYECTO',
+        'ID_USUARIO',
     ];
+    public function detalle_salida()
+    {
+        return $this->hasMany(DetalleSalida::class);
+    }
+    public function bodega_proyecto()
+    {
+        return $this->belongsTo(Bodega::class);
+    }
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

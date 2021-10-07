@@ -54,6 +54,12 @@
                                         C${{ $compra->GASTO_TOTAL }}
                                     </div>
                                 </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
+                                        <strong>{{ __('Bodega a la que pertenece') }}:</strong>
+                                        <span class="badge bg-success">{{ $bodega->NOMBRE_BODEGA }}</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <div class="row align-items-center my-3">
@@ -61,10 +67,11 @@
                                         <h3 class="card-title">Detalle de compra</h3>
                                     </div>
                                     <div class="col-auto">
-                                        <a href="{{ route('detalle-compras.create', $compra->ID_COMPRA) }}"
-                                            class="btn btn-success">
-                                            <span style="color:white"></span> {{ __('Nuevo registro') }}
-                                        </a>
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                            data-bs-target="#modelNuevoDetalle">
+                                            Nuevo detalle
+                                        </button>
+                                        @include('compras.detalle-compras.create')
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -85,12 +92,14 @@
                                                     <td class="text-center">{{ $detalle->ID_CATEGORIA }}</td>
                                                     <td class="text-center">
                                                         @can('compra-delete')
-                                                            {!! Form::open(['method' => 'DELETE', 'route' => ['detalle-compras.destroy', $detalle->ID_DETALLE_COMPRA], 'style' => 'display:inline']) !!}
-                                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger mb-2 mb-md-0']) !!}
-                                                            {!! Form::close() !!}
+                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                                data-bs-target="#modelEliminarDetalle{{ $detalle->ID_DETALLE_COMPRA }}">
+                                                                Delete
+                                                            </button>
                                                         @endcan
                                                     </td>
                                                 </tr>
+                                                @include('compras.detalle-compras.delete')
                                             @endforeach
                                         </tbody>
                                     </table>

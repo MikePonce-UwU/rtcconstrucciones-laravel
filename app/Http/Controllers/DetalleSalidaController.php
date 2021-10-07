@@ -3,24 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categoria;
-use App\Models\Compra;
-use App\Models\DetalleCompra;
+use App\Models\DetalleSalida;
 use Illuminate\Http\Request;
 
-class DetalleCompraController extends Controller
+class DetalleSalidaController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:compra-list|compra-create|compra-edit|compra-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:compra-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:compra-edit', ['only' => ['edit', 'update']]);
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function index()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -32,15 +28,14 @@ class DetalleCompraController extends Controller
     {
         //
         $this->validate($request, [
-            'ID_COMPRA' => 'required',
-            'NOMBRE' => 'required',
+            'ESTADO_DESC' => 'required',
             'CANTIDAD' => 'required',
-            'PRECIO' => 'required',
-            'ID_CATEGORIA' => 'required',
+            'ID_PRODUCTO' => 'required',
+            'ID_SALIDA' => 'required',
         ]);
         $input = $request->all();
-        $detalle = DetalleCompra::create($input);
-        return redirect()->route('compras.show', $detalle->ID_COMPRA)->with('success', 'Detalles de compra registradas satisfactoriamente!!');
+        $detalle = DetalleSalida::create($input);
+        return redirect()->route('salidas.show', [$detalle->ID_SALIDA])->with('success', 'Detalle de salida registrada satisfactoriamente!');
     }
 
     /**
@@ -48,11 +43,11 @@ class DetalleCompraController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     public function show($id)
-     {
-         //
-        }
      */
+    public function show($id)
+    {
+        //
+    }
 
     /**
      * Update the specified resource in storage.
@@ -75,9 +70,9 @@ class DetalleCompraController extends Controller
     public function destroy($id)
     {
         //
-        $detalle = DetalleCompra::find($id);
-        $compraID = $detalle->ID_COMPRA;
+        $detalle = DetalleSalida::find($id);
+        $salidaID = $detalle->ID_SALIDA;
         $detalle->delete();
-        return redirect()->route('compras.show', $compraID)->with('success', 'Detalle de compra eliminada satisfactoriamente!!');
+        return redirect()->route('salidas.show', $salidaID)->with('success', 'Detalle de salida eliminada!');
     }
 }

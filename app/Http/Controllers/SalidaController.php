@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bodega;
-use App\Models\DetalleEntrada;
-use App\Models\Entrada;
+use App\Models\DetalleSalida;
 use App\Models\Producto;
+use App\Models\Salida;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EntradaController extends Controller
+class SalidaController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:entrada-list|entrada-create|entrada-edit|entrada-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:entrada-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:entrada-edit', ['only' => ['edit', 'update']]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -27,8 +21,8 @@ class EntradaController extends Controller
     public function index()
     {
         //
-        $entradas = Entrada::all();
-        return view('entradas.index', compact('entradas'));
+        $salidas = Salida::all();
+        return view('salidas.index', compact('salidas'));
     }
 
     /**
@@ -40,7 +34,7 @@ class EntradaController extends Controller
     {
         //
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        return view('entradas.create', compact('bodegas'));
+        return view('salidas.create', compact('bodegas'));
     }
 
     /**
@@ -53,14 +47,14 @@ class EntradaController extends Controller
     {
         //
         $this->validate($request, [
-            'DESCRIPCION_ENTRADA' => 'required',
-            'FECHA_ENTRADA' => 'required|date',
+            'DESCRIPCION_SALIDA' => 'required',
+            'FECHA_SALIDA' => 'required|date',
             'ID_BODEGA_PROYECTO' => 'required',
             'ID_USUARIO' => 'required',
         ]);
         $input = $request->all();
-        $entrada = Entrada::create($input);
-        return redirect()->route('entradas.show', [$entrada->ID_ENTRADA])->with('success', 'Entrada registrada satisfactoriamente');
+        $salida = Salida::create($input);
+        return redirect()->route('salidas.show', $salida->ID_SALIDA)->with('success', 'Salida registrada satisfactoriamente');
     }
 
     /**
@@ -73,18 +67,18 @@ class EntradaController extends Controller
     {
         //
         $productos = Producto::pluck('NOMBRE', 'ID_PRODUCTO');
-        $entrada = Entrada::find($id);
+        $salida = Salida::find($id);
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        $bodega = bodega::find($entrada->ID_BODEGA_PROYECTO);
+        $bodega = bodega::find($salida->ID_BODEGA_PROYECTO);
         $usuario = null;
-        $detalles = DetalleEntrada::where('ID_ENTRADA', $id)->get();
+        $detalles = DetalleSalida::where('ID_SALIDA', $id)->get();
         $producto = Producto::all();
-        if ($entrada->ID_USUARIO === Auth::user()->id) {
+        if ($salida->ID_USUARIO === Auth::user()->id) {
             $usuario = Auth::user();
         } else {
-            $usuario = User::find($entrada->ID_USUARIO);
+            $usuario = User::find($salida->ID_USUARIO);
         }
-        return view('entradas.show', compact('entrada', 'bodega', 'usuario', 'detalles', 'bodegas', 'productos', 'producto'));
+        return view('salidas.show', compact('salida', 'detalles', 'bodegas', 'bodega', 'productos', 'producto', 'usuario'));
     }
 
     /**
@@ -96,9 +90,9 @@ class EntradaController extends Controller
     public function edit($id)
     {
         //
-        $entrada = Entrada::find($id);
+        $salida = Salida::find($id);
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        return view('entradas.edit', compact('entrada', 'bodegas'));
+        return view('salidas.edit', compact('salida', 'bodegas'));
     }
 
     /**
@@ -112,15 +106,15 @@ class EntradaController extends Controller
     {
         //
         $this->validate($request, [
-            'DESCRIPCION_ENTRADA' => 'required',
-            'FECHA_ENTRADA' => 'required|date',
+            'DESCRIPCION_SALIDA' => 'required',
+            'FECHA_SALIDA' => 'required|date',
             'ID_BODEGA_PROYECTO' => 'required',
             'ID_USUARIO' => 'required',
         ]);
         $input = $request->all();
-        $entrada = Entrada::find($id);
-        $entrada->update($input);
-        return redirect()->route('entradas.show', [$entrada->ID_ENTRADA])->with('success', 'Entrada registrada satisfactoriamente');
+        $salida = Salida::find($id);
+        $salida->update($input);
+        return redirect()->route('salidas.show', [$salida->ID_SALIDA])->with('success', 'Salida registrada satisfactoriamente');
     }
 
     /**
@@ -132,7 +126,7 @@ class EntradaController extends Controller
     public function destroy($id)
     {
         //
-        $entrada = Entrada::find($id)->delete();
-        return redirect()->route('entradas.index')->with('success', 'Entrada eliminada!');
+        $salida = Salida::find($id)->delete();
+        return redirect()->route('salidas.index')->with('success', 'Salida eliminada!');
     }
 }

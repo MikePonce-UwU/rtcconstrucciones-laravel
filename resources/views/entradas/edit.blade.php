@@ -108,9 +108,4 @@
         })
     </script>
     <script>
-        $("#nueva-linea").on('click', function(ev) {
-            ev.preventDefault();
-            $("#dataTable-1").table().add();
-        })
-    </script>
-@endsection
+    @endsection

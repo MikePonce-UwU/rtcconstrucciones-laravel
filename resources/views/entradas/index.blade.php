@@ -9,7 +9,7 @@
                         <h2 class="h3 mb-0 page-title">{{ __('Entradas') }}</h2>
                     </div>
                     <div class="col-auto">
-                        @can('compra-create')
+                        @can('entrada-create')
                             <a href="{{ route('entradas.create') }}" class="btn btn-success text-white">
                                 <span></span> {{ __('New') }}
                             </a>
