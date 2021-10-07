@@ -65,7 +65,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <a class="btn grey btn-outline-secondary ms-2" href="{{ route('alquileres.index') }}">
+                            <a class="btn grey btn-outline-secondary ms-2" href="{{ route('compras.index') }}">
                                 {{ __('Back') }}</a>
                             <button type="submit" class="btn btn-success ms-2">{{ __('Save') }}</button>
                         </div>

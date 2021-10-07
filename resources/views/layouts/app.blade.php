@@ -9,6 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }} - {{ Route::current()->getName() }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('agency-assets/casco.png') }}" />
 
     <!-- Scripts -->
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}

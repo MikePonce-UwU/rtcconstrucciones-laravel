@@ -68,7 +68,7 @@ class EntregaAlquilerController extends Controller
     {
         //
         $entrega = EntregaAlquiler::find($id);
-        $alquiler = Alquiler::find($entrega->ID_ENTREGA_ALQUILER);
+        $alquiler = Alquiler::find($entrega->ID_ALQUILER);
         return view('alquileres.entrega_alquileres.show', compact('entrega', 'alquiler'));
     }
 

@@ -8,6 +8,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('agency-assets/casco.png') }}" />
     <link rel="stylesheet" href="{{ asset('admin-assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/otro mas xd.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>

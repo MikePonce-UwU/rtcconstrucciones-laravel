@@ -44,7 +44,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header text-center h1">Formulario de edicion</div>
                     <div class="card-body">
-                        {!! Form::model($proyecto, ['method' => 'PATCH', 'route' => ['proyectos.update', $proyecto->id]]) !!}
+                        {!! Form::model($proyecto, ['method' => 'PATCH', 'route' => ['proyectos.update', $proyecto->ID_PROYECTO]]) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Name') }}:</strong>

@@ -59,7 +59,7 @@ class CompraController extends Controller
         $input = $request->all();
         $compra = Compra::create($input);
         $compraID = $compra->ID_COMPRA;
-        return redirect()->route('detalle-compras.create', [$compraID])->with('success', 'Compra realizada satisfactoriamente!');
+        return redirect()->route('compras.show', [$compraID])->with('success', 'Compra realizada satisfactoriamente!');
     }
 
     /**
