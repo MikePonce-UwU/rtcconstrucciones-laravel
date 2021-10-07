@@ -58,9 +58,7 @@
                                     <div class="form-group">
                                         <strong>{{ __('Bodega a la que pertenece') }}:</strong>
                                         <span class="badge bg-success">
-                                            @foreach ($bodega as $b)
-                                                {{ $b->NOMBRE_BODEGA }}
-                                            @endforeach
+                                            {{ $bodega->NOMBRE_BODEGA }}
                                         </span>
                                     </div>
                                 </div>
