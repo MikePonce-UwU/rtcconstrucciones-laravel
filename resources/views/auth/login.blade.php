@@ -4,7 +4,10 @@
         <div class="row justify-content-center">
             <div class="col-lg-5">
                 <div class="card my-5">
-                    <div class="card-header text-center h1">{{ __('Login') }}</div>
+                    <div class="card-header text-center h1">{{ __('Login') }} <a href="{{ url('/') }}" class="btn btn-link btn-md mt-2 mt-lg-0">BACK</a></div>
+                       
+                        
+                           
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
