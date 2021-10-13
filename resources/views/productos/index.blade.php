@@ -6,11 +6,11 @@
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Administracion de usuarios') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Administracion de productos') }}</h2>
                     </div>
                     <div class="col-auto">
                         @can('user-create')
-                            <a href="{{ route('users.create') }}" class="btn btn-success" style="color:white"
+                            <a href="{{ route('productos.create') }}" class="btn btn-success" style="color:white"
                                 {{-- data-bs-toggle="modal" data-bs-target="#modelCreate" --}}>
                                 <span style="color:white"></span> {{ __('New') }}
                             </a>
@@ -25,7 +25,7 @@
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Usuarios') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Productos') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -41,57 +41,40 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header text-center h1">
-                                Lista de usuarios
+                                Lista de productos
                             </div>
                             <div class="card-body">
                                 <!-- table -->
                                 <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">{{ __('Name') }}</th>
-                                            <th class="text-center">{{ __('Email') }}</th>
-                                            <th class="text-center">{{ __('Roles') }}</th>
-                                            <th class="text-center">{{ __('Created date') }}</th>
-                                            <th class="text-center">{{ __('Updated date') }}</th>
-                                            @if (!empty($user->email_verified_at))
-                                                <th class="text-center">{{ __('Email verified date') }}</th>
-                                            @endif
+                                            <th class="text-center">{{ __('Nombre') }}</th>
+                                            <th class="text-center">{{ __('Cantidad') }}</th>
+                                            <th class="text-center">{{ __('Estado') }}</th>
                                             <th class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $user)
+                                        @foreach ($productos as $producto)
                                             <tr>
-                                                <td class="text-center">{{ $user->name }}</td>
-                                                <td class="text-center">{{ $user->email }}</td>
+                                                <td class="text-center">{{ $producto->NOMBRE }}</td>
                                                 <td class="text-center">
-                                                    @if (!empty($user->getRoleNames()))
-                                                        @foreach ($user->getRoleNames() as $v)
-                                                            {{ $v }}
-                                                        @endforeach
-                                                    @endif
+                                                    {{ $producto->CANTIDAD }}{{ __(' ') }}{{ $producto->UNIDAD_MEDIDA }}
                                                 </td>
-                                                <td class="text-center">{{ $user->created_at->format('M. d, Y') }}
-                                                </td>
-                                                <td class="text-center">
-                                                    {{ $user->created_at->format('M. d, Y') }}</td>
-                                                @if (!empty($user->email_verified_at))
-                                                    <td class="text-center">
-                                                        {{ $user->email_verified_at->format('M. d, Y') }}</td>
-                                                @endif
+                                                <td class="text-center">{{ $producto->ESTADO_DESC }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-secondary"
-                                                        href="{{ route('users.show', $user->id) }}">{{ __('Show') }}</a>
-                                                    @can('user-edit')
+                                                        href="{{ route('productos.show', $producto->ID_PRODUCTO) }}">{{ __('Show') }}</a>
+                                                    @can('producto-edit')
                                                         <a class="btn btn-primary"
-                                                            href="{{ route('users.edit', $user->id) }}">{{ __('Edit') }}</a>
+                                                            href="{{ route('productos.edit', $producto->ID_PRODUCTO) }}">{{ __('Edit') }}</a>
                                                     @endcan
-                                                    @if (Route::has('users.delete'))
-                                                        <a href="{{ route('users.delete', [$user->id]) }}"
+                                                    @if (Route::has('productos.delete'))
+                                                        <a href="{{ route('productos.delete', [$producto->ID_PRODUCTO]) }}"
                                                             class="btn btn-warning">{{ __('Eliminar') }}</a>
                                                     @endif
-                                                    @can('user-delete')
-                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) !!}
+                                                    @can('producto-delete')
+                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['productos.destroy', $producto->ID_PRODUCTO], 'style' => 'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                                         {!! Form::close() !!}
                                                     @endcan

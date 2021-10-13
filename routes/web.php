@@ -41,4 +41,5 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('destroy/{id}', [App\Http\Controllers\DetalleEntradaController::class, 'destroy'])->name('detalle-entradas.destroy');
     });
     Route::apiResource('detalle-salidas', App\Http\Controllers\DetalleSalidaController::class)->only(['store', 'destroy']);
+    Route::resource('productos', App\Http\Controllers\ProductoController::class);
 });

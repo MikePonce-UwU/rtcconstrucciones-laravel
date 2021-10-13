@@ -37,7 +37,7 @@
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
                 @if (Route::has('login'))
-                    <div class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         @auth
                             <li class="nav-item">
                                 <a href="{{ url('/home') }}" class="nav-link">Home</a>
@@ -45,11 +45,14 @@
                         @else
                             <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-md me-0 me-lg-2">Log
                                 in</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn btn-primary btn-md mt-2 mt-lg-0">Register</a>
-                            @endif
+                            @can('user-index')
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="btn btn-primary btn-md mt-2 mt-lg-0">Register</a>
+                                @endif
+                            @endcan
+
                         @endauth
-                    </div>
+                    </ul>
                 @endif
             </div>
         </div>
@@ -294,7 +297,8 @@
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">NUESTRO INCRE&Iacute;BLE EQUIPO</h2>
-                <h3 class="section-subheading text-muted">Somos Una empresa especializada en el DISEÑO, SUPERVISI&Oacute;N y CONSTRUCCI&Oacute;N de obras civiles.</h3>
+                <h3 class="section-subheading text-muted">Somos Una empresa especializada en el DISEÑO,
+                    SUPERVISI&Oacute;N y CONSTRUCCI&Oacute;N de obras civiles.</h3>
             </div>
             <div class="row">
                 <div class="col-lg-4">
@@ -333,18 +337,20 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <p class="large text-muted">RT Construcciones se pone a sus gratas ordenes para cualquier servicio que necesite en el ramo de la construcci&oacute;n.</p>
+                    <p class="large text-muted">RT Construcciones se pone a sus gratas ordenes para cualquier servicio
+                        que necesite en el ramo de la construcci&oacute;n.</p>
                 </div>
             </div>
         </div>
     </section>
-   
+
     <!-- Contact-->
     <section class="page-section" id="contact">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">Cont&aacute;ctenos</h2>
-                <h3 class="section-subheading text-muted">Nos Ponemos a la disposici&oacute;n para todo personal que requiera de nuestros servicios.</h3>
+                <h3 class="section-subheading text-muted">Nos Ponemos a la disposici&oacute;n para todo personal que
+                    requiera de nuestros servicios.</h3>
             </div>
             <!-- * * * * * * * * * * * * * * *-->
             <!-- * * SB Forms Contact Form * *-->
@@ -360,13 +366,15 @@
                             <!-- Name input-->
                             <input class="form-control" id="name" type="text" placeholder="Nombre*"
                                 data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="name:required">EL Nombre Es Requerido.</div>
+                            <div class="invalid-feedback" data-sb-feedback="name:required">EL Nombre Es Requerido.
+                            </div>
                         </div>
                         <div class="form-group">
                             <!-- Email address input-->
                             <input class="form-control" id="email" type="email" placeholder="Correo*"
                                 data-sb-validations="required,email" />
-                            <div class="invalid-feedback" data-sb-feedback="email:required">El Correo Es Requerrido.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:required">El Correo Es Requerrido.
+                            </div>
                             <div class="invalid-feedback" data-sb-feedback="email:email">El Correo No Es Valido.</div>
                         </div>
                         <div class="form-group mb-md-0">
@@ -420,7 +428,8 @@
                 <div class="col-lg-4 text-lg-start">Copyright &copy; {{ config('app.name') }} 2021</div>
                 <div class="col-lg-4 my-3 my-lg-0">
                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/rtconstrucciones3"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/rtconstrucciones3"><i
+                            class="fab fa-facebook-f"></i></a>
                     <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <div class="col-lg-4 text-lg-end">

@@ -109,6 +109,15 @@
                     Entradas
                 </a>
             @endcan
+            @can('producto-list')
+                <a class="nav-link @if (Route::current()->getName() === 'productos.index')
+                active
+            @endif "
+                    href="{{ route('productos.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></i></div>
+                    Productos
+                </a>
+            @endcan
 
 
         </div>
