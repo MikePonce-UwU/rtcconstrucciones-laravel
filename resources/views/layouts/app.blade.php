@@ -32,7 +32,7 @@
     @yield('css-content')
 </head>
 
-<body class="sb-nav-fixed font-montserrat">
+<body class="sb-nav-fixed font-FiraCode">
     @include('components.navigation')
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 </div>
-                </footer>
+            </footer>
         </div>
     </div>
 

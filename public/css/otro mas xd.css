@@ -1,5 +1,4 @@
 /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 #sb-scrolling-div::-webkit-scrollbar {
     -webkit-appearance: none;
@@ -31,8 +30,9 @@
     text-transform: uppercase;
     font-size: small;
 }
-.font-montserrat {
-    font-family: "Montserrat", sans-serif;
+.font-FiraCode {
+    font-family: "Fira Code", monospace;
+    line-height: 0.75;
 }
 .font-bold {
     font-weight: bold;

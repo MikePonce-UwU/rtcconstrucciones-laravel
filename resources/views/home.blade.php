@@ -32,11 +32,11 @@
                             </div>
                         @endif
                         Bienvenido, usted es:
-                        "@if (!empty(Auth::user()->getRoleNames()))
+                        @if (!empty(Auth::user()->getRoleNames()))
                             @foreach (Auth::user()->getRoleNames() as $v)
-                                {{ $v }}
+                                {{ '"' . $v . '"' }}
                             @endforeach
-                            @endif"
+                        @endif
                     </div>
                 </div>
             </div>
