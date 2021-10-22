@@ -12,9 +12,19 @@ class DetalleEntrada extends Model
     protected $table = 'detalle_entrada';
     public $timestamps = false;
     protected $fillable = [
-        'ESTADO_DESC',
-        'CANTIDAD',
-        'ID_PRODUCTO',
-        'ID_ENTRADA',
+        'CANTIDAD',    'ID_PRODUCTO',    'ID_ENTRADA',    'ID_ESTADO',
     ];
+    //belongs to
+    public function entrada()
+    {
+        return $this->belongsTo(Entrada::class, 'ID_ENTRADA', 'ID_ENTRADA');
+    }
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'ID_ESTADO', 'ID_ESTADO');
+    }
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'ID_PRODUCTO', 'ID_PRODUCTO');
+    }
 }

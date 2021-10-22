@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Proyecto extends Model
 {
@@ -12,16 +11,22 @@ class Proyecto extends Model
     protected $primaryKey = 'ID_PROYECTO';
     protected $table = 'proyecto';
     protected $fillable = [
-        'NOMBRE',
-        'FECHA_INICIO',
-        'FECHA_FINALIZACION',
-        'DESCRIPCION',
-        'DIRECCION',
-        'TIPO',
+        'NOMBRE',    'DESCRIPCION',    'DIRECCION',    'FECHA_INICIO',    'FECHA_FINALIZACION',    'ID_TIPO_PROYECTO',    'ID_ESTADO',
     ];
     public $timestamps = false;
+    //hasone
     public function bodega_proyecto()
     {
         return $this->HasOne(Bodega::class);
+    }
+
+    //belongs to
+    public function tipo_proyecto()
+    {
+        return $this->belongsTo(TipoProyecto::class, 'ID_TIPO_PROYECTO', 'ID_TIPO_PROYECTO');
+    }
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'ID_ESTADO', 'ID_ESTADO');
     }
 }

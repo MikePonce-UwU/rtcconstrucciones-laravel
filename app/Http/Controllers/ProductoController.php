@@ -36,9 +36,15 @@ class ProductoController extends Controller
     public function create()
     {
         //
+        $unidadMedida = [
+            'U' => 'Unidad(es)',
+            'LB' => 'Libra(s)',
+            'KG' => 'Kilo(s)',
+            'MT' => 'Metro(s)',
+        ];
         $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
         $categorias = Categoria::pluck('NOMBRE', 'ID_CATEGORIA');
-        return view('productos.create', compact('estados', 'categorias'));
+        return view('productos.create', compact('estados', 'categorias', 'unidadMedida'));
     }
 
     /**
@@ -73,9 +79,7 @@ class ProductoController extends Controller
     {
         //
         $producto = Producto::find($id);
-        $estado = Estado::find($producto->ID_ESTADO);
-        $categoria = categoria::find($producto->ID_CATEGORIA);
-        return view('productos.show', compact('producto', 'estado', 'categoria'));
+        return view('productos.show', compact('producto'));
     }
 
     /**
@@ -88,9 +92,10 @@ class ProductoController extends Controller
     {
         //
         $unidadMedida = [
-            'Unidad(es)' => 'Unidad(es)',
-            'Libra(s)' => 'Libra(s)',
-            'Kilo(s)' => 'Kilo(s)',
+            'U' => 'Unidad(es)',
+            'LB' => 'Libra(s)',
+            'KG' => 'Kilo(s)',
+            'MT' => 'Metro(s)',
         ];
         $producto = Producto::find($id);
         $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');

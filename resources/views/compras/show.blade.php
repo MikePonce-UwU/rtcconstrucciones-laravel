@@ -38,6 +38,12 @@
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
+                                        <strong>{{ __('Encargado de compra') }}:</strong>
+                                        {{ $compra->usuario->name }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
                                         <strong>{{ __('Descripcion') }}:</strong>
                                         {{ $compra->DESCRIPCION }}
                                     </div>
@@ -45,7 +51,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Fecha de compra') }}:</strong>
-                                        {{ $compra->FECHA_COMPRA }}
+                                        {{ $compra->FECHA_COMPRA->format('M d, Y') }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -57,7 +63,8 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Bodega a la que pertenece') }}:</strong>
-                                        <span class="badge bg-success">{{ $bodega->NOMBRE_BODEGA }}</span>
+                                        <span
+                                            class="badge bg-success">{{ $compra->bodega_proyecto->NOMBRE_BODEGA }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +91,7 @@
                                             <th class="text-center">Acciones</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($detalles as $detalle)
+                                            @foreach ($compra->detalle_compra as $detalle)
                                                 <tr>
                                                     <td class="text-center">{{ $detalle->NOMBRE }}</td>
                                                     <td class="text-center">{{ $detalle->CANTIDAD }}</td>

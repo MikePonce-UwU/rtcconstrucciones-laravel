@@ -53,7 +53,6 @@ class CompraController extends Controller
         $this->validate($request, [
             'DESCRIPCION' => 'required',
             'FECHA_COMPRA' => 'required|date',
-            'GASTO_TOTAL' => '',
             'ID_BODEGA_PROYECTO' => 'required',
         ]);
         $input = $request->all();
@@ -73,9 +72,7 @@ class CompraController extends Controller
         //
         $compra = Compra::find($id);
         $categorias = Categoria::pluck('NOMBRE', 'ID_CATEGORIA');
-        $bodega = Bodega::find($compra->ID_BODEGA_PROYECTO);
-        $detalles = DetalleCompra::where('ID_COMPRA', $id)->get();
-        return view('compras.show', compact('compra', 'bodega', 'detalles', 'categorias'));
+        return view('compras.show', compact('compra',  'categorias'));
     }
 
     /**
@@ -89,8 +86,7 @@ class CompraController extends Controller
         //
         $compra = Compra::find($id);
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        $detalles = DetalleCompra::all()->where('ID_COMPRA', $compra->ID_COMPRA);
-        return view('compras.edit', compact('compra', 'bodegas', 'detalles'));
+        return view('compras.edit', compact('compra', 'bodegas'));
     }
 
     /**
@@ -106,13 +102,12 @@ class CompraController extends Controller
         $this->validate($request, [
             'DESCRIPCION' => 'required',
             'FECHA_COMPRA' => 'required|date',
-            'GASTO_TOTAL' => 'required',
             'ID_BODEGA_PROYECTO' => 'required',
         ]);
         $input = $request->all();
         $compra = Compra::find($id);
         $compra->update($input);
-        return redirect()->route('entrega-alquileres.index')->with('success', 'Compra modificada exitosamente!!');
+        return redirect()->route('compras.index')->with('success', 'Compra modificada exitosamente!!');
     }
 
     /**

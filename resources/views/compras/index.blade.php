@@ -56,7 +56,8 @@
                                         @foreach ($compras as $compra)
                                             <tr>
                                                 <td class="text-center">{{ $compra->DESCRIPCION }}</td>
-                                                <td class="text-center">{{ $compra->FECHA_COMPRA }}</td>
+                                                <td class="text-center">{{ $compra->FECHA_COMPRA->diffForHumans() }}
+                                                </td>
                                                 <td class="text-center">C${{ $compra->GASTO_TOTAL }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-dark mb-2 mb-md-0"

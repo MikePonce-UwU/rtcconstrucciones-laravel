@@ -58,10 +58,10 @@ class PermissionTableSeeder extends Seeder
             'categoria-create',
             'categoria-edit',
             'categoria-delete',
-            'compra-list',
-            'compra-create',
-            'compra-edit',
-            'compra-delete',
+            'estado-list',
+            'estado-create',
+            'estado-edit',
+            'estado-delete',
         ];
 
         foreach ($permissions as $permission) {

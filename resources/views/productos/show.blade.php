@@ -45,14 +45,14 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Descripcion de estado') }}:</strong>
-                                        <span class="badge bg-success">{{ $estado->NOMBRE }}</span>
+                                        <span class="badge bg-success">{{ $producto->estado->NOMBRE }}</span>
                                         {{ $producto->ESTADO_DESC }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Categoria') }}:</strong>
-                                        {{ $categoria->NOMBRE }}
+                                        {{ $producto->categoria->NOMBRE }}
                                     </div>
                                 </div>
                             </div>

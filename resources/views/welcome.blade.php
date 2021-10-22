@@ -45,18 +45,9 @@
                         @else
                             <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-md me-0 me-lg-2">Log
                                 in</a>
-<<<<<<< HEAD
-                            @can('user-index')
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}" class="btn btn-primary btn-md mt-2 mt-lg-0">Register</a>
-                                @endif
-                            @endcan
-
-=======
                             {{-- @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="btn btn-primary btn-md mt-2 mt-lg-0">Register</a>
                             @endif --}}
->>>>>>> 1b4f1c740541354441972445f3c21dfc01d1ea8d
                         @endauth
                     </ul>
                 @endif

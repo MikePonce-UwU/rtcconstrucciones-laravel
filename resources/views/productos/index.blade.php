@@ -6,7 +6,7 @@
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Administracion de productos') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Administracion de inventario') }}</h2>
                     </div>
                     <div class="col-auto">
                         @can('user-create')

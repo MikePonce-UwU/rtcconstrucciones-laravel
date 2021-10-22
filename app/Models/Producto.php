@@ -7,21 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    //Editar tabla de productos con siguiente query:
-    /* ALTER TABLE
-        producto 
-    ADD 
-        COLUMN UNIDAD_MEDIDA ENUM('Unidad(es)', 'Libra(s)', 'Kilo(s)') NOT NULL; */
     use HasFactory;
     protected $primaryKey = 'ID_PRODUCTO';
     protected $table = 'producto';
     public $timestamps = false;
     protected $fillable = [
-        'NOMBRE',
-        'CANTIDAD',
-        'ESTADO_DESC',
-        'ID_ESTADO',
-        'ID_CATEGORIA',
-        'UNIDAD_MEDIDA',
+        'NOMBRE',    'CANTIDAD',    'ID_ESTADO',    'ID_CATEGORIA',    'ID_UND_MEDIDA',
     ];
+    //belongs to
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'ID_ESTADO', 'ID_ESTADO');
+    }
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'ID_CATEGORIA', 'ID_CATEGORIA');
+    }
+    public function unidad_medida()
+    {
+        return $this->belongsTo(Und_Medida::class, 'ID_UND_MEDIDA', 'ID_UND_MEDIDA');
+    }
+
+    //has many
 }

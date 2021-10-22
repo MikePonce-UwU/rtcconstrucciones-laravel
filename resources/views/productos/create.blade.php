@@ -54,7 +54,8 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <div class="form-group">
                                 <strong>{{ __('Cantidad de producto') }}:</strong>
-                                {!! Form::text('CANTIDAD', null, ['placeholder' => 'Cantidad de producto', 'class' => 'form-control']) !!}
+                                {!! Form::text('CANTIDAD', null, ['placeholder' => 'Cantidad de producto', 'class' => 'form-control']) !!}<br>
+                                {!! Form::select('UNIDAD_MEDIDA', $unidadMedida, null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">

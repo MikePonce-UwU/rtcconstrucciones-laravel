@@ -15,4 +15,12 @@ class Categoria extends Model
         'NOMBRE',
         'DESCRIPCION',
     ];
+    //has many
+    public function detalle_compra()
+    {
+        return $this->hasMany(DetalleCompra::class, 'ID_CATEGORIA', 'ID_CATEGORIA');
+    }
+
+    //belongs to
+
 }

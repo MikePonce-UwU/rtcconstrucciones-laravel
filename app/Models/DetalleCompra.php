@@ -12,10 +12,20 @@ class DetalleCompra extends Model
     protected $table = 'detalle_compra';
     public $timestamps = false;
     protected $fillable = [
-        'ID_COMPRA',
-        'NOMBRE',
-        'CANTIDAD',
-        'PRECIO',
-        'ID_CATEGORIA',
+        'NOMBRE',    'CANTIDAD',    'PRECIO',    'SUBTOTAL',    'ID_COMPRA',    'ID_CATEGORIA',    'ID_UND_MEDIDA',
+
     ];
+    //belongs to
+    public function compra()
+    {
+        return $this->belongsTo(Compra::class, 'ID_COMPRA', 'ID_COMPRA');
+    }
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'ID_CATEGORIA', 'ID_CATEGORIA');
+    }
+    public function unidad_medida()
+    {
+        return $this->belongsTo(Und_Medida::class, 'ID_UND_MEDIDA', 'ID_UND_MEDIDA');
+    }
 }

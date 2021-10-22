@@ -12,9 +12,19 @@ class DetalleSalida extends Model
     protected $table = 'detalle_salida';
     public $timestamps = false;
     protected $fillable = [
-        'ESTADO_DESC',
-        'CANTIDAD',
-        'ID_PRODUCTO',
-        'ID_SALIDA',
+        'CANTIDAD',    'ID_PRODUCTO',    'ID_SALIDA',    'ID_ESTADO',
     ];
+    //belongs to
+    public function salida()
+    {
+        return $this->belongsTo(Salida::class, 'ID_SALIDA', 'ID_SALIDA');
+    }
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class, 'ID_PRODUCTO', 'ID_PRODUCTO');
+    }
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'ID_ESTADO', 'ID_ESTADO');
+    }
 }
