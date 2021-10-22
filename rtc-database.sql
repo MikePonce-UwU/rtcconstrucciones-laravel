@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-10-2021 a las 01:07:55
+-- Tiempo de generación: 22-10-2021 a las 19:46:02
 -- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.10
+-- Versión de PHP: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `rtc-db`
+-- Base de datos: `rtc-database`
 --
 
 -- --------------------------------------------------------
@@ -29,20 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `alquiler` (
   `ID_ALQUILER` int(11) NOT NULL,
-  `NOMBRE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `CANTIDAD` int(11) DEFAULT NULL,
+  `NOMBRE_EMPRESA` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `DIRECCION` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `TELEFONO` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `FECHA_ALQUILER` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `HORAS_ALQUILER` int(11) DEFAULT NULL,
-  `PAGO_HORA` decimal(8,2) DEFAULT NULL,
-  `ID_BODEGA_PROYECTO` int(11) NOT NULL
+  `TOTAL_PAGAR` decimal(8,2) DEFAULT NULL,
+  `ID_ESTADO` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `alquiler`
---
-
-INSERT INTO `alquiler` (`ID_ALQUILER`, `NOMBRE`, `CANTIDAD`, `FECHA_ALQUILER`, `HORAS_ALQUILER`, `PAGO_HORA`, `ID_BODEGA_PROYECTO`) VALUES
-(1, 'Cinta métrica', 2, '2021-10-03 16:00:00', 5, '20.00', 1);
 
 -- --------------------------------------------------------
 
@@ -54,20 +47,14 @@ CREATE TABLE `bodega_proyecto` (
   `ID_BODEGA_PROYECTO` int(11) NOT NULL,
   `NOMBRE_BODEGA` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `DIRECCION` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `NOMBRE_ENCARGADO` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `FECHA_CREACION` timestamp NULL DEFAULT NULL,
   `FECHA_CIERRE` timestamp NULL DEFAULT NULL,
   `CAPACIDAD` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `CAPACIDAD_DISPONIBLE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `ID_PROYECTO` int(11) DEFAULT NULL
+  `ID_PROYECTO` bigint(20) UNSIGNED NOT NULL,
+  `ID_ESTADO` bigint(20) UNSIGNED NOT NULL,
+  `ID_USUARIO` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `bodega_proyecto`
---
-
-INSERT INTO `bodega_proyecto` (`ID_BODEGA_PROYECTO`, `NOMBRE_BODEGA`, `DIRECCION`, `NOMBRE_ENCARGADO`, `FECHA_CREACION`, `FECHA_CIERRE`, `CAPACIDAD`, `CAPACIDAD_DISPONIBLE`, `ID_PROYECTO`) VALUES
-(1, 'Bodega proyecto Bello horizonte', 'Bello Horizonte, 3c. al sur xd', 'Enrique Flores', '2021-10-25 00:02:29', '2021-10-03 00:02:25', '50x90x70 mts.', '40x90x70 mts.', 1);
 
 -- --------------------------------------------------------
 
@@ -89,18 +76,31 @@ CREATE TABLE `categoria` (
 
 CREATE TABLE `compra` (
   `ID_COMPRA` int(11) NOT NULL,
-  `DESCRIPCION` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `DESCRIPCION` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `FECHA_COMPRA` timestamp NULL DEFAULT NULL,
   `GASTO_TOTAL` decimal(8,2) DEFAULT NULL,
-  `ID_BODEGA_PROYECTO` int(11) NOT NULL
+  `ID_BODEGA_PROYECTO` bigint(20) UNSIGNED NOT NULL,
+  `ID_ESTADO` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `compra`
+-- Estructura de tabla para la tabla `detalle_alquiler`
 --
 
-INSERT INTO `compra` (`ID_COMPRA`, `DESCRIPCION`, `FECHA_COMPRA`, `GASTO_TOTAL`, `ID_BODEGA_PROYECTO`) VALUES
-(1, 'Compra de nuevo material de construccion', '2021-10-04 20:10:33', '185.00', 1);
+CREATE TABLE `detalle_alquiler` (
+  `ID_DETALLE_ALQUILER` int(11) NOT NULL,
+  `NOMBRE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `CANTIDAD` int(11) DEFAULT NULL,
+  `HORAS_ALQUILER` int(11) DEFAULT NULL,
+  `HORAS_EXCEDIDAS` int(11) DEFAULT NULL,
+  `PAGO_HORA` decimal(8,2) DEFAULT NULL,
+  `PAGO_EXCEDIDO` decimal(8,2) DEFAULT NULL,
+  `SUBTOTAL` decimal(8,2) DEFAULT NULL,
+  `ID_BODEGA_PROYECTO` bigint(20) UNSIGNED NOT NULL,
+  `ID_ALQUILER` bigint(20) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -110,29 +110,14 @@ INSERT INTO `compra` (`ID_COMPRA`, `DESCRIPCION`, `FECHA_COMPRA`, `GASTO_TOTAL`,
 
 CREATE TABLE `detalle_compra` (
   `ID_DETALLE_COMPRA` int(11) NOT NULL,
-  `ID_COMPRA` int(11) NOT NULL,
   `NOMBRE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `CANTIDAD` int(11) DEFAULT NULL,
   `PRECIO` decimal(8,2) DEFAULT NULL,
-  `ID_CATEGORIA` int(11) NOT NULL
+  `SUBTOTAL` decimal(8,2) DEFAULT NULL,
+  `ID_COMPRA` bigint(20) UNSIGNED NOT NULL,
+  `ID_CATEGORIA` bigint(20) UNSIGNED NOT NULL,
+  `ID_UND_MEDIDA` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `detalle_compra`
---
-
-INSERT INTO `detalle_compra` (`ID_DETALLE_COMPRA`, `ID_COMPRA`, `NOMBRE`, `CANTIDAD`, `PRECIO`, `ID_CATEGORIA`) VALUES
-(1, 1, 'zinc xddd', 3, '20.00', 1),
-(2, 1, 'pan', 2, '40.00', 1),
-(3, 1, 'leche', 3, '15.00', 1);
-
---
--- Disparadores `detalle_compra`
---
-DELIMITER $$
-CREATE TRIGGER `actualizar_total` AFTER INSERT ON `detalle_compra` FOR EACH ROW UPDATE compra SET compra.GASTO_TOTAL = (SELECT SUM(detalle_compra.CANTIDAD*detalle_compra.PRECIO) from detalle_compra WHERE new.ID_COMPRA = detalle_compra.ID_COMPRA) WHERE compra.ID_COMPRA = new.ID_COMPRA
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -143,9 +128,9 @@ DELIMITER ;
 CREATE TABLE `detalle_entrada` (
   `ID_DETALLE_ENTRADA` int(11) NOT NULL,
   `CANTIDAD` int(11) DEFAULT NULL,
-  `ESTADO_DESC` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `ID_PRODUCTO` int(11) NOT NULL,
-  `ID_ENTRADA` int(11) NOT NULL
+  `ID_PRODUCTO` bigint(20) UNSIGNED NOT NULL,
+  `ID_ENTRADA` bigint(20) UNSIGNED NOT NULL,
+  `ID_ESTADO` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -157,9 +142,9 @@ CREATE TABLE `detalle_entrada` (
 CREATE TABLE `detalle_salida` (
   `ID_DETALLE_SALIDA` int(11) NOT NULL,
   `CANTIDAD` int(11) DEFAULT NULL,
-  `ESTADO_DESC` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ID_PRODUCTO` int(11) NOT NULL,
-  `ID_SALIDA` int(11) NOT NULL
+  `ID_SALIDA` bigint(20) UNSIGNED NOT NULL,
+  `ID_ESTADO` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -170,30 +155,11 @@ CREATE TABLE `detalle_salida` (
 
 CREATE TABLE `entrada` (
   `ID_ENTRADA` int(11) NOT NULL,
+  `DESCRIPCION_ENTRADA` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `FECHA_ENTRADA` timestamp NULL DEFAULT NULL,
-  `DESCRIPCION_ENTRADA` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `ID_BODEGA_PROYECTO` int(11) NOT NULL
+  `ID_USUARIO` bigint(20) UNSIGNED DEFAULT NULL,
+  `ID_BODEGA_PROYECTO` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `entrega_alquiler`
---
-
-CREATE TABLE `entrega_alquiler` (
-  `ID_ENTREGA_ALQUILER` int(11) NOT NULL,
-  `HORAS_EXCEDIDAS` int(11) DEFAULT NULL,
-  `PAGO_EXCEDIDO` decimal(8,2) DEFAULT NULL,
-  `ID_ALQUILER` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `entrega_alquiler`
---
-
-INSERT INTO `entrega_alquiler` (`ID_ENTREGA_ALQUILER`, `HORAS_EXCEDIDAS`, `PAGO_EXCEDIDO`, `ID_ALQUILER`) VALUES
-(1, 3, '20.00', 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +170,7 @@ INSERT INTO `entrega_alquiler` (`ID_ENTREGA_ALQUILER`, `HORAS_EXCEDIDAS`, `PAGO_
 CREATE TABLE `estado` (
   `ID_ESTADO` int(11) NOT NULL,
   `NOMBRE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `DESCRIPCION` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+  `DESCRIPCION` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -275,8 +241,7 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\User', 1),
-(2, 'App\\Models\\User', 2);
+(1, 'App\\Models\\User', 1);
 
 -- --------------------------------------------------------
 
@@ -309,49 +274,53 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'user-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(2, 'user-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(3, 'user-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(4, 'user-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(5, 'role-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(6, 'role-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(7, 'role-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(8, 'role-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(9, 'permission-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(10, 'permission-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(11, 'permission-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(12, 'bodega-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(13, 'bodega-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(14, 'bodega-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(15, 'bodega-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(16, 'proyecto-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(17, 'proyecto-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(18, 'proyecto-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(19, 'proyecto-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(20, 'entrada-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(21, 'entrada-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(22, 'entrada-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(23, 'entrada-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(24, 'salida-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(25, 'salida-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(26, 'salida-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(27, 'salida-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(28, 'alquiler-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(29, 'alquiler-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(30, 'alquiler-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(31, 'alquiler-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(32, 'producto-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(33, 'producto-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(34, 'producto-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(35, 'producto-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(36, 'compra-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(37, 'compra-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(38, 'compra-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(39, 'compra-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(40, 'categoria-list', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(41, 'categoria-create', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(42, 'categoria-edit', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58'),
-(43, 'categoria-delete', 'web', '2021-10-02 14:21:58', '2021-10-02 14:21:58');
+(1, 'user-list', 'web', '2021-10-22 17:03:19', '2021-10-22 17:03:19'),
+(2, 'user-create', 'web', '2021-10-22 17:03:19', '2021-10-22 17:03:19'),
+(3, 'user-edit', 'web', '2021-10-22 17:03:19', '2021-10-22 17:03:19'),
+(4, 'user-delete', 'web', '2021-10-22 17:03:19', '2021-10-22 17:03:19'),
+(5, 'role-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(6, 'role-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(7, 'role-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(8, 'role-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(9, 'permission-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(10, 'permission-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(11, 'permission-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(12, 'bodega-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(13, 'bodega-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(14, 'bodega-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(15, 'bodega-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(16, 'proyecto-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(17, 'proyecto-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(18, 'proyecto-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(19, 'proyecto-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(20, 'entrada-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(21, 'entrada-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(22, 'entrada-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(23, 'entrada-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(24, 'salida-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(25, 'salida-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(26, 'salida-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(27, 'salida-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(28, 'alquiler-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(29, 'alquiler-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(30, 'alquiler-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(31, 'alquiler-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(32, 'producto-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(33, 'producto-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(34, 'producto-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(35, 'producto-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(36, 'compra-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(37, 'compra-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(38, 'compra-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(39, 'compra-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(40, 'categoria-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(41, 'categoria-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(42, 'categoria-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(43, 'categoria-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(44, 'estado-list', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(45, 'estado-create', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(46, 'estado-edit', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20'),
+(47, 'estado-delete', 'web', '2021-10-22 17:03:20', '2021-10-22 17:03:20');
 
 -- --------------------------------------------------------
 
@@ -381,9 +350,9 @@ CREATE TABLE `producto` (
   `ID_PRODUCTO` int(11) NOT NULL,
   `NOMBRE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `CANTIDAD` int(11) DEFAULT NULL,
-  `ESTADO_DESC` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `ID_ESTADO` int(11) NOT NULL,
-  `ID_CATEGORIA` int(11) NOT NULL
+  `ID_ESTADO` bigint(20) UNSIGNED NOT NULL,
+  `ID_CATEGORIA` bigint(20) UNSIGNED NOT NULL,
+  `ID_UND_MEDIDA` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -394,20 +363,14 @@ CREATE TABLE `producto` (
 
 CREATE TABLE `proyecto` (
   `ID_PROYECTO` int(11) NOT NULL,
-  `NOMBRE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `FECHA_INICIO` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `FECHA_FINALIZACION` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `DESCRIPCION` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `NOMBRE` char(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `DESCRIPCION` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `DIRECCION` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `TIPO` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+  `FECHA_INICIO` timestamp NULL DEFAULT NULL,
+  `FECHA_FINALIZACION` timestamp NULL DEFAULT NULL,
+  `ID_TIPO_PROYECTO` bigint(20) UNSIGNED NOT NULL,
+  `ID_ESTADO` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `proyecto`
---
-
-INSERT INTO `proyecto` (`ID_PROYECTO`, `NOMBRE`, `FECHA_INICIO`, `FECHA_FINALIZACION`, `DESCRIPCION`, `DIRECCION`, `TIPO`) VALUES
-(1, 'Proyecto bello horizonte', '2021-10-02 15:42:49', '2021-10-23 15:42:53', 'Proyecto donde se llevará a cabo la construccion de un puente en la rotonda de bello horizonte', 'Bello Horizonte, 3c. al sur, 1c. arriba, 1/2c. sur', 'Horizontal');
 
 -- --------------------------------------------------------
 
@@ -428,9 +391,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'web', '2021-10-02 14:22:54', '2021-10-02 14:22:54'),
-(2, 'Encargado de bodega', 'web', '2021-10-02 15:46:23', '2021-10-02 15:46:23'),
-(3, 'Jefe de proyectos', 'web', '2021-10-02 15:46:47', '2021-10-02 15:46:47');
+(1, 'Admin', 'web', '2021-10-22 17:03:26', '2021-10-22 17:03:26');
 
 -- --------------------------------------------------------
 
@@ -460,20 +421,12 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (10, 1),
 (11, 1),
 (12, 1),
-(12, 2),
-(12, 3),
 (13, 1),
-(13, 2),
 (14, 1),
-(14, 2),
 (15, 1),
 (16, 1),
-(16, 2),
-(16, 3),
 (17, 1),
-(17, 3),
 (18, 1),
-(18, 3),
 (19, 1),
 (20, 1),
 (21, 1),
@@ -498,7 +451,11 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (40, 1),
 (41, 1),
 (42, 1),
-(43, 1);
+(43, 1),
+(44, 1),
+(45, 1),
+(46, 1),
+(47, 1);
 
 -- --------------------------------------------------------
 
@@ -508,9 +465,34 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 
 CREATE TABLE `salida` (
   `ID_SALIDA` int(11) NOT NULL,
+  `DESCRIPCION_SALIDA` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `FECHA_SALIDA` timestamp NULL DEFAULT NULL,
-  `DESCRIPCION_SALIDA` text COLLATE utf8_spanish_ci DEFAULT NULL,
-  `ID_BODEGA_PROYECTO` int(11) NOT NULL
+  `ID_USUARIO` bigint(20) UNSIGNED NOT NULL,
+  `ID_BODEGA_PROYECTO` bigint(20) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_proyecto`
+--
+
+CREATE TABLE `tipo_proyecto` (
+  `ID_TIPO_PROYECTO` int(11) NOT NULL,
+  `NOMBRE` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `DESCRIPCION` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `und_medida`
+--
+
+CREATE TABLE `und_medida` (
+  `ID_UND_MEDIDA` int(11) NOT NULL,
+  `ABREVIACION` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `DESCRIPCION` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -535,8 +517,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$DRjcvPBLI5Gs1rXwfijt4uKfe4Bs7woGZO7B966Ji9g9i6l3.iANq', 'xveluCOE36oizD3mZecuLXCJrkieK6lhfhsNx5rA60daNCUmoXFq35ItqtZa', '2021-10-02 14:22:54', '2021-10-02 14:22:54'),
-(2, 'Mike Ponce', 'mvallecillo101@gmail.com', NULL, '$2y$10$9uP43FgOgNNUO9kzuPjRsumj.c.Q72Q5P9Ij6P/9/h9BoYO6RoJTW', NULL, '2021-10-03 22:47:54', '2021-10-03 22:47:54');
+(1, 'Admin', 'admin@admin.com', NULL, '$2y$10$X7TRY0DUkdKR8nkJXtF95eeNvrHaUTiKvh10acA1HOZWCJpVCl6Nu', NULL, '2021-10-22 17:03:26', '2021-10-22 17:03:26');
 
 --
 -- Índices para tablas volcadas
@@ -547,14 +528,16 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 ALTER TABLE `alquiler`
   ADD PRIMARY KEY (`ID_ALQUILER`),
-  ADD KEY `RefBODEGA_PROYECTO14` (`ID_BODEGA_PROYECTO`);
+  ADD KEY `RefESTADO29` (`ID_ESTADO`);
 
 --
 -- Indices de la tabla `bodega_proyecto`
 --
 ALTER TABLE `bodega_proyecto`
   ADD PRIMARY KEY (`ID_BODEGA_PROYECTO`),
-  ADD KEY `RefPROYECTO19` (`ID_PROYECTO`);
+  ADD KEY `RefPROYECTO19` (`ID_PROYECTO`),
+  ADD KEY `RefESTADO31` (`ID_ESTADO`),
+  ADD KEY `RefUSUARIO1` (`ID_USUARIO`);
 
 --
 -- Indices de la tabla `categoria`
@@ -567,7 +550,16 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`ID_COMPRA`),
-  ADD KEY `RefBODEGA_PROYECTO13` (`ID_BODEGA_PROYECTO`);
+  ADD KEY `RefBODEGA_PROYECTO13` (`ID_BODEGA_PROYECTO`),
+  ADD KEY `RefESTADO30` (`ID_ESTADO`);
+
+--
+-- Indices de la tabla `detalle_alquiler`
+--
+ALTER TABLE `detalle_alquiler`
+  ADD PRIMARY KEY (`ID_DETALLE_ALQUILER`),
+  ADD KEY `RefBODEGA_PROYECTO23` (`ID_BODEGA_PROYECTO`),
+  ADD KEY `RefALQUILER24` (`ID_ALQUILER`);
 
 --
 -- Indices de la tabla `detalle_compra`
@@ -575,7 +567,8 @@ ALTER TABLE `compra`
 ALTER TABLE `detalle_compra`
   ADD PRIMARY KEY (`ID_DETALLE_COMPRA`),
   ADD KEY `RefCOMPRA15` (`ID_COMPRA`),
-  ADD KEY `RefCATEGORIA20` (`ID_CATEGORIA`);
+  ADD KEY `RefCATEGORIA20` (`ID_CATEGORIA`),
+  ADD KEY `RefUND_MEDIDA28` (`ID_UND_MEDIDA`);
 
 --
 -- Indices de la tabla `detalle_entrada`
@@ -583,7 +576,8 @@ ALTER TABLE `detalle_compra`
 ALTER TABLE `detalle_entrada`
   ADD PRIMARY KEY (`ID_DETALLE_ENTRADA`),
   ADD KEY `RefENTRADA5` (`ID_ENTRADA`),
-  ADD KEY `RefPRODUCTO18` (`ID_PRODUCTO`);
+  ADD KEY `RefPRODUCTO18` (`ID_PRODUCTO`),
+  ADD KEY `RefESTADO25` (`ID_ESTADO`);
 
 --
 -- Indices de la tabla `detalle_salida`
@@ -591,21 +585,16 @@ ALTER TABLE `detalle_entrada`
 ALTER TABLE `detalle_salida`
   ADD PRIMARY KEY (`ID_DETALLE_SALIDA`),
   ADD KEY `RefPRODUCTO3` (`ID_PRODUCTO`),
-  ADD KEY `RefSALIDA4` (`ID_SALIDA`);
+  ADD KEY `RefSALIDA4` (`ID_SALIDA`),
+  ADD KEY `RefESTADO26` (`ID_ESTADO`);
 
 --
 -- Indices de la tabla `entrada`
 --
 ALTER TABLE `entrada`
   ADD PRIMARY KEY (`ID_ENTRADA`),
+  ADD UNIQUE KEY `refUsuario2` (`ID_USUARIO`),
   ADD KEY `RefBODEGA_PROYECTO10` (`ID_BODEGA_PROYECTO`);
-
---
--- Indices de la tabla `entrega_alquiler`
---
-ALTER TABLE `entrega_alquiler`
-  ADD PRIMARY KEY (`ID_ENTREGA_ALQUILER`),
-  ADD KEY `RefALQUILER21` (`ID_ALQUILER`);
 
 --
 -- Indices de la tabla `estado`
@@ -666,13 +655,16 @@ ALTER TABLE `personal_access_tokens`
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`ID_PRODUCTO`),
   ADD KEY `RefESTADO1` (`ID_ESTADO`),
-  ADD KEY `RefCATEGORIA2` (`ID_CATEGORIA`);
+  ADD KEY `RefCATEGORIA2` (`ID_CATEGORIA`),
+  ADD KEY `RefUND_MEDIDA27` (`ID_UND_MEDIDA`);
 
 --
 -- Indices de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  ADD PRIMARY KEY (`ID_PROYECTO`);
+  ADD PRIMARY KEY (`ID_PROYECTO`),
+  ADD KEY `RefTIPO_PROYECTO22` (`ID_TIPO_PROYECTO`),
+  ADD KEY `RefESTADO32` (`ID_ESTADO`);
 
 --
 -- Indices de la tabla `roles`
@@ -695,6 +687,18 @@ ALTER TABLE `salida`
   ADD KEY `RefBODEGA_PROYECTO9` (`ID_BODEGA_PROYECTO`);
 
 --
+-- Indices de la tabla `tipo_proyecto`
+--
+ALTER TABLE `tipo_proyecto`
+  ADD PRIMARY KEY (`ID_TIPO_PROYECTO`);
+
+--
+-- Indices de la tabla `und_medida`
+--
+ALTER TABLE `und_medida`
+  ADD PRIMARY KEY (`ID_UND_MEDIDA`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -709,13 +713,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `ID_ALQUILER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_ALQUILER` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `bodega_proyecto`
 --
 ALTER TABLE `bodega_proyecto`
-  MODIFY `ID_BODEGA_PROYECTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_BODEGA_PROYECTO` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -727,13 +731,19 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_COMPRA` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_alquiler`
+--
+ALTER TABLE `detalle_alquiler`
+  MODIFY `ID_DETALLE_ALQUILER` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_compra`
 --
 ALTER TABLE `detalle_compra`
-  MODIFY `ID_DETALLE_COMPRA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_DETALLE_COMPRA` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_entrada`
@@ -752,12 +762,6 @@ ALTER TABLE `detalle_salida`
 --
 ALTER TABLE `entrada`
   MODIFY `ID_ENTRADA` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `entrega_alquiler`
---
-ALTER TABLE `entrega_alquiler`
-  MODIFY `ID_ENTREGA_ALQUILER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `estado`
@@ -781,7 +785,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -799,13 +803,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `ID_PROYECTO` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID_PROYECTO` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `salida`
@@ -814,10 +818,22 @@ ALTER TABLE `salida`
   MODIFY `ID_SALIDA` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `tipo_proyecto`
+--
+ALTER TABLE `tipo_proyecto`
+  MODIFY `ID_TIPO_PROYECTO` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `und_medida`
+--
+ALTER TABLE `und_medida`
+  MODIFY `ID_UND_MEDIDA` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
