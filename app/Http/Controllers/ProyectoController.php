@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estado;
 use App\Models\Proyecto;
+use App\Models\TipoProyecto;
 use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
@@ -34,7 +36,9 @@ class ProyectoController extends Controller
     public function create()
     {
         //
-        return view('proyectos.create');
+        $tipo = TipoProyecto::pluck('NOMBRE', 'ID_TIPO_PROYECTO');
+        $estado = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('proyectos.create', compact('tipo', 'estado'));
     }
 
     /**
@@ -51,8 +55,9 @@ class ProyectoController extends Controller
             'FECHA_INICIO' => 'required',
             'FECHA_FINALIZACION' => 'required',
             'DESCRIPCION' => 'required',
-            'DIRECCION' => 'required|max:50',
-            'TIPO' => 'required|max:50',
+            'DIRECCION' => 'required|max:100',
+            'ID_TIPO_PROYECTO' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
         $input = $request->all();
         Proyecto::create($input);

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bodega;
+use App\Models\Estado;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BodegaController extends Controller
 {
@@ -23,8 +25,8 @@ class BodegaController extends Controller
     public function index(Request $request)
     {
         //
-        $data = Bodega::all();
-        return view('bodegas.index', compact('data'));
+        $bodegas = Bodega::all();
+        return view('bodegas.index', compact('bodegas'));
     }
 
     /**
@@ -36,7 +38,8 @@ class BodegaController extends Controller
     {
         //
         $proyectos = Proyecto::pluck('NOMBRE', 'ID_PROYECTO')->all();
-        return view('bodegas.create', compact('proyectos'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO')->all();
+        return view('bodegas.create', compact('proyectos', 'estados'));
     }
 
     /**
@@ -51,14 +54,15 @@ class BodegaController extends Controller
         $this->validate($request, [
             'NOMBRE_BODEGA' => 'required|max:50',
             'DIRECCION' => 'required|max:50',
-            'NOMBRE_ENCARGADO' => 'required|max:50',
             'FECHA_CREACION' => 'required|date',
             'FECHA_CIERRE' => 'required|date',
             'CAPACIDAD' => 'required|max:50',
             'CAPACIDAD_DISPONIBLE' => 'required|max:50',
             'ID_PROYECTO' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
         $input = $request->all();
+        $input['ID_USUARIO'] = Auth::id();
         Bodega::create($input);
 
         return redirect()->route('bodegas.index')->with('success', 'Bodega creada exitosamente!');
@@ -89,7 +93,8 @@ class BodegaController extends Controller
         //
         $bodega = Bodega::find($id);
         $proyectos = Proyecto::pluck('NOMBRE', 'ID_PROYECTO')->all();
-        return view('bodegas.edit', compact('bodega', 'proyectos'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO')->all();
+        return view('bodegas.edit', compact('bodega', 'proyectos', 'estados'));
     }
 
     /**

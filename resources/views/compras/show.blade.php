@@ -38,12 +38,6 @@
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Encargado de compra') }}:</strong>
-                                        {{ $compra->usuario->name }}
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
                                         <strong>{{ __('Descripcion') }}:</strong>
                                         {{ $compra->DESCRIPCION }}
                                     </div>
@@ -51,7 +45,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Fecha de compra') }}:</strong>
-                                        {{ $compra->FECHA_COMPRA->format('M d, Y') }}
+                                        {{ $compra->FECHA_COMPRA->diffForHumans() }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -68,7 +62,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <hr>
+                            <div class="card-body">
                                 <div class="row align-items-center my-3">
                                     <div class="col">
                                         <h3 class="card-title">Detalle de compra</h3>
@@ -82,7 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <table class="table table-bordered mx-auto" id="dataTable-1">
+                                    <table class="table table-bordered" id="dataTable-1">
                                         <thead>
                                             <th class="text-center">Nombre</th>
                                             <th class="text-center">Cantidad</th>
@@ -91,12 +86,12 @@
                                             <th class="text-center">Acciones</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($compra->detalle_compra as $detalle)
+                                            @forelse ($compra->detalle_compra as $detalle)
                                                 <tr>
                                                     <td class="text-center">{{ $detalle->NOMBRE }}</td>
                                                     <td class="text-center">{{ $detalle->CANTIDAD }}</td>
                                                     <td class="text-center">{{ $detalle->PRECIO }}</td>
-                                                    <td class="text-center">{{ $detalle->ID_CATEGORIA }}</td>
+                                                    <td class="text-center">{{ $detalle->categoria->NOMBRE }}</td>
                                                     <td class="text-center">
                                                         @can('compra-delete')
                                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -107,7 +102,9 @@
                                                     </td>
                                                 </tr>
                                                 @include('compras.detalle-compras.delete')
-                                            @endforeach
+                                            @empty
+                                                <i class="fs-6 text-muted mx-auto">No hay datos que mostrar</i>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

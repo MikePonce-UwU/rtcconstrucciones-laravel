@@ -58,11 +58,14 @@
                                         @foreach ($proyectos as $proyecto)
                                             <tr>
                                                 <td class="text-center">{{ $proyecto->NOMBRE }}</td>
-                                                <td class="text-center">{{ $proyecto->FECHA_INICIO }}</td>
-                                                <td class="text-center">{{ $proyecto->FECHA_FINALIZACION }}</td>
-                                                <td class="text-center">{{ $proyecto->DESCRIPCION }}</td>
-                                                <td class="text-center">{{ $proyecto->DIRECCION }}</td>
-                                                <td class="text-center">{{ $proyecto->TIPO }}</td>
+                                                <td class="text-center">{{ $proyecto->FECHA_INICIO->diffForHumans() }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $proyecto->FECHA_FINALIZACION->diffForHumans() }}</td>
+                                                <td class="text-center">{!! \Illuminate\Support\Str::limit($proyecto->DESCRIPCION, 25, $end = '...') !!}</td>
+                                                <td class="text-center">{!! \Illuminate\Support\Str::limit($proyecto->DIRECCION, 25, $end = '...') !!}</td>
+                                                <td class="text-center">{{ $proyecto->tipo_proyecto->NOMBRE }}
+                                                </td>
                                                 <td class="text-center">
                                                     <a href="{{ route('proyectos.show', $proyecto->ID_PROYECTO) }}"
                                                         class="btn btn-dark text-white mb-2 mb-md-0">

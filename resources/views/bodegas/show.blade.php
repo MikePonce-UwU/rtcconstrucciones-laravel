@@ -38,6 +38,12 @@
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
+                                        <strong>{{ __('Encargado de bodega') }}:</strong>
+                                        {{ $bodega->usuario->name }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="form-group">
                                         <strong>{{ __('Direccion') }}:</strong>
                                         {{ $bodega->DIRECCION }}
                                     </div>
@@ -81,40 +87,46 @@
                         <div class="card shadow">
                             <div class="card-header text-center h1">{{ __('Lista de productos en bodega') }}</div>
                             <div class="card-body">
-                                <div class="col-xs-10 col-sm-10 col-md-10">
-                                    <table class="table table-bordered" id="dataTable-1">
-                                        <thead>
-                                            <th>Nombre</th>
-                                            <th>cantidad</th>
-                                            <th>Estado</th>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($bodega->compra as $compra)
-                                                @forelse ($compra->detalle_compra as $c)
-                                                    {{ dd($c) }}
-                                                    <tr>
-                                                        <td>{{ $c->NOMBRE }}</td>
-                                                        <td>{{ $c->CANTIDAD }}</td>
-                                                        <td><label
-                                                                class="badge bg-info">{{ $c->categoria->NOMBRE }}</label>
-                                                        </td>
-                                                    </tr>
-                                                @empty
-                                                    <i class="fs-6 text-muted">No hay datos que mostrar</i>
-                                                @endforelse
-                                            @empty
-                                                <i class="fs-6 text-muted">No hay datos que mostrar</i>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
+                                @foreach ($bodega->compra as $compra)
+                                    <hr>
+                                    <div class="row mx-auto">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                            <div class="card-title"><a
+                                                    href="{{ route('compras.show', [$compra->ID_COMPRA]) }}"
+                                                    class="btn btn-link">Compra #{{ $compra->ID_COMPRA }}</a></div>
+                                            <p class="card-text fs-6">{{ $compra->DESCRIPCION }}</p>
+                                            <p class="card-text fs-6">C${{ $compra->GASTO_TOTAL }}</p>
+                                            <small
+                                                class="fst-italic">{{ $compra->FECHA_COMPRA->diffForHumans() }}</small>
+                                            <table class="table table-bordered text-center" id="dataTable-1">
+                                                <thead>
+                                                    <th>Nombre</th>
+                                                    <th>cantidad</th>
+                                                    <th>Precio</th>
+                                                    <th>Categoria</th>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($compra->detalle_compra as $c)
+                                                        <tr>
+                                                            <td>{{ $c->NOMBRE }}</td>
+                                                            <td>{{ $c->CANTIDAD . $c->unidad_medida->ABREVIACION }}
+                                                            </td>
+                                                            <td>{{ __('C$') }}{{ $c->PRECIO }}</td>
+                                                            <td><label
+                                                                    class="badge bg-info">{{ $c->categoria->NOMBRE }}</label>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                    </div>
-                </div>
 
-            </div> <!-- .col-12 -->
-        </div> <!-- .row -->
-    </div> <!-- .container-fluid -->
+                    </div> <!-- .col-12 -->
+                </div> <!-- .row -->
+            </div> <!-- .container-fluid -->
 
-@endsection
+        @endsection

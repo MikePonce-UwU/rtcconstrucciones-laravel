@@ -7,6 +7,8 @@ use App\Models\Bodega;
 use App\Models\Categoria;
 use App\Models\Compra;
 use App\Models\DetalleCompra;
+use App\Models\Estado;
+use App\Models\Und_Medida;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
@@ -38,7 +40,8 @@ class CompraController extends Controller
     {
         //
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        return view('compras.create', compact('bodegas'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('compras.create', compact('bodegas', 'estados'));
     }
 
     /**
@@ -56,6 +59,7 @@ class CompraController extends Controller
             'ID_BODEGA_PROYECTO' => 'required',
         ]);
         $input = $request->all();
+
         $compra = Compra::create($input);
         $compraID = $compra->ID_COMPRA;
         return redirect()->route('compras.show', [$compraID])->with('success', 'Compra realizada satisfactoriamente!');
@@ -72,7 +76,8 @@ class CompraController extends Controller
         //
         $compra = Compra::find($id);
         $categorias = Categoria::pluck('NOMBRE', 'ID_CATEGORIA');
-        return view('compras.show', compact('compra',  'categorias'));
+        $und_medida = Und_Medida::pluck('ABREVIACION', 'ID_UND_MEDIDA');
+        return view('compras.show', compact('compra', 'und_medida', 'categorias'));
     }
 
     /**
@@ -86,7 +91,8 @@ class CompraController extends Controller
         //
         $compra = Compra::find($id);
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        return view('compras.edit', compact('compra', 'bodegas'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('compras.edit', compact('compra',  'bodegas', 'estados'));
     }
 
     /**

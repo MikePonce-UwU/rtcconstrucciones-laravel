@@ -45,48 +45,7 @@
                     <div class="card-header text-center h1">Formulario de edicion</div>
                     <div class="card-body">
                         {!! Form::model($proyecto, ['method' => 'PATCH', 'route' => ['proyectos.update', $proyecto->ID_PROYECTO]]) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Name') }}:</strong>
-                                {!! Form::text('NOMBRE', $proyecto->NOMBRE, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Fecha de inicio') }}:</strong>
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Inicio</button>
-                                    {!! Form::text('FECHA_INICIO', $proyecto->FECHA_INICIO, ['placeholder' => 'Fecha de inicio', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Fecha de Finalizacion') }}:</strong>
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary" id="toggle-dtp2">Fin</button>
-                                    {!! Form::text('FECHA_FINALIZACION', $proyecto->FECHA_FINALIZACION, ['placeholder' => 'Fecha de finalizacion', 'class' => 'form-control', 'id' => 'datetimepicker2']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Descripcion') }}:</strong>
-                                {!! Form::text('DESCRIPCION', $proyecto->DESCRIPCION, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Direccion') }}:</strong>
-                                {!! Form::text('DIRECCION', $proyecto->DIRECCION, ['placeholder' => 'Direccion', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Tipo') }}:</strong>
-                                {!! Form::text('TIPO', $proyecto->TIPO, ['placeholder' => 'Tipo', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
+                        @include('proyectos.forms.form')
                         <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                             <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
                         </div>

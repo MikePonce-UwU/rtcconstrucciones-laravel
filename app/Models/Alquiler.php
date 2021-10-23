@@ -16,6 +16,10 @@ class Alquiler extends Model
     public $timestamps = false;
     protected $dates = ['FECHA_ALQUILER'];
 
+    public function detalle_alquiler()
+    {
+        return $this->hasMany(DetalleAlquiler::class, 'ID_ALQUILER', 'ID_ALQUILER');
+    }
     public function estado()
     {
         return $this->belongsTo(Estado::class, 'ID_ESTADO', 'ID_ESTADO');

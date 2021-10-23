@@ -57,11 +57,11 @@
                                         </tr class="text-center">
                                     </thead>
                                     <tbody>
-                                        @foreach ($data as $bodega)
+                                        @foreach ($bodegas as $bodega)
                                             <tr>
                                                 <td class="text-center">{{ $bodega->NOMBRE_BODEGA }}</td>
                                                 <td class="text-center">{{ $bodega->DIRECCION }}</td>
-                                                <td class="text-center">{{ $bodega->NOMBRE_ENCARGADO }}</td>
+                                                <td class="text-center">{{ $bodega->usuario->name }}</td>
                                                 <td class="text-center">{{ $bodega->FECHA_CREACION }}</td>
                                                 <td class="text-center">{{ $bodega->FECHA_CIERRE }}</td>
                                                 <td class="text-center">{{ $bodega->CAPACIDAD }}</td>

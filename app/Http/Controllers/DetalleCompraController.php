@@ -37,6 +37,7 @@ class DetalleCompraController extends Controller
             'CANTIDAD' => 'required',
             'PRECIO' => 'required',
             'ID_CATEGORIA' => 'required',
+            'ID_UND_MEDIDA' => 'required',
         ]);
         $input = $request->all();
         $detalle = DetalleCompra::create($input);

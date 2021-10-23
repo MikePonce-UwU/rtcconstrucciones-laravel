@@ -14,6 +14,7 @@ class Proyecto extends Model
         'NOMBRE',    'DESCRIPCION',    'DIRECCION',    'FECHA_INICIO',    'FECHA_FINALIZACION',    'ID_TIPO_PROYECTO',    'ID_ESTADO',
     ];
     public $timestamps = false;
+    protected $dates = ['FECHA_INICIO', 'FECHA_FINALIZACION'];
     //hasone
     public function bodega_proyecto()
     {

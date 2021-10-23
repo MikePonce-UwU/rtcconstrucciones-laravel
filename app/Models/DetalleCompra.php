@@ -12,7 +12,7 @@ class DetalleCompra extends Model
     protected $table = 'detalle_compra';
     public $timestamps = false;
     protected $fillable = [
-        'NOMBRE',    'CANTIDAD',    'PRECIO',    'SUBTOTAL',    'ID_COMPRA',    'ID_CATEGORIA',    'ID_UND_MEDIDA',
+        'NOMBRE',    'CANTIDAD',    'PRECIO',   'ID_COMPRA',    'ID_CATEGORIA',    'ID_UND_MEDIDA',
 
     ];
     //belongs to

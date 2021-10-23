@@ -43,27 +43,7 @@
                     <div class="card-header text-center h1">Formulario de edicion</div>
                     <div class="card-body">
                         {!! Form::model($compra, ['method' => 'PATCH', 'route' => ['compras.update', $compra->ID_COMPRA]]) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Descripcion') }}:</strong>
-                            </div>
-                            {!! Form::text('DESCRIPCION', $compra->DESCRIPCION, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Fecha de compra') }}:</strong>
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Fecha</button>
-                                    {!! Form::text('FECHA_COMPRA', $compra->FECHA_COMPRA, ['placeholder' => 'Fecha de compra', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Bodega') }}:</strong>
-                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, $compra->ID_BODEGA_PROYECTO, ['class' => 'form-control', 'multiple']) !!}
-                            </div>
-                        </div>
+                        @include('compras.forms.form')
                         <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
                             <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
                         </div>

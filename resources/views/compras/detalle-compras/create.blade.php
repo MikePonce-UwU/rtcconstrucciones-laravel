@@ -34,6 +34,12 @@
                         {!! Form::select('ID_CATEGORIA', $categorias, [], ['class' => 'form-control', 'multiple']) !!}
                     </div>
                 </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                    <div class="form-group">
+                        <strong>{{ __('Unidad de medida') }}:</strong>
+                        {!! Form::select('ID_UND_MEDIDA', $und_medida, [], ['class' => 'form-control', 'multiple']) !!}
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>

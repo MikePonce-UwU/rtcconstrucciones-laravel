@@ -35,19 +35,20 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header text-center h1">
-                                {{ $proyecto->NOMBRE }}
+                                {{ $proyecto->NOMBRE }} <label
+                                    class="badge bg-success">{{ $proyecto->estado->NOMBRE }}</label>
                             </div>
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Fecha de inicio') }}:</strong>
-                                        {{ $proyecto->FECHA_INICIO }}
+                                        {{ $proyecto->FECHA_INICIO->diffForHumans() }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Fecha de finalizacion') }}:</strong>
-                                        {{ $proyecto->FECHA_FINALIZACION }}
+                                        {{ $proyecto->FECHA_FINALIZACION->diffForHumans() }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -65,7 +66,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Tipo de obra') }}:</strong>
-                                        {{ $proyecto->TIPO }}
+                                        {{ $proyecto->tipo_proyecto->NOMBRE }}
                                     </div>
                                 </div>
                             </div>
