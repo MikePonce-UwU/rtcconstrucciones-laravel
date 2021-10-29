@@ -43,48 +43,7 @@
                     <div class="card-header text-center h1">Formulario de edicion</div>
                     <div class="card-body">
                         {!! Form::model($alquiler, ['method' => 'PATCH', 'route' => ['alquileres.update', $alquiler->ID_ALQUILER]]) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Nombre') }}:</strong>
-                                {!! Form::text('NOMBRE', $alquiler->NOMBRE, ['placeholder' => 'Nombre', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Cantidad a usar') }}:</strong>
-                                {!! Form::text('CANTIDAD', $alquiler->CANTIDAD, ['placeholder' => 'Cantidad', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Fecha de alquiler') }}:</strong>
-                                <div class="input-group">
-                                    <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Inicio</button>
-                                    {!! Form::text('FECHA_ALQUILER', $alquiler->FECHA_ALQUILER, ['placeholder' => 'Fecha de creacion', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Hora alquiler') }}:</strong>
-                                {!! Form::text('HORAS_ALQUILER', $alquiler->HORAS_ALQUILER, ['placeholder' => 'Hora alquiler', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Pago por hora') }}:</strong>
-                                <div class="input-group">
-                                    <span class="input-group-text">C$</span>
-                                    {!! Form::text('PAGO_HORA', $alquiler->PAGO_HORA, ['placeholder' => 'Pago por hora', 'class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Bodega') }}:</strong>
-                                {!! Form::select('ID_BODEGA_PROYECTO', $bodegas, $alquiler->ID_BODEGA, ['class' => 'form-control', 'multiple']) !!}
-                            </div>
-                        </div>
+                        @include('alquileres.forms.form')
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
                         </div>

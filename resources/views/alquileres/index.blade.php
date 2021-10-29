@@ -39,7 +39,7 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header text-center h1">
-                                Listado de alquileres a bodegas
+                                Listado de alquileres
                             </div>
                             <div class="card-body">
                                 <!-- table -->
@@ -47,21 +47,19 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">{{ __('Nombre') }}</th>
-                                            <th class="text-center">{{ __('Cantidad') }}</th>
+                                            <th class="text-center">{{ __('Direccion') }}</th>
                                             <th class="text-center">{{ __('Fecha alquiler') }}</th>
-                                            <th class="text-center">{{ __('Hora alquiler') }}</th>
-                                            <th class="text-center">{{ __('Pago por hora') }}</th>
+                                            <th class="text-center">{{ __('Total') }}</th>
                                             <th class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
                                     <tbody>
                                         @foreach ($alquileres as $alquiler)
                                             <tr>
-                                                <td class="text-center">{{ $alquiler->NOMBRE }}</td>
-                                                <td class="text-center">{{ $alquiler->CANTIDAD }}</td>
+                                                <td class="text-center">{{ $alquiler->NOMBRE_EMPRESA }}</td>
+                                                <td class="text-center">{{ $alquiler->DIRECCION }}</td>
                                                 <td class="text-center">{{ $alquiler->FECHA_ALQUILER }}</td>
-                                                <td class="text-center">{{ $alquiler->HORAS_ALQUILER }}hr</td>
-                                                <td class="text-center">C${{ $alquiler->PAGO_HORA }}</td>
+                                                <td class="text-center">C${{ $alquiler->TOTAL_PAGAR }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-dark mb-2 mb-md-0"
                                                         href="{{ route('alquileres.show', $alquiler->ID_ALQUILER) }}">{{ __('Show') }}</a>

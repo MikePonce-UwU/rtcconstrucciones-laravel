@@ -35,4 +35,8 @@ class Bodega extends Model
     {
         return $this->hasMany(Compra::class, 'ID_BODEGA_PROYECTO', 'ID_BODEGA_PROYECTO');
     }
+    public function detalle_alquiler()
+    {
+        return $this->hasMany(DetalleAlquiler::class, 'ID_BODEGA_PROYECTO', 'ID_BODEGA_PROYECTO');
+    }
 }

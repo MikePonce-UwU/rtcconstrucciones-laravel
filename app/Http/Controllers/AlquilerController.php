@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alquiler;
 use App\Models\Bodega;
 use App\Models\EntregaAlquiler;
+use App\Models\Estado;
 use Illuminate\Http\Request;
 
 class AlquilerController extends Controller
@@ -25,8 +26,7 @@ class AlquilerController extends Controller
     {
         //
         $alquileres = Alquiler::all();
-        $entregas_alquileres = EntregaAlquiler::all();
-        return view('alquileres.index', compact('alquileres', 'entregas_alquileres'));
+        return view('alquileres.index', compact('alquileres'));
     }
 
     /**
@@ -37,8 +37,8 @@ class AlquilerController extends Controller
     public function create()
     {
         //
-        $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        return view('alquileres.create', compact('bodegas'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('alquileres.create', compact('estados'));
     }
 
     /**
@@ -51,11 +51,12 @@ class AlquilerController extends Controller
     {
         //
         $this->validate($request, [
-            'NOMBRE' => 'required|max:50',
-            'CANTIDAD' => 'required|numeric',
+            'NOMBRE_EMPRESA' => 'required|max:75',
+            'DIRECCION' => 'required|max:256',
+            'TELEFONO' => 'required',
             'FECHA_ALQUILER' => 'required|date',
-            'HORAS_ALQUILER' => 'required|numeric',
-            'PAGO_HORA' => 'required',
+            'TOTAL_PAGAR' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
         $input = $request->all();
         Alquiler::create($input);
@@ -72,8 +73,8 @@ class AlquilerController extends Controller
     {
         //
         $alquiler = Alquiler::find($id);
-        $bodega = Bodega::find($alquiler->ID_ALQUILER);
-        return view('alquileres.show', compact('alquiler', 'bodega'));
+        $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
+        return view('alquileres.show', compact('alquiler', 'bodegas'));
     }
 
     /**

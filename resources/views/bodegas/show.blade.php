@@ -85,8 +85,8 @@
                 <div class="row my-4">
                     <div class="col-md-12">
                         <div class="card shadow">
-                            <div class="card-header text-center h1">{{ __('Lista de productos en bodega') }}</div>
                             <div class="card-body">
+                                <div class="text-center h1">{{ __('Lista de productos en bodega') }}</div>
                                 @foreach ($bodega->compra as $compra)
                                     <hr>
                                     <div class="row mx-auto">
