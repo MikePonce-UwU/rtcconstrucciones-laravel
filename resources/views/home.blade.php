@@ -2,6 +2,7 @@
 @section('titulo', 'Dashboard')
 @section('content')
     <x-content-header :page-title="__('Vista principal')">
+        <x-slot name="header">Vista principal</x-slot>
         <li class="breadcrumb-item active">{{ __('Dashboard') }}</li>
     </x-content-header>
     <x-content>
