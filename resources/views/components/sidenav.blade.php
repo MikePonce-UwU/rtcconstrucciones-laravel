@@ -1,122 +1,151 @@
-<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-    <div class="sb-sidenav-menu" id="sb-scrolling-div">
-        <div class="nav">
-            <div class="sb-sidenav-menu-heading">Core</div>
-            <a class="nav-link @if (Route::current()->getName() === 'home')
-                active
-            @endif "
-                href="{{ route('home', []) }}">
-                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                Dashboard
-            </a>
-            <div class="sb-sidenav-menu-heading">Interfaces</div>
-            @can('user-list')
-                <a class="nav-link @if (Route::current()->getName() === 'users.index')
-                active
-            @endif "
-                    href="{{ route('users.index', []) }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
-                    Usuarios
-                </a>
-            @endcan
+{{-- sidebar nuevo xd --}}
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+        <img src="{{ asset('agency-assets/casco.png') }}" alt="RTConstrucciones Logo"
+            class="brand-image img-circle elevation-3" style="opacity: .8">
+        <x-heading-span class="brand-text font-weight-light">{{ config('app.name') }}</x-heading-span>
+    </a>
 
-            @can('role-list')
-                <a class="nav-link @if (Route::current()->getName() === 'roles.index')
-                active
-            @endif "
-                    href="{{ route('roles.index', []) }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-user-tag"></i></div>
-                    Roles
-                </a>
-            @endcan
-
-            @can('permission-list')
-                <a class="nav-link @if (Route::current()->getName() === 'permisos.index')
-                active
-            @endif "
-                    href="{{ route('permisos.index', []) }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-parking"></i></div>
-                    Permisos
-                </a>
-            @endcan
-
-            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-                aria-expanded="false" aria-controls="collapseLayouts">
-                <div class="sb-nav-link-icon"><i class="fas fa-database"></i></div>
-                Módulos
-                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-            </a>
-            <div class="collapse @if (Route::current()->getName() === 'bodegas.index' || Route::current()->getName() === 'proyectos.index' || Route::current()->getName() === 'alquileres.index')
-                show
-            @endif "
-                id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                <nav class="sb-sidenav-menu-nested nav">
-                    @can('alquiler-list')
-                        <a class="nav-link @if (Route::current()->getName() === 'alquileres.index')
-                active
-            @endif "
-                            href="{{ route('alquileres.index', ['id' => 1]) }}">Alquileres</a>
-                    @endcan
-
-                    @can('bodega-list')
-                        <a class="nav-link @if (Route::current()->getName() === 'bodegas.index')
-                active
-            @endif "
-                            href="{{ route('bodegas.index', ['id' => 1]) }}">Bodegas</a>
-                    @endcan
-
-                    @can('proyecto-list')
-                        <a class="nav-link @if (Route::current()->getName() === 'proyectos.index')
-                    active
-                @endif "
-                            href="{{ route('proyectos.index', []) }}">Proyectos</a>
-                    @endcan
-
-                </nav>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{ asset('adminlte-assets/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                    alt="User Image">
             </div>
-            <div class="sb-sidenav-menu-heading">Addons</div>
-            @can('compra-list')
-                <a class="nav-link @if (Route::current()->getName() === 'compras.index')
-                active
-            @endif "
-                    href="{{ route('compras.index', []) }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-money-bill-wave"></i></div>
-                    Compras
-                </a>
-            @endcan
-            @can('salida-list')
-                <a class="nav-link @if (Route::current()->getName() === 'salidas.index')
-                active
-            @endif "
-                    href="{{ route('salidas.index') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Salidas
-                </a>
-            @endcan
-            @can('entrada-list')
-                <a class="nav-link @if (Route::current()->getName() === 'entradas.index')
-                active
-            @endif "
-                    href="{{ route('entradas.index') }}">
-                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                    Entradas
-                </a>
-            @endcan
-            @can('producto-list')
-                <a class="nav-link @if (Route::current()->getName() === 'productos.index')
-                active
-            @endif "
-                    href="{{ route('productos.index') }}">
-                    <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></i></div>
-                    Productos
-                </a>
-            @endcan
-
-
+            <div class="info">
+                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            </div>
         </div>
+
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link @if (Route::current()->getName() === 'home') active @endif">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Usuarios y roles
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('users.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Usuarios</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('roles.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Roles</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('permisos.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Permisos</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Bodegas y Proyectos
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('bodegas.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Bodegas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('proyectos.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Proyectos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('alquileres.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Alquileres</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('compras.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Compras</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-header">GESTIÓN DE PRODUCTOS</li>
+                <li class="nav-item">
+                    <a href="{{ route('productos.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-calendar-alt"></i>
+                        <p>
+                            Productos
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>
+                            Entradas y salidas
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('entradas.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Entradas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('salidas.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>salidas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
     </div>
-    <div class="sb-sidenav-footer">
-        <div class="small">Logged in as:</div>
-        {{ Auth::user()->name }}
-    </div>
-</nav>
+    <!-- /.sidebar -->
+</aside>

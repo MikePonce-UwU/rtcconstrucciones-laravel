@@ -26,10 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bodegas = Bodega::all();
-        $proyectos = Proyecto::all();
-        $usuarios = User::all();
-
-        return view('home', compact('bodegas', 'proyectos', 'usuarios'));
+        return view('home');
     }
 }

@@ -1,45 +1,71 @@
 @extends('layouts.app')
-
+@section('titulo', 'Dashboard')
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                <div class="row align-items-center my-4">
-                    <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Vista principal') }}</h2>
-                    </div>
-                    <div class="col-auto">
-                    </div>
-                </div>
-                <div class="content-header row">
-                    <div class="content-header-left col-md-12 col-12 mb-2">
-                        <div class="row breadcrumbs-top">
-                            <div class="breadcrumb-wrapper col-12">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active">{{ __('Dashboard') }}</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header text-center h1">{{ __('Dashboard') }}</div>
+    <x-content-header :page-title="__('Vista principal')">
+        <li class="breadcrumb-item active">{{ __('Dashboard') }}</li>
+    </x-content-header>
+    <x-content>
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ App\Models\Salida::whereDate('FECHA_SALIDA', '=', Carbon\Carbon::now())->count() }}</h3>
 
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        Bienvenido, usted es:
-                        @if (!empty(Auth::user()->getRoleNames()))
-                            @foreach (Auth::user()->getRoleNames() as $v)
-                                {{ '"' . $v . '"' }}
-                            @endforeach
-                        @endif
+                        <p>Nuevas salidas</p>
                     </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ App\Models\Entrada::whereDate('FECHA_ENTRADA', '=', Carbon\Carbon::now())->count() }}</h3>
+
+                        <p>Nuevas entradas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>{{ App\Models\Proyecto::whereDate('FECHA_INICIO', '=', Carbon\Carbon::now())->count() }}</h3>
+
+                        <p>Nuevos proyectos</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ App\Models\Bodega::whereDate('FECHA_CREACION', '=', Carbon\Carbon::now())->count() }}</h3>
+
+                        <p>Nuevas bodegas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
         </div>
-    </div>
+    </x-content>
 @endsection
