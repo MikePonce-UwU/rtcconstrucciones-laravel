@@ -87,7 +87,9 @@ class ProyectoController extends Controller
     {
         //
         $proyecto = Proyecto::find($id);
-        return view('proyectos.edit', compact('proyecto'));
+        $tipo = TipoProyecto::pluck('NOMBRE', 'ID_TIPO_PROYECTO');
+        $estado = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('proyectos.edit', compact('proyecto', 'tipo', 'estado'));
     }
 
     /**
