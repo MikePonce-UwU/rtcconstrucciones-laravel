@@ -76,37 +76,89 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-header">GESTIÓN DE PROYECTOS</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
+                        <i class="far fa-circle nav-icon"></i>
                         <p>
-                            Bodegas y Proyectos
-                            <i class="fas fa-angle-left right"></i>
+                            Bodegas
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('bodegas.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Bodegas</p>
+                                <p>Listar bodegas</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('bodegas.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear bodega</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Proyectos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('proyectos.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Proyectos</p>
+                                <p>Listar proyectos</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('proyectos.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear proyecto</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Alquileres<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('alquileres.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Alquileres</p>
+                                <p>Listar alquileres</p>
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('alquileres.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear alquiler</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('compras.index') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Compras<i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="{{ route('compras.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Compras</p>
+                                <p>Listar compras</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('compras.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear compra</p>
                             </a>
                         </li>
                     </ul>
@@ -124,7 +176,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-envelope"></i>
                         <p>
-                            Entradas y salidas
+                            Entradas
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -132,13 +184,36 @@
                         <li class="nav-item">
                             <a href="{{ route('entradas.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Entradas</p>
+                                <p>Listar entradas</p>
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('entradas.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear entrada</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-envelope"></i>
+                        <p>
+                            Salidas
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="{{ route('salidas.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>salidas</p>
+                                <p>Listar salidas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('salidas.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear salida</p>
                             </a>
                         </li>
                     </ul>
