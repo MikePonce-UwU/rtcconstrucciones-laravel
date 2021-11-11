@@ -46,11 +46,11 @@
     <script>
         $(function() {
             $('#datetimepicker1').datetimepicker({
-                format: 'Y-m-d H:m:s',
+                format: 'Y-M-d H:m:s',
                 lang: 'es'
             });
             $('#datetimepicker2').datetimepicker({
-                format: 'Y-m-d H:m:s',
+                format: 'Y-M-d H:m:s',
                 lang: 'es'
             });
             $("#toggle-dtp1").on('click', function() {
