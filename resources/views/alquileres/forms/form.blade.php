@@ -18,7 +18,7 @@
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
     <div class="form-group">
-        <strong>{{ __('Fecha de alquiler') }}:</strong>
+        <strong>{{ __('Fecha de alquiler') }}: <i class="text-muted">@if (isset($alquiler)) {{ $alquiler->FECHA_ALQUILER }} @endif</i></strong>
         <div class="input-group">
             <button type="button" class="btn btn-outline-secondary" id="toggle-dtp1">Inicio</button>
             {!! Form::text('FECHA_ALQUILER', null, ['placeholder' => 'Fecha de alquiler', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}

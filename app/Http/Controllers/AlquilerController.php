@@ -102,11 +102,12 @@ class AlquilerController extends Controller
     {
         //
         $this->validate($request, [
-            'NOMBRE' => 'required|max:50',
-            'CANTIDAD' => 'required|numeric',
+            'NOMBRE_EMPRESA' => 'required|max:75',
+            'DIRECCION' => 'required|max:256',
+            'TELEFONO' => 'required',
             'FECHA_ALQUILER' => 'required|date',
-            'HORAS_ALQUILER' => 'required|numeric',
-            'PAGO_HORA' => 'required',
+            'TOTAL_PAGAR' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
         $input = $request->all();
         $alquiler = Alquiler::find($id);

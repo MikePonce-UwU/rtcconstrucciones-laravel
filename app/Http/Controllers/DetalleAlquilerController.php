@@ -53,8 +53,14 @@ class DetalleAlquilerController extends Controller
     {
         //
         $this->validate($request, [
+            'NOMBRE' => 'required',
+            'CANTIDAD' => 'required',
+            'HORAS_ALQUILER' => 'required',
             'HORAS_EXCEDIDAS' => 'required',
+            'PAGO_HORA' => 'required',
             'PAGO_EXCEDIDO' => 'required',
+            'SUBTOTAL' => 'required',
+            'ID_BODEGA_PROYECTO' => 'required',
             'ID_ALQUILER' => 'required',
         ]);
         $input = $request->all();

@@ -110,11 +110,12 @@ class BodegaController extends Controller
         $this->validate($request, [
             'NOMBRE_BODEGA' => 'required|max:50',
             'DIRECCION' => 'required|max:50',
-            'NOMBRE_ENCARGADO' => 'required|max:50',
             'FECHA_CREACION' => 'required|date',
-            'FECHA_CIERRE' => 'required|date',
+            'FECHA_CIERRE' => 'required|date|after:FECHA_CREACION',
             'CAPACIDAD' => 'required|max:50',
+            'CAPACIDAD_DISPONIBLE' => 'required|max:50',
             'ID_PROYECTO' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
 
         $input = $request->all();
