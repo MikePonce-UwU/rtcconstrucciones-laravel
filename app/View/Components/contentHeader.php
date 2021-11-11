@@ -4,16 +4,18 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class content-header extends Component
+class contentHeader extends Component
 {
+    public $header;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($header)
     {
         //
+        $this->header = $header;
     }
 
     /**
@@ -23,6 +25,6 @@ class content-header extends Component
      */
     public function render()
     {
-        return view('components.content-header');
+        return view('components.contentHeader');
     }
 }

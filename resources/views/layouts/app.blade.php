@@ -9,6 +9,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }} - @yield('titulo')</title>
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="{{ mix('js/app.js') }}"></script>
+
     <link rel="icon" type="image/x-icon" href="{{ asset('agency-assets/casco.png') }}" />
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -33,6 +36,8 @@
     <link rel="stylesheet" href="{{ asset('adminlte-assets/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('adminlte-assets/plugins/summernote/summernote-bs4.min.css') }}">
+    @yield('css-content')
+    @yield('js-content')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -41,14 +46,20 @@
             <img class="animation__shake" src="{{ asset('agency-assets/casco.png') }}" alt="RTConstrucciones"
                 height="60" width="60">
         </div>
-        @include('components.navigation')
-        @include('components.sidenav')
+        {{-- @include('components.navigation') --}}
+        <x-navigation />
+        {{-- @include('components.sidenav') --}}
+        <x-sidenav />
         <main class="content-wrapper">
             @yield('content')
         </main>
     </div>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
     <footer class="main-footer">
-        <strong>Copyright &copy; {{ now()->year() }}
+        <strong>Copyright &copy; {{ now()->format('Y') }}
             All rights reserved.
     </footer>
     <!-- jQuery -->
