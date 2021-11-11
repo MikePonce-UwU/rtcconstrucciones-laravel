@@ -61,22 +61,23 @@
     <link rel="stylesheet" href="{{ asset('datetimepicker-master/jquery.datetimepicker.css') }}">
 @endsection
 @section('js-content')
+    <script src="{{ asset('datetimepicker-master/jquery.js') }}"></script>
     <script src="{{ asset('datetimepicker-master/build/jquery.datetimepicker.full.min.js') }}"></script>
     <script>
         $(function() {
             $('#datetimepicker1').datetimepicker({
-                format: 'Y-m-d H:i:s',
+                format: 'Y-m-d H:m:s',
                 lang: 'es'
             });
             $('#datetimepicker2').datetimepicker({
-                format: 'Y-m-d H:i:s',
+                format: 'Y-m-d H:m:s',
                 lang: 'es'
             });
             $("#toggle-dtp1").on('click', function() {
-                $("#datetimepicker1").datetimepicker('show');
+                $("#datetimepicker1").datetimepicker('toggle');
             });
             $("#toggle-dtp2").on('click', function() {
-                $("#datetimepicker2").datetimepicker('show');
+                $("#datetimepicker2").datetimepicker('toggle');
             });
         })
     </script>

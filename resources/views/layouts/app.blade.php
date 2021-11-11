@@ -33,7 +33,7 @@
     <link rel="stylesheet"
         href="{{ asset('adminlte-assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('adminlte-assets/plugins/daterangepicker/daterangepicker.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('adminlte-assets/plugins/daterangepicker/daterangepicker.css') }}"> --}}
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('adminlte-assets/plugins/summernote/summernote-bs4.min.css') }}">
     @yield('css-content')
