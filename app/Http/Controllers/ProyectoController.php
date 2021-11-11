@@ -52,8 +52,8 @@ class ProyectoController extends Controller
         //
         $this->validate($request, [
             'NOMBRE' => 'required|max:50',
-            'FECHA_INICIO' => 'required',
-            'FECHA_FINALIZACION' => 'required',
+            'FECHA_INICIO' => 'required|date',
+            'FECHA_FINALIZACION' => 'required|date|after:FECHA_INICIO',
             'DESCRIPCION' => 'required',
             'DIRECCION' => 'required|max:100',
             'ID_TIPO_PROYECTO' => 'required',

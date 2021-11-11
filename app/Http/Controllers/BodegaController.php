@@ -55,7 +55,7 @@ class BodegaController extends Controller
             'NOMBRE_BODEGA' => 'required|max:50',
             'DIRECCION' => 'required|max:50',
             'FECHA_CREACION' => 'required|date',
-            'FECHA_CIERRE' => 'required|date',
+            'FECHA_CIERRE' => 'required|date|after:FECHA_CREACION',
             'CAPACIDAD' => 'required|max:50',
             'CAPACIDAD_DISPONIBLE' => 'required|max:50',
             'ID_PROYECTO' => 'required',
