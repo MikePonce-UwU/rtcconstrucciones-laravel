@@ -87,8 +87,8 @@ class AlquilerController extends Controller
     {
         //
         $alquiler = Alquiler::find($id);
-        $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        return view('alquileres.edit', compact('alquiler', 'bodegas'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('alquileres.edit', compact('alquiler', 'estados'));
     }
 
     /**
