@@ -69,7 +69,7 @@ class SalidaController extends Controller
         //
         $salida = Salida::find($id);
         //dependencias
-        $productos = Producto::all();
+        $productos = Producto::where('CANTIDAD', '>', 0)->get();
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
         $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
         return view('salidas.show', compact('salida', 'productos', 'estados', 'bodegas'));
