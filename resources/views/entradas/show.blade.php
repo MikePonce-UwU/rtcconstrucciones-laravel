@@ -36,10 +36,11 @@
                         <div class="card shadow">
                             <div class="card-header text-center h1">Entrada #{{ $entrada->ID_ENTRADA }}</div>
                             <div class="card-body">
+
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Usuario de la entrada') }}:</strong>
-                                        {{ $usuario->name }}
+                                        {{ $entrada->users->name }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -51,14 +52,14 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Fecha de compra') }}:</strong>
-                                        {{ $entrada->FECHA_ENTRADA }}
+                                        {{ \Carbon\Carbon::createFromDate($entrada->FECHA_ENTRADA)->diffForHumans() }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Bodega a la que pertenece') }}:</strong>
                                         <span class="badge bg-success">
-                                            {{ $bodega->NOMBRE_BODEGA }}
+                                            {{ $entrada->bodega_proyecto->NOMBRE_BODEGA }}
                                         </span>
                                     </div>
                                 </div>
@@ -87,18 +88,14 @@
                                             <th class="text-center">Acciones</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($detalles as $detalle)
+                                            @foreach ($entrada->detalle_entrada as $detalle)
                                                 <tr id="row_{{ $detalle->ID_DETALLE_ENTRADA }}">
                                                     <td class="text-center">{{ $detalle->ID_DETALLE_ENTRADA }}</td>
                                                     <td class="text-center">
-                                                        @foreach ($producto as $p)
-                                                            @if ($detalle->ID_PRODUCTO === $p->ID_PRODUCTO)
-                                                                {{ $p->NOMBRE }}
-                                                            @endif
-                                                        @endforeach
+                                                        {{ $detalle->producto->NOMBRE }}
                                                     </td>
                                                     <td class="text-center">{{ $detalle->CANTIDAD }}</td>
-                                                    <td class="text-center">{{ $detalle->ESTADO_DESC }}</td>
+                                                    <td class="text-center">{{ $detalle->estado->NOMBRE }}</td>
                                                     <td class="text-center">
                                                         @can('entrada-delete')
                                                             <!-- Button trigger modal -->

@@ -12,20 +12,36 @@
                 <input type="hidden" name="ID_DETALLE_ENTRADA" id="ID_DETALLE_ENTRADA">
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
-                        <strong>{{ __('Descripcion') }}:</strong>
-                        {!! Form::text('ESTADO_DESC', null, ['placeholder' => 'Descripcion', 'class' => 'form-control', 'id' => 'ESTADO_DESC']) !!}
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                    <div class="form-group">
                         <strong>{{ __('Cantidad') }}:</strong>
                         {!! Form::text('CANTIDAD', null, ['placeholder' => 'Cantidad', 'class' => 'form-control', 'id' => 'CANTIDAD']) !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
+                        <strong>{{ __('Estado') }}:</strong>
+                        {!! Form::select('ID_ESTADO', $estados, null, ['class' => 'form-control', 'id' => 'ESTADO_DESC', 'multiple']) !!}
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
+                    <div class="form-group">
                         <strong>{{ __('Producto') }}:</strong>
-                        {!! Form::select('ID_PRODUCTO', $productos, [], ['class' => 'form-control', 'multiple', 'id' => 'ID_PRODUCTO']) !!}
+                        <select name="ID_PRODUCTO" id="idproducto" class="form-control" multiple>
+                            @foreach ($entrada->bodega_proyecto->salida as $salida)
+                                @foreach ($salida->detalle_salida as $detalle_salida)
+                                    @if (is_array($detalle_salida->producto))
+                                        @foreach ($detalle_salida->producto as $product)
+
+                                            <option value="{{ $product->ID_PRODUCTO }}">{{ $product->NOMBRE }}</p>
+                                        @endforeach
+                                    @else
+                                        <option value="{{ $detalle_salida->producto->ID_PRODUCTO }}">
+                                            {{ $detalle_salida->producto->NOMBRE }}</p>
+
+                                    @endif
+
+                                @endforeach
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3 d-none">

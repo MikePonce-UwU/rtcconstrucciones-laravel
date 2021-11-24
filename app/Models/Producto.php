@@ -29,4 +29,13 @@ class Producto extends Model
     }
 
     //has many
+    /**
+     * Get all of the detalle_salida for the Producto
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detalle_salida()
+    {
+        return $this->hasMany(DetalleSalida::class, 'ID_PRODUCTO', 'ID_PRODUCTO');
+    }
 }

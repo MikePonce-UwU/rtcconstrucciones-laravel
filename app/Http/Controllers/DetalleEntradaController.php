@@ -28,10 +28,10 @@ class DetalleEntradaController extends Controller
     {
         //
         $this->validate($request, [
-            'ESTADO_DESC' => 'required',
             'CANTIDAD' => 'required',
             'ID_PRODUCTO' => 'required',
             'ID_ENTRADA' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
         $input = $request->all();
         $detalle = DetalleEntrada::create($input);

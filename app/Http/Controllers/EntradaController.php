@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bodega;
 use App\Models\DetalleEntrada;
 use App\Models\Entrada;
+use App\Models\Estado;
 use App\Models\Producto;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -72,19 +73,12 @@ class EntradaController extends Controller
     public function show($id)
     {
         //
-        $productos = Producto::pluck('NOMBRE', 'ID_PRODUCTO');
         $entrada = Entrada::find($id);
-        $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        $bodega = bodega::find($entrada->ID_BODEGA_PROYECTO);
-        $usuario = null;
-        $detalles = DetalleEntrada::where('ID_ENTRADA', $id)->get();
-        $producto = Producto::all();
-        if ($entrada->ID_USUARIO === Auth::user()->id) {
-            $usuario = Auth::user();
-        } else {
-            $usuario = User::find($entrada->ID_USUARIO);
-        }
-        return view('entradas.show', compact('entrada', 'bodega', 'usuario', 'detalles', 'bodegas', 'productos', 'producto'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('entradas.show', compact(
+            'entrada',
+            'estados'
+        ));
     }
 
     /**
