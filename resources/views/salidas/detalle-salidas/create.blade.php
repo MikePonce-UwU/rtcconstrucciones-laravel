@@ -26,8 +26,8 @@
                     <div class="input-group has validation">
                         <strong class="input-group-text">{{ __('Cantidad') }}:</strong>
                         {!! Form::number('CANTIDAD', null, ['placeholder' => 'Cantidad', 'class' => 'form-control', 'id' => 'cantidad']) !!}
-                        <button type="button" class="btn btn-success" onchange="validadCantidad();">Validar
-                            cantidad</button>
+                        {{-- <button type="button" class="btn btn-success" onchange="validadCantidad();">Validar
+                            cantidad</button> --}}
                         <div id="cantidadOwO"></div>
                     </div>
                 </div>
