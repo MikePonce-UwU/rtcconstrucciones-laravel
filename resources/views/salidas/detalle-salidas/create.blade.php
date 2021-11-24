@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-@section('js-content')
+@section('js-conten')
     <script>
         var id = 0;
         $("#productos").on("change", function() {
