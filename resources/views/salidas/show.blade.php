@@ -96,13 +96,13 @@
                                                     <td class="text-center">{{ $detalle_salida->CANTIDAD }}</td>
                                                     <td class="text-center">{{ $detalle_salida->estado->NOMBRE }}</td>
                                                     <td class="text-center">
-                                                        {{-- @can('salida-delete')
+                                                        @can('salida-delete')
                                                             <!-- Button trigger modal -->
                                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                                 data-bs-target="#modelEliminarDetalle{{ $detalle_salida->ID_DETALLE_SALIDA }}">
                                                                 Delete
                                                             </button>
-                                                        @endcan --}}
+                                                        @endcan
                                                     </td>
                                                 </tr>
                                                 @include('salidas.detalle-salidas.delete')
