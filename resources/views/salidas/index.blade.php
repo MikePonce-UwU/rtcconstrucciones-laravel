@@ -55,7 +55,9 @@
                                         @foreach ($salidas as $salida)
                                             <tr>
                                                 <td class="text-center">{{ $salida->DESCRIPCION_SALIDA }}</td>
-                                                <td class="text-center">{{ $salida->FECHA_SALIDA }}</td>
+                                                <td class="text-center">
+                                                    {{ \Carbon\Carbon::createFromDate($salida->FECHA_SALIDA)->diffForHumans() }}
+                                                </td>
                                                 <td class="text-center">
                                                     <a class="btn btn-dark mb-2 mb-md-0"
                                                         href="{{ route('salidas.show', $salida->ID_SALIDA) }}">{{ __('Show') }}</a>

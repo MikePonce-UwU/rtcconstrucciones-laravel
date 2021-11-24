@@ -45,40 +45,7 @@
                     <div class="card-header text-center h1">Edit form</div>
                     <div class="card-body">
                         {!! Form::model($producto, ['method' => 'PATCH', 'route' => ['productos.update', $producto->ID_PRODUCTO]]) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>{{ __('Nombre producto') }}:</strong>
-                                {!! Form::text('NOMBRE', $producto->NOMBRE, ['placeholder' => 'Nombre producto', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>{{ __('Cantidad de producto') }}:</strong>
-                                <div class="input-group">
-                                    {!! Form::number('CANTIDAD', $producto->CANTIDAD, ['placeholder' => 'Cantidad de producto', 'class' => 'form-control']) !!}
-                                    {!! Form::select('UNIDAD_MEDIDA', $unidadMedida, $producto->UNIDAD_MEDIDA, ['class' => 'form-control']) !!}
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>{{ __('Descripcion de estado') }}:</strong>
-                                {!! Form::text('ESTADO_DESC', $producto->ESTADO_DESC, ['placeholder' => 'Descripcion de estado', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>{{ __('Estado') }}:</strong>
-                                {!! Form::select('ID_ESTADO', $estados, $producto->ID_ESTADO, ['class' => 'form-control', 'multiple']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>{{ __('Categoria') }}:</strong>
-                                {!! Form::select('ID_CATEGORIA', $categorias, $producto->ID_CATEGORIA, ['class' => 'form-control', 'multiple']) !!}
-                            </div>
-                        </div>
+                        @include('productos.forms.form')
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
                         </div>

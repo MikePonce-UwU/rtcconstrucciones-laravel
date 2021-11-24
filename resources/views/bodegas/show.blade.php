@@ -123,6 +123,36 @@
                                     </div>
                                 @endforeach
                             </div>
+                            <div class="card-body">
+                                <div class="text-center h1">Lista de productos de inventario</div>
+                                @foreach ($bodega->salida as $salida)
+                                    <hr>
+                                    <div class="row mx-auto">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                            <table class="table table-striped" id="dataTable-1">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Nombre</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($salida->detalle_salida as $detalle_salida)
+                                                        <tr>
+                                                            <td>{{ $detalle_salida->ID_SALIDA }}</td>
+                                                            <td>{{ $detalle_salida->producto->NOMBRE }}</td>
+                                                            <td>{{ $detalle_salida->CANTIDAD }}</td>
+                                                            <td>{{ $detalle_salida->estado->NOMBRE }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
 
                     </div> <!-- .col-12 -->

@@ -39,7 +39,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Usuario de la entrada') }}:</strong>
-                                        {{ $usuario->name }}
+                                        {{ $salida->usuario->name }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -51,14 +51,14 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Fecha de compra') }}:</strong>
-                                        {{ $salida->FECHA_SALIDA }}
+                                        {{ \Carbon\Carbon::createFromDate($salida->FECHA_SALIDA)->diffForHumans() }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Bodega a la que pertenece') }}:</strong>
                                         <span class="badge bg-success">
-                                            {{ $bodega->NOMBRE_BODEGA }}
+                                            {{ $salida->bodega_proyecto->NOMBRE_BODEGA }}
                                         </span>
                                     </div>
                                 </div>
@@ -80,30 +80,26 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <table class="table table-bordered mx-auto" id="dataTable-1">
                                         <thead>
-                                            <th class="text-center">ID de detalle</th>
+                                            <th class="text-center">#</th>
                                             <th class="text-center">Producto</th>
                                             <th class="text-center">Cantidad</th>
                                             <th class="text-center">Estado</th>
                                             <th class="text-center">Acciones</th>
                                         </thead>
                                         <tbody>
-                                            @foreach ($detalles as $detalle)
-                                                <tr id="row_{{ $detalle->ID_DETALLE_SALIDA }}">
-                                                    <td class="text-center">{{ $detalle->ID_DETALLE_SALIDA }}</td>
-                                                    <td class="text-center">
-                                                        @foreach ($producto as $p)
-                                                            @if ($detalle->ID_PRODUCTO === $p->ID_PRODUCTO)
-                                                                {{ $p->NOMBRE }}
-                                                            @endif
-                                                        @endforeach
+                                            @foreach ($salida->detalle_salida as $detalle_salida)
+                                                <tr id="row_{{ $detalle_salida->ID_DETALLE_SALIDA }}">
+                                                    <td class="text-center">{{ $detalle_salida->ID_DETALLE_SALIDA }}
                                                     </td>
-                                                    <td class="text-center">{{ $detalle->CANTIDAD }}</td>
-                                                    <td class="text-center">{{ $detalle->ESTADO_DESC }}</td>
+                                                    <td class="text-center">{{ $detalle_salida->producto->NOMBRE }}
+                                                    </td>
+                                                    <td class="text-center">{{ $detalle_salida->CANTIDAD }}</td>
+                                                    <td class="text-center">{{ $detalle_salida->estado->NOMBRE }}</td>
                                                     <td class="text-center">
                                                         @can('salida-delete')
                                                             <!-- Button trigger modal -->
                                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                                                data-bs-target="#modelEliminarDetalle{{ $detalle->ID_DETALLE_SALIDA }}">
+                                                                data-bs-target="#modelEliminarDetalle{{ $detalle_salida->ID_DETALLE_SALIDA }}">
                                                                 Delete
                                                             </button>
                                                         @endcan

@@ -52,7 +52,6 @@
                                             <th class="text-center">{{ __('Fecha creación') }}</th>
                                             <th class="text-center">{{ __('Fecha cierre') }}</th>
                                             <th class="text-center">{{ __('Capacidad') }}</th>
-                                            <th class="text-center">{{ __('Capacidad disponible') }}</th>
                                             <th class="text-center">{{ __('Action') }}</th>
                                         </tr class="text-center">
                                     </thead>
@@ -61,11 +60,12 @@
                                             <tr>
                                                 <td class="text-center">{{ $bodega->NOMBRE_BODEGA }}</td>
                                                 <td class="text-center">{{ $bodega->DIRECCION }}</td>
-                                                <td class="text-center">{{ $bodega->usuario->name }}</td>
+                                                <td class="text-center">
+                                                    @if ($bodega->usuario->name === Auth::user()->name) {{ 'Tú' }} @else {{ $bodega->usuario->name }} @endif
+                                                </td>
                                                 <td class="text-center">{{ $bodega->FECHA_CREACION }}</td>
                                                 <td class="text-center">{{ $bodega->FECHA_CIERRE }}</td>
                                                 <td class="text-center">{{ $bodega->CAPACIDAD }}</td>
-                                                <td class="text-center">{{ $bodega->CAPACIDAD_DISPONIBLE }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-secondary mb-2 mb-md-0"
                                                         href="{{ route('bodegas.show', $bodega->ID_BODEGA_PROYECTO) }}">{{ __('Show') }}</a>

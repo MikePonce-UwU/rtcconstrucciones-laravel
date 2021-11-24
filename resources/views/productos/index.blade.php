@@ -59,9 +59,9 @@
                                             <tr>
                                                 <td class="text-center">{{ $producto->NOMBRE }}</td>
                                                 <td class="text-center">
-                                                    {{ $producto->CANTIDAD }}{{ __(' ') }}{{ $producto->UNIDAD_MEDIDA }}
+                                                    {{ $producto->CANTIDAD }}{{ __(' ') }}{{ $producto->unidad_medida->ABREVIACION }}
                                                 </td>
-                                                <td class="text-center">{{ $producto->ESTADO_DESC }}</td>
+                                                <td class="text-center">{{ $producto->estado->NOMBRE }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-secondary"
                                                         href="{{ route('productos.show', $producto->ID_PRODUCTO) }}">{{ __('Show') }}</a>

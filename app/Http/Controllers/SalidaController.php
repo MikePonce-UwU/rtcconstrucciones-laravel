@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Bodega;
 use App\Models\DetalleSalida;
+use App\Models\Estado;
 use App\Models\Producto;
 use App\Models\Salida;
 use App\Models\User;
@@ -50,9 +51,9 @@ class SalidaController extends Controller
             'DESCRIPCION_SALIDA' => 'required',
             'FECHA_SALIDA' => 'required|date',
             'ID_BODEGA_PROYECTO' => 'required',
-            'ID_USUARIO' => 'required',
         ]);
         $input = $request->all();
+        $input['ID_USUARIO'] = Auth::id();
         $salida = Salida::create($input);
         return redirect()->route('salidas.show', $salida->ID_SALIDA)->with('success', 'Salida registrada satisfactoriamente');
     }
@@ -66,19 +67,12 @@ class SalidaController extends Controller
     public function show($id)
     {
         //
-        $productos = Producto::pluck('NOMBRE', 'ID_PRODUCTO');
         $salida = Salida::find($id);
+        //dependencias
+        $productos = Producto::all();
         $bodegas = Bodega::pluck('NOMBRE_BODEGA', 'ID_BODEGA_PROYECTO');
-        $bodega = bodega::find($salida->ID_BODEGA_PROYECTO);
-        $usuario = null;
-        $detalles = DetalleSalida::where('ID_SALIDA', $id)->get();
-        $producto = Producto::all();
-        if ($salida->ID_USUARIO === Auth::user()->id) {
-            $usuario = Auth::user();
-        } else {
-            $usuario = User::find($salida->ID_USUARIO);
-        }
-        return view('salidas.show', compact('salida', 'detalles', 'bodegas', 'bodega', 'productos', 'producto', 'usuario'));
+        $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
+        return view('salidas.show', compact('salida', 'productos', 'estados', 'bodegas'));
     }
 
     /**
@@ -109,7 +103,6 @@ class SalidaController extends Controller
             'DESCRIPCION_SALIDA' => 'required',
             'FECHA_SALIDA' => 'required|date',
             'ID_BODEGA_PROYECTO' => 'required',
-            'ID_USUARIO' => 'required',
         ]);
         $input = $request->all();
         $salida = Salida::find($id);

@@ -25,7 +25,7 @@ class BodegaController extends Controller
     public function index(Request $request)
     {
         //
-        $bodegas = Bodega::all();
+        $bodegas = Bodega::where('ID_ESTADO', 1)->get();
         return view('bodegas.index', compact('bodegas'));
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Estado;
 use App\Models\Producto;
+use App\Models\Und_Medida;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -36,12 +37,7 @@ class ProductoController extends Controller
     public function create()
     {
         //
-        $unidadMedida = [
-            'U' => 'Unidad(es)',
-            'LB' => 'Libra(s)',
-            'KG' => 'Kilo(s)',
-            'MT' => 'Metro(s)',
-        ];
+        $unidadMedida = Und_Medida::pluck('ABREVIACION', 'ID_UND_MEDIDA');
         $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
         $categorias = Categoria::pluck('NOMBRE', 'ID_CATEGORIA');
         return view('productos.create', compact('estados', 'categorias', 'unidadMedida'));
@@ -59,10 +55,9 @@ class ProductoController extends Controller
         $this->validate($request, [
             'NOMBRE' => 'required',
             'CANTIDAD' => 'required|numeric',
-            'ESTADO_DESC' => 'required',
             'ID_ESTADO' => 'required',
             'ID_CATEGORIA' => 'required',
-            'UNIDAD_MEDIDA' => 'required',
+            'ID_UND_MEDIDA' => 'required',
         ]);
         $input = $request->all();
         Producto::create($input);
@@ -91,12 +86,7 @@ class ProductoController extends Controller
     public function edit($id)
     {
         //
-        $unidadMedida = [
-            'U' => 'Unidad(es)',
-            'LB' => 'Libra(s)',
-            'KG' => 'Kilo(s)',
-            'MT' => 'Metro(s)',
-        ];
+        $unidadMedida = Und_Medida::pluck('ABREVIACION', 'ID_UND_MEDIDA');
         $producto = Producto::find($id);
         $estados = Estado::pluck('NOMBRE', 'ID_ESTADO');
         $categorias = Categoria::pluck('NOMBRE', 'ID_CATEGORIA');
@@ -116,10 +106,9 @@ class ProductoController extends Controller
         $this->validate($request, [
             'NOMBRE' => 'required',
             'CANTIDAD' => 'required|numeric',
-            'ESTADO_DESC' => 'required',
             'ID_ESTADO' => 'required',
             'ID_CATEGORIA' => 'required',
-            'UNIDAD_MEDIDA' => 'required',
+            'ID_UND_MEDIDA' => 'required',
         ]);
         $input = $request->all();
         $producto = Producto::find($id);

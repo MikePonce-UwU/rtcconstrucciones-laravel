@@ -45,37 +45,7 @@
                     <div class="card-header text-center h1">Create form</div>
                     <div class="card-body">
                         {!! Form::open(['route' => 'productos.store', 'method' => 'POST']) !!}
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Nombre producto') }}:</strong>
-                                {!! Form::text('NOMBRE', null, ['placeholder' => 'Nombre producto', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Cantidad de producto') }}:</strong>
-                                {!! Form::text('CANTIDAD', null, ['placeholder' => 'Cantidad de producto', 'class' => 'form-control']) !!}<br>
-                                {!! Form::select('UNIDAD_MEDIDA', $unidadMedida, null, ['class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Descripcion de estado') }}:</strong>
-                                {!! Form::text('ESTADO_DESC', null, ['placeholder' => 'Descripcion de estado', 'class' => 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Estado') }}:</strong>
-                                {!! Form::select('ID_ESTADO', $estados, [], ['class' => 'form-control', 'multiple']) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
-                            <div class="form-group">
-                                <strong>{{ __('Categoria') }}:</strong>
-                                {!! Form::select('ID_CATEGORIA', $categorias, [], ['class' => 'form-control', 'multiple']) !!}
-                            </div>
-                        </div>
+                        @include('productos.forms.form')
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <a class="btn grey btn-outline-secondary" href="{{ route('productos.index') }}">
                                 {{ __('Back') }}</a>

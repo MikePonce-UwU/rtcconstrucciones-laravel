@@ -34,19 +34,13 @@
                 <div class="row my-4">
                     <div class="col-md-12">
                         <div class="card shadow">
-                            <div class="card-header text-center h1">{{ $producto->NOMBRE }}</div>
+                            <div class="card-header text-center h1">{{ $producto->NOMBRE }}<span
+                                    class="badge bg-success">{{ $producto->estado->NOMBRE }}</span></div>
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>{{ __('Cantidad total') }}:</strong>
-                                        {{ $producto->CANTIDAD }}{{ __(' ') }}{{ $producto->UNIDAD_MEDIDA }}
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <div class="form-group">
-                                        <strong>{{ __('Descripcion de estado') }}:</strong>
-                                        <span class="badge bg-success">{{ $producto->estado->NOMBRE }}</span>
-                                        {{ $producto->ESTADO_DESC }}
+                                        {{ $producto->CANTIDAD }}{{ __(' ') }}{{ $producto->unidad_medida->ABREVIACION }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
