@@ -71,6 +71,33 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card shadow-lg mt-3">
+                            <div class="card-header">
+                                <div class="text-center h2">
+                                    Bodega perteneciente
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row justify-content-center align-content-center">
+                                    <div class="col-12 col-md-10 col-sm-10 mb-3">
+                                        <h5 class="card-title">Nombre de bodega: </h5>
+                                        <a href="{{ route('bodegas.show', $proyecto->bodega_proyecto->ID_BODEGA_PROYECTO) }}"
+                                            class="card-link">{{ $proyecto->bodega_proyecto->NOMBRE_BODEGA }}
+                                        </a>
+                                    </div>
+                                    <div class="col-12 col-md-10 col-sm-10 mb-3">
+                                        <h5 class="card-title">Capacidad: </h5>
+                                        <h6 class="card-text">{{ $proyecto->bodega_proyecto->CAPACIDAD }}
+                                        </h6>
+                                    </div>
+                                    <div class="col-12 col-md-10 col-sm-10 mb-3">
+                                        <h5 class="card-title">Responsable de bodega: </h5>
+                                        <h6 class="card-text">{{ $proyecto->bodega_proyecto->usuario->name }}
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div> <!-- .col-md-12 -->
                 </div> <!-- end section row my-4 -->
 

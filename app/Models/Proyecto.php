@@ -18,7 +18,7 @@ class Proyecto extends Model
     //hasone
     public function bodega_proyecto()
     {
-        return $this->HasOne(Bodega::class);
+        return $this->HasOne(Bodega::class, 'ID_pROYECTO', 'ID_PROYECTO');
     }
 
     //belongs to

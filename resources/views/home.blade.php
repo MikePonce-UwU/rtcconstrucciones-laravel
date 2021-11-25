@@ -71,5 +71,48 @@
             </div>
             <!-- ./col -->
         </div>
+        <div class="row mb-3">
+            <div class="col-12 col-md-8">
+                <div class="card">
+                    <h5 class="card-title mx-auto my-3" style="font-weight:bold;">Lista de proyectos
+                        finalizados</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nombre proyecto</th>
+                                <th>Descripción</th>
+                                <th>Fecha Fin</th>
+                                <th>Detalles</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (App\Models\Proyecto::whereDate('FECHA_FINALIZACION', '<=', Carbon\Carbon::now())->get() as $proyecto)
+                                <tr>
+                                    <td>{{ $proyecto->NOMBRE }}</td>
+                                    <td>{{ $proyecto->DESCRIPCION }}</td>
+                                    <td>{{ $proyecto->FECHA_FINALIZACION }}</td>
+                                    <td><a href="{{ route('proyectos.show', $proyecto->ID_PROYECTO) }}"
+                                            class="btn btn-link">Ver</a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <h5 class="card-title mx-auto my-2" style="font-weight: bold;">Lista de productos</h5>
+                    <ul class="list-group list-group-flush">
+                        @php
+                            $productos = App\Models\Producto::paginate(5);
+                        @endphp
+                        @foreach ($productos as $producto)
+                            <li class="list-group-item">{{ $producto->NOMBRE }}</li>
+                        @endforeach
+                        {{ $productos->links() }}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </x-content>
 @endsection

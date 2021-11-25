@@ -126,6 +126,10 @@
                             <div class="card-body">
                                 <div class="text-center h1">Lista de productos de inventario</div>
                                 @foreach ($bodega->salida as $salida)
+                                    <a href="{{ route('salidas.show', $salida->ID_SALIDA) }}"
+                                        class="card-link mb-2">Salida #{{ $salida->ID_SALIDA }}</a>
+                                    <i
+                                        class="text-muted text-xs">{{ Carbon\Carbon::createFromDate($salida->FECHA_SALIDA)->diffForHumans(now()) }}</i>
                                     <hr>
                                     <div class="row mx-auto">
                                         <div class="col-xs-12 col-sm-12 col-md-12 ">
