@@ -1,16 +1,17 @@
 @extends('layouts.app')
+@section('titulo', 'Crear Usuario')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Create New User') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Crear Nuevo Usuario') }}</h2>
                     </div>
                     <div class="col-auto">
 
                         <a href="{{ route('users.index') }}" class="btn btn-primary" style="color:white">
-                            <span style="color:white"></span> {{ __('Back') }}
+                            <span style="color:white"></span> {{ __('Volver') }}
                         </a>
 
                     </div>
@@ -23,9 +24,9 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('users.index') }}">{{ __('Users') }}</a>
+                                            href="{{ route('users.index') }}">{{ __('Usuarios') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Create New User') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Crear Nuevo Usuario') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -33,7 +34,7 @@
                 </div>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <strong>Whoops!</strong> Hubo algunos problemas con su entrada.<br><br>
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -42,43 +43,43 @@
                     </div>
                 @endif
                 <div class="card shadow mb-4">
-                    <div class="card-header text-center h1">Create form</div>
+                    <div class="card-header text-center h1">Formulario Nuevo Usuario</div>
                     <div class="card-body">
                         {!! Form::open(['route' => 'users.store', 'method' => 'POST']) !!}
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>{{ __('Name') }}:</strong>
-                                {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Nombre') }}:</strong>
+                                {!! Form::text('name', null, ['placeholder' => 'Nombre', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>{{ __('Email') }}:</strong>
-                                {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Correo') }}:</strong>
+                                {!! Form::text('email', null, ['placeholder' => 'Correo', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>{{ __('Password') }}:</strong>
-                                {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Contraseña') }}:</strong>
+                                {!! Form::password('password', ['placeholder' => 'Contraseña', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>{{ __('Confirm Password') }}:</strong>
-                                {!! Form::password('confirm-password', ['placeholder' => 'Confirm Password', 'class' => 'form-control']) !!}
+                                <strong>{{ __('Confirmar Contraseña') }}:</strong>
+                                {!! Form::password('confirm-password', ['placeholder' => 'Confirmar Contraseña', 'class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
-                                <strong>{{ __('Role') }}:</strong>
+                                <strong>{{ __('Rol') }}:</strong>
                                 {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <a class="btn grey btn-outline-secondary" href="{{ route('users.index') }}">
-                                {{ __('Back') }}</a>
-                            <button type="submit" class="btn btn-success">{{ __('Save') }}</button>
+                            <button type="submit" class="btn btn-success">{{ __('Guardar') }}</button>
+                            <a class="btn grey btn-danger" href="{{ route('users.index') }}">
+                                {{ __('Cancelar') }}</a>                            
                         </div>
                         {!! Form::close() !!}
                     </div>

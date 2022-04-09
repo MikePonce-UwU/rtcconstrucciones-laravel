@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('titulo', 'Usuarios')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -12,7 +12,7 @@
                         @can('user-create')
                             <a href="{{ route('users.create') }}" class="btn btn-success" style="color:white"
                                 {{-- data-bs-toggle="modal" data-bs-target="#modelCreate" --}}>
-                                <span style="color:white"></span> {{ __('New') }}
+                                <span style="color:white"></span> {{ __('Crear Nuevo Usuario') }}
                             </a>
                             {{-- @include('users.modals-user.create') --}}
                         @endcan
@@ -48,15 +48,15 @@
                                 <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">{{ __('Name') }}</th>
-                                            <th class="text-center">{{ __('Email') }}</th>
-                                            <th class="text-center">{{ __('Roles') }}</th>
-                                            <th class="text-center">{{ __('Created date') }}</th>
-                                            <th class="text-center">{{ __('Updated date') }}</th>
+                                            <th class="text-center">{{ __('Nombre') }}</th>
+                                            <th class="text-center">{{ __('Correo') }}</th>
+                                            <th class="text-center">{{ __('Rol') }}</th>
+                                            <th class="text-center">{{ __('Fecha de Creación') }}</th>
+                                            <th class="text-center">{{ __('Fecha de Modificación') }}</th>
                                             @if (!empty($user->email_verified_at))
-                                                <th class="text-center">{{ __('Email verified date') }}</th>
+                                                <th class="text-center">{{ __('Fecha de Verificación de correo') }}</th>
                                             @endif
-                                            <th class="text-center">{{ __('Action') }}</th>
+                                            <th class="text-center">{{ __('Acción') }}</th>
                                         </tr class="text-center">
                                     </thead>
                                     <tbody>
@@ -80,21 +80,26 @@
                                                         {{ $user->email_verified_at->format('M. d, Y') }}</td>
                                                 @endif
                                                 <td class="text-center">
-                                                    <a class="btn btn-secondary"
-                                                        href="{{ route('users.show', $user->id) }}">{{ __('Show') }}</a>
-                                                    @can('user-edit')
-                                                        <a class="btn btn-primary"
-                                                            href="{{ route('users.edit', $user->id) }}">{{ __('Edit') }}</a>
-                                                    @endcan
-                                                    @if (Route::has('users.delete'))
-                                                        <a href="{{ route('users.delete', [$user->id]) }}"
-                                                            class="btn btn-warning">{{ __('Eliminar') }}</a>
-                                                    @endif
-                                                    @can('user-delete')
-                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                                        {!! Form::close() !!}
-                                                    @endcan
+                                                    <button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                                        Acción
+                                                    </button>
+                                                    <div class="dropdown-menu" style="">
+                                                        <a class="dropdown-item btn btn-secondary" href="{{ route('users.show', $user->id) }}">{{ __('Ver') }}</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        @can('user-edit')
+                                                            <a class="dropdown-item btn btn-primary" href="{{ route('users.edit', $user->id) }}">{{ __('Editar') }}</a>
+                                                        @endcan
+                                                    <div class="dropdown-divider"></div>
+                                                        @if (Route::has('users.delete'))
+                                                            <a href="{{ route('users.delete', [$user->id]) }}"
+                                                                class="dropdown-item btn btn-warning">{{ __('Eliminar') }}</a>
+                                                        @endif
+                                                        @can('user-delete')
+                                                            {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) !!}
+                                                            {!! Form::submit('Eliminar', ['class' => 'dropdown-item btn btn-danger']) !!}
+                                                            {!! Form::close() !!}
+                                                        @endcan
+                                                    </div>                                                                                                        
                                                 </td>
                                             </tr>
                                         @endforeach

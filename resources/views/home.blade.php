@@ -17,7 +17,7 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{ route('salidas.index') }}" class="small-box-footer">More info <i
+                    <a href="{{ route('salidas.index') }}" class="small-box-footer">Ver <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -33,7 +33,7 @@
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
-                    <a href="{{ route('entradas.index') }}" class="small-box-footer">More info <i
+                    <a href="{{ route('entradas.index') }}" class="small-box-footer">Ver <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
-                    <a href="{{ route('proyectos.index') }}" class="small-box-footer">More info <i
+                    <a href="{{ route('proyectos.index') }}" class="small-box-footer">Ver <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -65,7 +65,24 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="{{ route('bodegas.index') }}" class="small-box-footer">More info <i
+                    <a href="{{ route('bodegas.index') }}" class="small-box-footer">Ver <i
+                            class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ App\Models\Bodega::whereDate('FECHA_CREACION', '=', Carbon\Carbon::now())->count() }}</h3>
+
+                        <p>Productos</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="{{ route('productos.index') }}" class="small-box-footer">Ver<i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -76,7 +93,7 @@
                 <div class="card">
                     <h5 class="card-title mx-auto my-3" style="font-weight:bold;">Lista de proyectos
                         finalizados</h5>
-                    <table class="table table-striped">
+                    <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                         <thead>
                             <tr>
                                 <th>Nombre proyecto</th>
@@ -97,7 +114,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div>                
             </div>
             <div class="col-12 col-md-4">
                 <div class="card">
@@ -113,6 +130,6 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div>        
     </x-content>
 @endsection

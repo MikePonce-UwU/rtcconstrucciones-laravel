@@ -5,12 +5,12 @@
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Show User') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Ver Usuario') }}</h2>
                     </div>
                     <div class="col-auto">
 
                         <a href="{{ route('users.index') }}" class="btn btn-primary" style="color:white">
-                            <span style="color:white"></span> {{ __('Back') }}
+                            <span style="color:white"></span> {{ __('Volver') }}
                         </a>
 
                     </div>
@@ -23,9 +23,9 @@
                                     <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
                                     </li>
                                     <li class="breadcrumb-item"><a
-                                            href="{{ route('users.index') }}">{{ __('Users') }}</a>
+                                            href="{{ route('users.index') }}">{{ __('Usuarios') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Show User') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Ver Usuario') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -38,19 +38,19 @@
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Email') }}:</strong>
+                                        <strong>{{ __('Correo') }}:</strong>
                                         {{ $user->email }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Created date') }}:</strong>
+                                        <strong>{{ __('Fecha de Creación') }}:</strong>
                                         {{ $user->created_at }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Updated date') }}:</strong>
+                                        <strong>{{ __('Fecha de Actualización') }}:</strong>
                                         {{ $user->updated_at }}
                                     </div>
                                 </div>

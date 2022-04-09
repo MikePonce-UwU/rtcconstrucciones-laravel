@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>{{ config('app.name') }} - Home Page</title>
+    <title>{{ config('app.name') }} - Inicio</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{{ asset('agency-assets/casco.png') }}" />
     <!-- Font Awesome icons (free version)-->
@@ -30,21 +30,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase me-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portafolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Acerca de</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Equipo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contacto</a></li>
                 </ul>
                 @if (Route::has('login'))
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         @auth
                             <li class="nav-item">
-                                <a href="{{ url('/home') }}" class="nav-link">Home</a>
+                                <a href="{{ url('/home') }}" class="nav-link"> Admin</a>
                             </li>
                         @else
-                            <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-md me-0 me-lg-2">Log
-                                in</a>
+                            <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-md me-0 me-lg-2">Ingresar</a>
                             {{-- @if (Route::has('register'))
                                 <a href="{{ route('register') }}" class="btn btn-primary btn-md mt-2 mt-lg-0">Register</a>
                             @endif --}}

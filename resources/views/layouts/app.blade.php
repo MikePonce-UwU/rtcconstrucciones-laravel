@@ -38,6 +38,13 @@
     <link rel="stylesheet" href="{{ asset('adminlte-assets/plugins/summernote/summernote-bs4.min.css') }}">
     @yield('css-content')
     @yield('js-content')
+    <!-- Data table -->
+      <!--DATATABLES-->
+      <link rel="stylesheet" href="{{ asset('datatables/jquery.dataTables.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('datatables/buttons.dataTables.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('datatables/responsive.dataTables.min.css') }}">
+      
+      <!--<link rel="stylesheet" href="../public/css/bootstrap-select.min.css">-->
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -97,6 +104,20 @@
     <script src="{{ asset('adminlte-assets/dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('adminlte-assets/dist/js/pages/dashboard.js') }}"></script>
+    
+    <!--DATATABLES-->
+    <script src="{{ asset('datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatables/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('datatables/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('datatables/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('datatables/jszip.min.js') }}"></script>
+    <script src="{{ asset('datatables/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('datatables/vfs_fonts.js') }}"></script>
+
+    <!--
+    <script src="../public/js/bootbox.min.js"></script>  
+    <script src="../public/js/bootstrap-select.min.js"></script>  
+    -->
 </body>
 
 </html>
