@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('titulo', 'Proyectos')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -10,7 +11,7 @@
                     <div class="col-auto">
                         @can('proyecto-create')
                             <a href="{{ route('proyectos.create') }}" class="btn btn-success text-white">
-                                <span></span> {{ __('New') }}
+                                <span></span> {{ __('Crear Nuevo Proyecto') }}
                             </a>
                         @endcan
                     </div>
@@ -38,25 +39,27 @@
                     <div class="col-md-12">
                         <div class="card shadow">
                             <div class="card-header text-center h1">
-                                Listado de proyectos activos
+                                Listado de Proyectos
                             </div>
                             <div class="card-body">
                                 <!-- table -->
                                 <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">{{ __('#') }}</th>
                                             <th class="text-center">{{ __('Nombre proyecto') }}</th>
                                             <th class="text-center">{{ __('Fecha inicio') }}</th>
-                                            <th class="text-center">{{ __('Fecha finalizacion') }}</th>
-                                            <th class="text-center">{{ __('Descripcion') }}</th>
-                                            <th class="text-center">{{ __('Direccion') }}</th>
+                                            <th class="text-center">{{ __('Fecha finalización') }}</th>
+                                            <th class="text-center">{{ __('Descripción') }}</th>
+                                            <th class="text-center">{{ __('Dirección') }}</th>
                                             <th class="text-center">{{ __('Tipo') }}</th>
-                                            <th class="text-center">{{ __('Actions') }}</th>
+                                            <th class="text-center">{{ __('Acción') }}</th>
                                         </tr class="text-center">
                                     </thead>
                                     <tbody>
                                         @foreach ($proyectos as $proyecto)
                                             <tr>
+                                                <td class="text-center">{{ $proyecto->ID_PROYECTO }}</td>
                                                 <td class="text-center">{{ $proyecto->NOMBRE }}</td>
                                                 <td class="text-center">{{ $proyecto->FECHA_INICIO->diffForHumans() }}
                                                 </td>
@@ -67,25 +70,26 @@
                                                 <td class="text-center">{{ $proyecto->tipo_proyecto->NOMBRE }}
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('proyectos.show', $proyecto->ID_PROYECTO) }}"
-                                                        class="btn btn-dark text-white mb-2 mb-md-0">
-                                                        <span></span> {{ __('Show') }}
-                                                    </a>
-                                                    @can('proyecto-edit')
-                                                        <a href="{{ route('proyectos.edit', $proyecto->ID_PROYECTO) }}"
-                                                            class="btn btn-success text-white mb-2 mb-md-0">
-                                                            <span></span> {{ __('Edit') }}
-                                                        </a>
-                                                    @endcan
-                                                    @if (Route::has('proyecto.delete'))
-                                                        <a href="{{ route('proyecto.delete', [$bodega->ID_PROYECTO]) }}"
-                                                            class="btn btn-warning">{{ __('Eliminar') }}</a>
-                                                    @endif
-                                                    @can('proyecto-delete')
-                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['proyectos.destroy', $proyecto->ID_PROYECTO], 'style' => 'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger text-white mb-2 mb-md-0']) !!}
-                                                        {!! Form::close() !!}
-                                                    @endcan
+                                                    <button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                                        Acción
+                                                    </button>
+                                                    <div class="dropdown-menu" style="">
+                                                        <a class="dropdown-item btn btn-secondary" href="{{ route('proyectos.show', $proyecto->ID_PROYECTO) }}">{{ __('Ver') }}</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        @can('proyecto-edit')
+                                                            <a class="dropdown-item btn btn-primary" href="{{ route('proyectos.edit', $proyecto->ID_PROYECTO) }}">{{ __('Editar') }}</a>
+                                                        @endcan
+                                                    <div class="dropdown-divider"></div>
+                                                        @if (Route::has('proyecto.delete'))
+                                                            <a href="{{ route('proyecto.delete', [$bodega->ID_PROYECTO]) }}"
+                                                                class="dropdown-item btn btn-warning">{{ __('Eliminar') }}</a>
+                                                        @endif
+                                                        @can('proyecto-delete')
+                                                            {!! Form::open(['method' => 'DELETE', 'route' => ['proyectos.destroy', $proyecto->ID_PROYECTO], 'style' => 'display:inline']) !!}
+                                                            {!! Form::submit('Eliminar', ['class' => 'dropdown-item btn btn-danger']) !!}
+                                                            {!! Form::close() !!}
+                                                        @endcan
+                                                    </div>                                                                                                                                                             
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -101,18 +105,4 @@
     </div> <!-- .container-fluid -->
 
 
-@endsection
-@section('css-content')
-    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
-@endsection
-@section('js-content')
-    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTable-1')
-                .dataTable({
-                    responsive: true,
-                });
-        });
-    </script>
 @endsection

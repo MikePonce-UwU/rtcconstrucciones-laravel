@@ -61,7 +61,7 @@ class ProyectoController extends Controller
         ]);
         $input = $request->all();
         Proyecto::create($input);
-        return redirect()->route('proyectos.index')->with('success', 'Proyecto creado satisfactoriamente!');
+        return redirect()->route('proyectos.index')->with('success', 'Proyecto Creado Exitosamente!!');
     }
 
     /**
@@ -115,7 +115,7 @@ class ProyectoController extends Controller
 
         $proyecto = Proyecto::find($id);
         $proyecto->update($input);
-        return redirect()->route('proyectos.index')->with('success', 'Proyecto actualizado satisfactoriamente!');
+        return redirect()->route('proyectos.index')->with('success', 'Proyecto Actualizado Exitosamente!!');
     }
 
     /**
@@ -129,6 +129,6 @@ class ProyectoController extends Controller
         //
         Proyecto::find($id)->delete();
         return redirect()->route('proyectos.index')
-            ->with('success', 'Proyecto borrado satisfactoriamente');
+            ->with('success', 'Proyecto Eliminado Exitosamente!!');
     }
 }

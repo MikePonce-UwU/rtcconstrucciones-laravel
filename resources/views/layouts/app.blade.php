@@ -42,9 +42,13 @@
       <!--DATATABLES-->
       <link rel="stylesheet" href="{{ asset('datatables/jquery.dataTables.min.css') }}">
       <link rel="stylesheet" href="{{ asset('datatables/buttons.dataTables.min.css') }}">
-      <link rel="stylesheet" href="{{ asset('datatables/responsive.dataTables.min.css') }}">
-      
+      <link rel="stylesheet" href="{{ asset('datatables/responsive.dataTables.min.css') }}">      
+      <link rel="stylesheet" href="{{ asset('datatables/datatables.min.css') }}">
       <!--<link rel="stylesheet" href="../public/css/bootstrap-select.min.css">-->
+
+    <!-- DATE PICKER -->
+    <link rel="stylesheet" href="{{ asset('datetimepicker-master/jquery.datetimepicker.css') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -113,11 +117,26 @@
     <script src="{{ asset('datatables/jszip.min.js') }}"></script>
     <script src="{{ asset('datatables/pdfmake.min.js') }}"></script>
     <script src="{{ asset('datatables/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('datatables/jquery-3.5.1.js') }}"></script>
+    <script src="{{ asset('datatables/buttons.print.min.js') }}"></script>    
 
+    <script>
+        $(document).ready(function() {
+            $('#dataTable-1')
+                .dataTable({
+                    responsive: true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+        });
+    </script>
     <!--
     <script src="../public/js/bootbox.min.js"></script>  
     <script src="../public/js/bootstrap-select.min.js"></script>  
     -->
+
 </body>
 
 </html>

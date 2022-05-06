@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('titulo', 'Ver Usuario')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -8,11 +9,9 @@
                         <h2 class="h3 mb-0 page-title">{{ __('Ver Usuario') }}</h2>
                     </div>
                     <div class="col-auto">
-
                         <a href="{{ route('users.index') }}" class="btn btn-primary" style="color:white">
                             <span style="color:white"></span> {{ __('Volver') }}
                         </a>
-
                     </div>
                 </div>
                 <div class="content-header row">
@@ -34,7 +33,15 @@
                 <div class="row my-4">
                     <div class="col-md-12">
                         <div class="card shadow">
-                            <div class="card-header text-center h1">{{ $user->name }}</div>
+                            <div class="card-header text-center h1">{{ $user->name }}  
+                                @if ($user->estado->NOMBRE == 'Habilitado')
+                                    <b class="text-center text-success">{{ $user->estado->NOMBRE }}
+                                    </b>
+                                @else
+                                    <b class="text-center text-danger">{{ $user->estado->NOMBRE }}
+                                    </b>
+                                @endif
+                            </div>
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">

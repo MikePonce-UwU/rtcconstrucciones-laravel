@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal de confirmación:</h5>
+                <h5 class="modal-title">Modal de Confirmación</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -17,7 +17,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
                 {!! Form::open(['method' => 'DELETE', 'route' => ['detalle-salidas.destroy', $detalle_salida->ID_DETALLE_SALIDA]]) !!}
-                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
             </div>
         </div>

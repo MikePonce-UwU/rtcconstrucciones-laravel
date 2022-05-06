@@ -76,7 +76,20 @@
                                 {!! Form::select('roles[]', $roles, $userRole, ['class' => 'form-control', 'multiple']) !!}
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">                            
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>{{ __('Estado') }}:</strong>
+                                    {{-- dd($estados) --}}
+                                <select name="ID_ESTADO" id="ID_ESTADO" class="form-control">
+                                    @foreach ($estados as $estado)
+                                        <option value="{{ $estado->ID_ESTADO }}" @if ($user->ID_ESTADO == $estado->ID_ESTADO)
+                                            {{'selected'}}
+                                        @endif>{{ $estado->NOMBRE }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
                             <button type="submit" class="btn btn-success">{{ __('Guardar') }}</button>
                             <a class="btn grey btn-danger" href="{{ route('users.index') }}">
                                 {{ __('Cancelar') }}</a>

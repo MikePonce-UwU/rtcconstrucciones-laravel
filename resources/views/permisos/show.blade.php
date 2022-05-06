@@ -1,16 +1,17 @@
 @extends('layouts.app')
+@section('titulo', 'Ver Permiso')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Mostrar permiso') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Ver permiso') }}</h2>
                     </div>
                     <div class="col-auto">
 
                         <a href="{{ route('permisos.index') }}" class="btn btn-primary" style="color:white">
-                            <span style="color:white"></span> {{ __('Back') }}
+                            <span style="color:white"></span> {{ __('Volver') }}
                         </a>
 
                     </div>
@@ -25,7 +26,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="{{ route('permisos.index') }}">{{ __('Permisos') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Mostrar permiso') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Ver permiso') }}</li>
                                 </ol>
                             </div>
                         </div>

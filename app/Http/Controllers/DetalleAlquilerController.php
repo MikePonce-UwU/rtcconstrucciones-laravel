@@ -38,7 +38,7 @@ class DetalleAlquilerController extends Controller
         ]);
         $input = $request->all();
         DetalleAlquiler::create($input);
-        return redirect()->route('alquileres.show', $input['ID_ALQUILER'])->with('success', 'Entrega de alquiler registrada satisfactoriamente!!');
+        return redirect()->route('alquileres.show', $input['ID_ALQUILER'])->with('success', 'Producto de Alquiler Creado Exitosamente!!');
     }
 
 
@@ -66,7 +66,7 @@ class DetalleAlquilerController extends Controller
         $input = $request->all();
         $entrega = DetalleAlquiler::find($id);
         $entrega->update($input);
-        return redirect()->route('detalle-alquileres.index')->with('success', 'Entrega de alquiler modificada satisfactoriamente!!');
+        return redirect()->route('detalle-alquileres.index')->with('success', 'Producto de Alquiler Actualizado Exitosamente!!');
     }
 
     /**
@@ -81,6 +81,6 @@ class DetalleAlquilerController extends Controller
         $entrega = DetalleAlquiler::find($id);
         $detalleID = $entrega->alquiler->ID_ALQUILER;
         $entrega->delete();
-        return redirect()->route('alquileres.show', $detalleID)->with('success', 'Entrega de alquiler eliminada satisfactoriamente!!');
+        return redirect()->route('alquileres.show', $detalleID)->with('success', 'Producto de Alquiler Eliminado Exitosamente!!');
     }
 }

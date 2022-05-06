@@ -8,7 +8,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::resource('bodegas', App\Http\Controllers\BodegaController::class);
     Route::resource('proyectos', App\Http\Controllers\ProyectoController::class);
-    Route::resource('permisos', App\Http\Controllers\PermisoController::class)->except(['edit', 'update']);
+    //Route::resource('permisos', App\Http\Controllers\PermisoController::class)->except(['edit', 'update']);
     Route::resource('alquileres', App\Http\Controllers\AlquilerController::class);
     Route::resource('detalle-alquileres', App\Http\Controllers\DetalleAlquilerController::class)->except('index', 'create', 'show', 'edit');
     Route::resource('compras', App\Http\Controllers\CompraController::class);

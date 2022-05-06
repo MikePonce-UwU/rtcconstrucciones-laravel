@@ -65,7 +65,7 @@ class BodegaController extends Controller
         $input['ID_USUARIO'] = Auth::id();
         Bodega::create($input);
 
-        return redirect()->route('bodegas.index')->with('success', 'Bodega creada exitosamente!');
+        return redirect()->route('bodegas.index')->with('success', 'Bodega Creada Exitosamente!!');
     }
 
     /**
@@ -121,7 +121,7 @@ class BodegaController extends Controller
         $input = $request->all();
         $bodega = Bodega::find($id);
         $bodega->update($input);
-        return redirect()->route('bodegas.index')->with('success', 'Bodega editada exitosamente!!');
+        return redirect()->route('bodegas.index')->with('success', 'Bodega Actualizado Exitosamente!!');
     }
 
     /**
@@ -135,6 +135,6 @@ class BodegaController extends Controller
         //
         Bodega::find($id)->delete();
         return redirect()->route('bodegas.index')
-            ->with('success', 'Bodega borrada successfully');
+            ->with('success', 'Bodega Eliminada Exitosamente!!');
     }
 }

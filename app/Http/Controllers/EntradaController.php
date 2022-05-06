@@ -61,7 +61,7 @@ class EntradaController extends Controller
         ]);
         $input = $request->all();
         $entrada = Entrada::create($input);
-        return redirect()->route('entradas.show', [$entrada->ID_ENTRADA])->with('success', 'Entrada registrada satisfactoriamente');
+        return redirect()->route('entradas.show', [$entrada->ID_ENTRADA])->with('success', 'Entrada Creada Exitosamente!!');
     }
 
     /**
@@ -114,7 +114,7 @@ class EntradaController extends Controller
         $input = $request->all();
         $entrada = Entrada::find($id);
         $entrada->update($input);
-        return redirect()->route('entradas.show', [$entrada->ID_ENTRADA])->with('success', 'Entrada registrada satisfactoriamente');
+        return redirect()->route('entradas.show', [$entrada->ID_ENTRADA])->with('success', 'Entrada Actualizada Exitosamente!!');
     }
 
     /**
@@ -127,6 +127,6 @@ class EntradaController extends Controller
     {
         //
         $entrada = Entrada::find($id)->delete();
-        return redirect()->route('entradas.index')->with('success', 'Entrada eliminada!');
+        return redirect()->route('entradas.index')->with('success', 'Entrada Eliminada Exitosamente!!');
     }
 }

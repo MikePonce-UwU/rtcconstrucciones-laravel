@@ -35,7 +35,7 @@ class DetalleSalidaController extends Controller
         ]);
         $input = $request->all();
         $detalle = DetalleSalida::create($input);
-        return redirect()->route('salidas.show', [$detalle->ID_SALIDA])->with('success', 'Detalle de salida registrada satisfactoriamente!');
+        return redirect()->route('salidas.show', [$detalle->ID_SALIDA])->with('success', 'Detalle de Salida Creada Exitosamente!!');
     }
 
     /**
@@ -73,6 +73,6 @@ class DetalleSalidaController extends Controller
         $detalle = DetalleSalida::find($id);
         $salidaID = $detalle->ID_SALIDA;
         $detalle->delete();
-        return redirect()->route('salidas.show', $salidaID)->with('success', 'Detalle de salida eliminada!');
+        return redirect()->route('salidas.show', $salidaID)->with('success', 'Detalle de Salida Eliminado Exitosamente!!');
     }
 }

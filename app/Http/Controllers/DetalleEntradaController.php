@@ -35,7 +35,7 @@ class DetalleEntradaController extends Controller
         ]);
         $input = $request->all();
         $detalle = DetalleEntrada::create($input);
-        return redirect()->route('entradas.show', [$detalle->ID_ENTRADA])->with('success', 'Detalle de entrada registrada satisfactoriamente!');
+        return redirect()->route('entradas.show', [$detalle->ID_ENTRADA])->with('success', 'Detalle de Entrada Creada Exitosamente!!');
     }
 
     /**
@@ -73,6 +73,6 @@ class DetalleEntradaController extends Controller
         $detalle = DetalleEntrada::find($id);
         $entradaID = $detalle->ID_ENTRADA;
         $detalle->delete();
-        return redirect()->route('entradas.show', $entradaID)->with('success', 'Detalle de entrada eliminada!');
+        return redirect()->route('entradas.show', $entradaID)->with('success', 'Detalle de Entrada Eliminada Exitosamente!!');
     }
 }

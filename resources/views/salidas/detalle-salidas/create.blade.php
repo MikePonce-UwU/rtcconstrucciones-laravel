@@ -4,7 +4,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Detalle de salida:</h5>
+                <h5 class="modal-title">Detalle de Salida</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             {!! Form::open(['method' => 'POST', 'route' => 'detalle-salidas.store']) !!}
@@ -33,20 +33,20 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
-                        <strong>{{ __('Descripcion') }}:</strong>
+                        <strong>{{ __('Descripción') }}:</strong>
                         {!! Form::select('ID_ESTADO', $estados, null, ['class' => 'form-control', 'multiple']) !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3 d-none">
                     <div class="form-group">
-                        <strong>{{ __('ID salida') }}:</strong>
+                        <strong>{{ __('ID Salida') }}:</strong>
                         {!! Form::number('ID_SALIDA', $salida->ID_SALIDA, ['placeholder' => 'ID salida', 'class' => 'form-control', 'id' => 'ID_SALIDA']) !!}
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Save</button>
+            <div class="modal-footer">                
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
             </div>
             {!! Form::close() !!}
         </div>

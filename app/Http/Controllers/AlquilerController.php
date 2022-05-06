@@ -60,7 +60,7 @@ class AlquilerController extends Controller
         ]);
         $input = $request->all();
         Alquiler::create($input);
-        return redirect()->route('alquileres.index')->with('success', 'Alquiler registrado exitosamente!!');
+        return redirect()->route('alquileres.index')->with('success', 'Alquiler Creado Exitosamente!!');
     }
 
     /**
@@ -112,7 +112,7 @@ class AlquilerController extends Controller
         $input = $request->all();
         $alquiler = Alquiler::find($id);
         $alquiler->update($input);
-        return redirect()->route('alquileres.index')->with('success', 'Alquiler modificado exitosamente!!');
+        return redirect()->route('alquileres.index')->with('success', 'Alquiler Actualizado Exitosamente!!');
     }
 
     /**
@@ -125,6 +125,6 @@ class AlquilerController extends Controller
     {
         //
         $alquiler = Alquiler::find($id)->delete();
-        return redirect()->route('alquileres.index')->with('success', 'Alquiler eliminado exitosamente!!');
+        return redirect()->route('alquileres.index')->with('success', 'Alquiler Eliminado Exitosamente!!');
     }
 }

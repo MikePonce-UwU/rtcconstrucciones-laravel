@@ -1,17 +1,17 @@
 @extends('layouts.app')
-
+@section('titulo', 'Entradas')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Entradas') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Administración de Entradas') }}</h2>
                     </div>
                     <div class="col-auto">
                         @can('entrada-create')
                             <a href="{{ route('entradas.create') }}" class="btn btn-success text-white">
-                                <span></span> {{ __('New') }}
+                                <span></span> {{ __('Crear Nueva Entrada') }}
                             </a>
                         @endcan
                     </div>
@@ -46,6 +46,7 @@
                                 <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">{{ __('#') }}</th>
                                             <th class="text-center">{{ __('Descripcion') }}</th>
                                             <th class="text-center">{{ __('Fecha entrada') }}</th>
                                             <th class="text-center">{{ __('Action') }}</th>
@@ -54,24 +55,30 @@
                                     <tbody>
                                         @foreach ($entradas as $entrada)
                                             <tr>
+                                                <td class="text-center">{{ $entrada->ID_ENTRADA }}</td>
                                                 <td class="text-center">{{ $entrada->DESCRIPCION_ENTRADA }}</td>
                                                 <td class="text-center">{{ $entrada->FECHA_ENTRADA }}</td>
                                                 <td class="text-center">
-                                                    <a class="btn btn-dark mb-2 mb-md-0"
-                                                        href="{{ route('entradas.show', $entrada->ID_ENTRADA) }}">{{ __('Show') }}</a>
-                                                    @can('entrada-edit')
-                                                        <a class="btn btn-primary mb-2 mb-md-0"
-                                                            href="{{ route('entradas.edit', $entrada->ID_ENTRADA) }}">{{ __('Edit') }}</a>
-                                                    @endcan
-                                                    @if (Route::has('entradas.delete'))
-                                                        <a href="{{ route('entradas.delete', [$entrada->ID_ENTRADA]) }}"
-                                                            class="btn btn-warning">{{ __('Eliminar') }}</a>
-                                                    @endif
-                                                    @can('entrada-delete')
-                                                        {!! Form::open(['method' => 'DELETE', 'route' => ['entradas.destroy', $entrada->ID_ENTRADA], 'style' => 'display:inline']) !!}
-                                                        {!! Form::submit('Delete', ['class' => 'btn btn-danger mb-2 mb-md-0']) !!}
-                                                        {!! Form::close() !!}
-                                                    @endcan
+                                                    <button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                                        Acción
+                                                    </button>
+                                                    <div class="dropdown-menu" style="">
+                                                        <a class="dropdown-item btn btn-secondary" href="{{ route('entradas.show', $entrada->ID_ENTRADA) }}">{{ __('Ver') }}</a>
+                                                    <div class="dropdown-divider"></div>
+                                                        @can('entrada-edit')
+                                                            <a class="dropdown-item btn btn-primary" href="{{ route('entradas.edit', $entrada->ID_ENTRADA) }}">{{ __('Editar') }}</a>
+                                                        @endcan
+                                                    <div class="dropdown-divider"></div>
+                                                        @if (Route::has('entradas.delete'))
+                                                            <a href="{{ route('entradas.delete', [$entrada->ID_ENTRADA]) }}"
+                                                                class="dropdown-item btn btn-warning">{{ __('Eliminar') }}</a>
+                                                        @endif
+                                                        @can('entrada-delete')
+                                                            {!! Form::open(['method' => 'DELETE', 'route' => ['entradas.destroy', $entrada->ID_ENTRADA], 'style' => 'display:inline']) !!}
+                                                            {!! Form::submit('Eliminar', ['class' => 'dropdown-item btn btn-danger']) !!}
+                                                            {!! Form::close() !!}
+                                                        @endcan
+                                                    </div>                                                                                                                                                                                                           
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -85,20 +92,4 @@
             </div> <!-- .col-12 -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
-
-
-@endsection
-@section('css-content')
-    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
-@endsection
-@section('js-content')
-    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTable-1')
-                .dataTable({
-                    responsive: true,
-                });
-        });
-    </script>
 @endsection

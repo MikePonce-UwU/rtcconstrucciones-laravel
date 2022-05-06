@@ -1,43 +1,61 @@
 @extends('layouts.app')
-@section('titulo', 'Editando compra')
-@section('content')
-    <x-contentHeader header="{{ __('Editar compra') }}">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
-        </li>
-        <li class="breadcrumb-item"><a href="{{ route('compras.index') }}">{{ __('Compras') }}</a>
-        </li>
-        <li class="breadcrumb-item active">{{ __('Editar compra') }}</li>
-    </x-contentHeader>
-    <x-content>
-        <a href="{{ route('compras.index') }}" class="btn btn-primary" style="color:white">
-            <span style="color:white"></span> {{ __('Back') }}
-        </a>
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-        <div class="card shadow mb-4">
-            <div class="card-header text-center h1">Formulario de edicion</div>
-            <div class="card-body">
-                {!! Form::model($compra, ['method' => 'PATCH', 'route' => ['compras.update', $compra->ID_COMPRA]]) !!}
-                @include('compras.forms.form')
-                <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
-                    <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
+@section('titulo', 'Editar Compra')
+@section('content')    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <div class="row align-items-center my-4">
+                    <div class="col">
+                        <h2 class="h3 mb-0 page-title">{{ __('Editar Compra') }}</h2>
+                    </div>
+                    <div class="col-auto">
+                        <a href="{{ route('compras.index') }}" class="btn btn-primary" style="color:white">
+                            <span style="color:white"></span> {{ __('Volver') }}
+                        </a>
+                    </div>
                 </div>
-                {!! Form::close() !!}
+                <div class="content-header row">
+                    <div class="content-header-left col-md-12 col-12 mb-2">
+                        <div class="row breadcrumbs-top">
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('Dashboard') }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a
+                                            href="{{ route('compras.index') }}">{{ __('Compras') }}</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{ __('Editar Compra') }}</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> Hubo algunos problemas con su entrada.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="card shadow mb-4">
+                    <div class="card-header text-center h1">Formulario de Edición</div>
+                    <div class="card-body">
+                        {!! Form::model($compra, ['method' => 'PATCH', 'route' => ['compras.update', $compra->ID_COMPRA]]) !!}
+                        @include('compras.forms.form')
+                        <div class="col-xs-12 col-sm-12 col-md-12 mx-auto">
+                            <button type="submit" class="btn btn-success">{{ __('Guardar') }}</button>
+                            <a class="btn grey btn-danger" href="{{ route('compras.index') }}">
+                                {{ __('Cancelar') }}</a>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
+                </div> <!-- / .card -->
             </div>
-        </div> <!-- / .card -->
-    </x-content>
-
-@endsection
-@section('css-content')
-    <link rel="stylesheet" href="{{ asset('datetimepicker-master/jquery.datetimepicker.css') }}">
+        </div>
+    </div>
 @endsection
 @section('js-content')
     <script src="{{ asset('datetimepicker-master/jquery.js') }}"></script>

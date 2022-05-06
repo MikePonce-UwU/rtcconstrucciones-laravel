@@ -1,15 +1,16 @@
 @extends('layouts.app')
+@section('titulo', 'Editar Alquiler')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Editar alquiler') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Editar Alquiler') }}</h2>
                     </div>
                     <div class="col-auto">
                         <a href="{{ route('alquileres.index') }}" class="btn btn-primary" style="color:white">
-                            <span style="color:white"></span> {{ __('Back') }}
+                            <span style="color:white"></span> {{ __('Volver') }}
                         </a>
                     </div>
                 </div>
@@ -23,7 +24,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="{{ route('alquileres.index') }}">{{ __('Alquileres') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Editar alquiler') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Editar Alquiler') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -31,7 +32,7 @@
                 </div>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <strong>Whoops!</strong> Hubo algunos problemas con su entrada.<br><br>
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -40,12 +41,14 @@
                     </div>
                 @endif
                 <div class="card shadow mb-4">
-                    <div class="card-header text-center h1">Formulario de edicion</div>
+                    <div class="card-header text-center h1">Formulario de Edición</div>
                     <div class="card-body">
                         {!! Form::model($alquiler, ['method' => 'PATCH', 'route' => ['alquileres.update', $alquiler->ID_ALQUILER]]) !!}
                         @include('alquileres.forms.form')
                         <div class="col-xs-12 col-sm-12 col-md-12">
-                            <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
+                            <button type="submit" class="btn btn-success">{{ __('Guardar') }}</button>
+                            <a class="btn grey btn-danger ms-2" href="{{ route('alquileres.index') }}">
+                                {{ __('Cancelar') }}</a>
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -54,9 +57,6 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
-@endsection
-@section('css-content')
-    <link rel="stylesheet" href="{{ asset('datetimepicker-master/jquery.datetimepicker.css') }}">
 @endsection
 @section('js-content')
     <script src="{{ asset('datetimepicker-master/jquery.js') }}"></script>

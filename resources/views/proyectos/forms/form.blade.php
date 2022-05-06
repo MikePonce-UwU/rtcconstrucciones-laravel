@@ -15,28 +15,28 @@
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
     <div class="form-group">
-        <strong>{{ __('Fecha de Finalizacion') }}: <i class="text-muted">@if (isset($proyecto)) {{ $proyecto->FECHA_FINALIZACION }} @endif</i></strong>
+        <strong>{{ __('Fecha de Finalización') }}: <i class="text-muted">@if (isset($proyecto)) {{ $proyecto->FECHA_FINALIZACION }} @endif</i></strong>
         <div class="input-group">
             <button type="button" class="btn btn-outline-secondary" id="toggle-dtp2">Fin</button>
-            {!! Form::text('FECHA_FINALIZACION', null, ['placeholder' => 'Fecha de finalizacion', 'class' => 'form-control', 'id' => 'datetimepicker2']) !!}
+            {!! Form::text('FECHA_FINALIZACION', null, ['placeholder' => 'Fecha de finalización', 'class' => 'form-control', 'id' => 'datetimepicker2']) !!}
         </div>
     </div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
     <div class="form-group">
-        <strong>{{ __('Descripcion') }}:</strong>
-        {!! Form::text('DESCRIPCION', null, ['placeholder' => 'Descripcion', 'class' => 'form-control']) !!}
+        <strong>{{ __('Descripción') }}:</strong>
+        {!! Form::text('DESCRIPCION', null, ['placeholder' => 'Descripción', 'class' => 'form-control']) !!}
     </div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
     <div class="form-group">
-        <strong>{{ __('Direccion') }}:</strong>
-        {!! Form::text('DIRECCION', null, ['placeholder' => 'Direccion', 'class' => 'form-control']) !!}
+        <strong>{{ __('Dirección') }}:</strong>
+        {!! Form::text('DIRECCION', null, ['placeholder' => 'Dirección', 'class' => 'form-control']) !!}
     </div>
 </div>
 <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
     <div class="form-group">
-        <strong>{{ __('Tipo') }}:</strong>
+        <strong>{{ __('Tipo De Proyecto') }}:</strong>
     </div>
     @php
         $value = null;

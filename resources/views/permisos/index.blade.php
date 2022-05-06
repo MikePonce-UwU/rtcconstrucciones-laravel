@@ -1,16 +1,17 @@
 @extends('layouts.app')
+@section('titulo', 'Permisos')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Administracion de permisos') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Administración de permisos') }}</h2>
                     </div>
                     <div class="col-auto">
                         @can('permission-create')
                             <a href="{{ route('permisos.create') }}" class="btn btn-success" style="color:white">
-                                <span style="color:white"></span> {{ __('New') }}
+                                <span style="color:white"></span> {{ __('Crear Nuevo Permiso') }}
                             </a>
                         @endcan
                     </div>
@@ -42,17 +43,19 @@
                                 <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">{{ __('Name') }}</th>
-                                            <th class="text-center">{{ __('Action') }}</th>
+                                            <th class="text-center">{{ __('#') }}</th>
+                                            <th class="text-center">{{ __('Nombre') }}</th>
+                                            <th class="text-center">{{ __('Acción') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($permisos as $permiso)
                                             <tr>
+                                                <td class="text-center">{{ $permiso->id }}</td>
                                                 <td class="text-center">{{ $permiso->name }}</td>
                                                 <td class="text-center">
                                                     <a class="btn btn-dark text-white"
-                                                        href="{{ route('permisos.show', $permiso->id) }}">Show</a>
+                                                        href="{{ route('permisos.show', $permiso->id) }}">Ver</a>
                                                     @can('permission-delete')
                                                         {!! Form::open(['method' => 'DELETE', 'route' => ['permisos.destroy', $permiso->id], 'style' => 'display:inline']) !!}
                                                         {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
@@ -72,18 +75,4 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
-@endsection
-@section('css-content')
-    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
-@endsection
-@section('js-content')
-    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTable-1')
-                .dataTable({
-                    responsive: true,
-                });
-        });
-    </script>
 @endsection

@@ -61,7 +61,7 @@ class ProductoController extends Controller
         ]);
         $input = $request->all();
         Producto::create($input);
-        return redirect()->route('productos.index')->with('succcess', 'Producto anexado exitosamente!!');
+        return redirect()->route('productos.index')->with('succcess', 'Producto Creado Exitosamente!!');
     }
 
     /**
@@ -113,7 +113,7 @@ class ProductoController extends Controller
         $input = $request->all();
         $producto = Producto::find($id);
         $producto->update($input);
-        return redirect()->route('productos.index')->with('success', 'Producto modificado exitosamente!!');
+        return redirect()->route('productos.index')->with('success', 'Producto Actualizado Exitosamente!!');
     }
 
     /**
@@ -124,6 +124,8 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Producto::find($id)->delete();
+        return redirect()->route('productos.index')
+            ->with('success', 'Producto Eliminado Exitosamente!!');
     }
 }

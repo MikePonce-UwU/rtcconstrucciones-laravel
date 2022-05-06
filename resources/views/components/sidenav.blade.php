@@ -46,12 +46,13 @@
                 </li>
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                <li class="nav-header">GESTIÓN DE ACTIVOS</li>
+                <li class="nav-header">GESTIÓN DE ACCESO</li>
+                <!-- Usuarios -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
-                            Usuarios y roles
+                            Usuarios
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -59,27 +60,71 @@
                         <li class="nav-item">
                             <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Usuarios</p>
+                                <p>Administrar Usuarios</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('users.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear Usuario</p>
+                            </a>
+                        </li>                     
+                    </ul>                    
+                </li>
+                <!-- Roles -->
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cogs"></i>
+                        <p>
+                            Roles
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('roles.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Roles</p>
+                                <p>Administrar Roles</p>
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('roles.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear Rol</p>
+                            </a>
+                        </li>                     
+                    </ul>                    
+                </li>
+                {{-- Permisos 
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-id-card "></i>
+                        <p>
+                            Permisos
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
                             <a href="{{ route('permisos.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Permisos</p>
+                                <p>Administrar Permisos</p>
                             </a>
                         </li>
-                    </ul>
+                        <li class="nav-item">
+                            <a href="{{ route('permisos.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear Permiso</p>
+                            </a>
+                        </li>                     
+                    </ul>                    
                 </li>
+                --}}
+
                 <li class="nav-header">GESTIÓN DE PROYECTOS</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="nav-icon fas fa-inbox"></i>
                         <p>
                             Bodegas
                             <i class="right fas fa-angle-left"></i>
@@ -89,13 +134,13 @@
                         <li class="nav-item">
                             <a href="{{ route('bodegas.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar bodegas</p>
+                                <p>Administrar Bodegas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('bodegas.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Crear bodega</p>
+                                <p>Crear Bodega</p>
                             </a>
                         </li>
 
@@ -103,7 +148,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="nav-icon fas fa-briefcase "></i>
                         <p>Proyectos
                             <i class="right fas fa-angle-left"></i>
                         </p>
@@ -112,69 +157,84 @@
                         <li class="nav-item">
                             <a href="{{ route('proyectos.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar proyectos</p>
+                                <p>Administrar Proyectos</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('proyectos.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Crear proyecto</p>
+                                <p>Crear Proyecto</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="nav-icon fas fa-calendar-check"></i>
                         <p>Alquileres<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('alquileres.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar alquileres</p>
+                                <p>Administrar Alquileres</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('alquileres.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Crear alquiler</p>
+                                <p>Crear Alquiler</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('compras.index') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
+                        <i class="nav-icon fas fa-shopping-bag"></i>
                         <p>Compras<i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('compras.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar compras</p>
+                                <p>Administrar Compras</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('compras.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Crear compra</p>
+                                <p>Crear Compra</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-header">GESTIÓN DE PRODUCTOS</li>
                 <li class="nav-item">
-                    <a href="{{ route('productos.index') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon far fa-calendar-alt"></i>
                         <p>
                             Productos
+                            <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('productos.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Administrar Productos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('productos.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Crear Producto</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <i class="nav-icon fas fa-truck"></i>
                         <p>
                             Entradas
                             <i class="fas fa-angle-left right"></i>
@@ -184,20 +244,20 @@
                         <li class="nav-item">
                             <a href="{{ route('entradas.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar entradas</p>
+                                <p>Administrar Entradas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('entradas.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Crear entrada</p>
+                                <p>Crear Entrada</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon far fa-envelope"></i>
+                        <i class="nav-icon fas fa-truck"></i>
                         <p>
                             Salidas
                             <i class="fas fa-angle-left right"></i>
@@ -207,13 +267,13 @@
                         <li class="nav-item">
                             <a href="{{ route('salidas.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Listar salidas</p>
+                                <p>Administrar Salidas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('salidas.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Crear salida</p>
+                                <p>Crear Salida</p>
                             </a>
                         </li>
                     </ul>

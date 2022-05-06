@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nuevo detalle</h5>
+                <h5 class="modal-title">Nuevo Producto de Alquiler</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             {!! Form::open(['method' => 'POST', 'route' => 'detalle-alquileres.store']) !!}
@@ -22,27 +22,27 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
-                        <strong>{{ __('Horas de alquiler') }}:</strong>
-                        {!! Form::number('HORAS_ALQUILER', null, ['placeholder' => 'Horas de alquiler', 'class' => 'form-control', 'id' => 'horas-alquiler']) !!}
+                        <strong>{{ __('Horas de Alquiler') }}:</strong>
+                        {!! Form::number('HORAS_ALQUILER', null, ['placeholder' => 'Horas de Alquiler', 'class' => 'form-control', 'id' => 'horas-alquiler']) !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
-                        <strong>{{ __('Horas excedidas') }}:</strong>
-                        {!! Form::number('HORAS_EXCEDIDAS', null, ['placeholder' => 'Horas excedidas', 'class' => 'form-control', 'id' => 'horas-excedidas']) !!}
+                        <strong>{{ __('Horas Excedidas') }}:</strong>
+                        {!! Form::number('HORAS_EXCEDIDAS', null, ['placeholder' => 'Horas Excedidas', 'class' => 'form-control', 'id' => 'horas-excedidas']) !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
-                        <strong>{{ __('Pago por hora') }}:</strong>
-                        {!! Form::number('PAGO_HORA', null, ['placeholder' => 'Pago por hora', 'class' => 'form-control', 'id' => 'pago-hora']) !!}
+                        <strong>{{ __('Pago por Hora') }}:</strong>
+                        {!! Form::number('PAGO_HORA', null, ['placeholder' => 'Pago por Hora', 'class' => 'form-control', 'id' => 'pago-hora']) !!}
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 mb-3">
                     <div class="form-group">
-                        <strong>{{ __('Pago excedido') }}:</strong>
+                        <strong>{{ __('Pago Excedido') }}:</strong>
                         <div class="input-group">
-                            {!! Form::text('PAGO_EXCEDIDO', null, ['placeholder' => 'Pago excedido', 'class' => 'form-control disabled', 'id' => 'pago-excedido']) !!}
+                            {!! Form::text('PAGO_EXCEDIDO', null, ['placeholder' => 'Pago Excedido', 'class' => 'form-control disabled', 'id' => 'pago-excedido']) !!}
                             <button type="button" id="btn-pago-excedido" class="btn btn-outline-info"
                                 onclick="pago();">Calcular</button>
                         </div>
@@ -67,8 +67,9 @@
                 {!! Form::text('ID_ALQUILER', $alquiler->ID_ALQUILER, ['placeholder' => 'Alquiler', 'class' => 'form-control d-none']) !!}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                
             </div>
             {!! Form::close() !!}
         </div>

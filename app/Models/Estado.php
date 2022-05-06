@@ -13,6 +13,8 @@ class Estado extends Model
     public $timestamps = false;
     protected $fillable = [
         'NOMBRE',
+    ];
+    protected $hidden = [
         'DESCRIPCION',
     ];
     /**

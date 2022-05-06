@@ -62,7 +62,7 @@ class CompraController extends Controller
 
         $compra = Compra::create($input);
         $compraID = $compra->ID_COMPRA;
-        return redirect()->route('compras.show', [$compraID])->with('success', 'Compra realizada satisfactoriamente!');
+        return redirect()->route('compras.show', [$compraID])->with('success', 'Compra Creada Exitosamente!!');
     }
 
     /**
@@ -113,7 +113,7 @@ class CompraController extends Controller
         $input = $request->all();
         $compra = Compra::find($id);
         $compra->update($input);
-        return redirect()->route('compras.index')->with('success', 'Compra modificada exitosamente!!');
+        return redirect()->route('compras.index')->with('success', 'Compra Actualizado Exitosamente!!');
     }
 
     /**
@@ -126,6 +126,6 @@ class CompraController extends Controller
     {
         //
         $compra = Compra::find($id)->delete();
-        return redirect()->route('compras.index')->with('success', 'Compra eliminada exitosamente!!');
+        return redirect()->route('compras.index')->with('success', 'Compra Eliminado Exitosamente!!');
     }
 }

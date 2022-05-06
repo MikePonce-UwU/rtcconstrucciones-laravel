@@ -1,16 +1,17 @@
 @extends('layouts.app')
+@section('titulo', 'Crear Rol')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Crear un nuevo rol') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Crear Nuevo Rol') }}</h2>
                     </div>
                     <div class="col-auto">
 
                         <a href="{{ route('roles.index') }}" class="btn btn-primary" style="color:white">
-                            <span style="color:white"></span> {{ __('Back') }}
+                            <span style="color:white"></span> {{ __('Volver') }}
                         </a>
 
                     </div>
@@ -25,7 +26,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Crear nuevo rol') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Crear Nuevo Rol') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -33,7 +34,7 @@
                 </div>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <strong>Whoops!</strong> Hubo algunos problemas con su entrada.<br><br>
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -42,29 +43,31 @@
                     </div>
                 @endif
                 <div class="card shadow mb-4">
-                    <div class="card-header text-center h1">Formulario de creacion</div>
+                    <div class="card-header text-center h1">Formulario Nuevo Rol</div>
                     <div class="card-body">
                         {!! Form::open(['route' => 'roles.store', 'method' => 'POST']) !!}
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>{{ __('Name') }}:</strong>
-                                    {!! Form::text('name', null, ['placeholder' => 'Name', 'class' => 'form-control']) !!}
+                                    <strong>{{ __('Nombre') }}:</strong>
+                                    {!! Form::text('name', null, ['placeholder' => 'Nombre', 'class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>{{ __('Permission') }} :</strong>
-                                    <br />
-                                    @foreach ($permission as $value)
+                                    <strong>{{ __('Permisos') }} :</strong>
+                                    <br />                                       
+                                    @foreach ($permission as $value)                                                                      
                                         <label>{{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-                                            {{ $value->name }}</label>
-                                        <br />
+                                            {{ $value->name }}</label>                                           
+                                        <br/>                                                                                    
                                     @endforeach
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <button type="submit" class="btn btn-success">{{ __('Save') }}</button>
+                                <button type="submit" class="btn btn-success">{{ __('Guardar') }}</button>
+                                <a class="btn grey btn-danger" href="{{ route('roles.index') }}">
+                                    {{ __('Cancelar') }}</a>   
                             </div>
                         </div>
                         {!! Form::close() !!}

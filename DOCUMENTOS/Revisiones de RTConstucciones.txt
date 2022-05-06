@@ -1,0 +1,75 @@
+//////////////// finalizado
+Nose elimina un usuario por las operaciones que realiza..
+permisos, Oculto, no es necesario para el cliente
+
+////////////////////////////////// Faltante
+Usuario, Si el usuario esta deshabilitado, no se muestre en los demas combobox
+
+bodegas, el campo estado no esta siendo utilizado.. 
+funcion de estado: mostrar de forma rapida si una bodega esta siendo en uso o no(activa, inactiva)
+
+bodega, mejorar la forma de ingresar la capacidad de bodega y la capacidad disponible
+
+bodega, el caso es que se crean 2 tablas con id="dataTable-1" pero solo se le aplica a la primera
+
+bodega, verificar la forma del calendario en nuevo
+{!! Form::input('datetime-local','FECHA_CREACION', null, ['placeholder' => 'Fecha de Creación', 'class' => 'form-control', 'id' => 'datetimepicker1']) !!}
+
+Proyecto, el campo estado no esta siendo utilizado
+funcion de estado: mostrar de forma rapida si un proyecto esta activo o ha finalizado(activa, inactiva)
+
+Alquiler, el campo estado no esta siendo utilizado
+funcion de estado: mostrar de forma rapida si un Alquiler esta activo, finalizado, se ha pagado, aun tiene pendiente de paga o entrega(activa, inactiva)
+
+Alquiler, calculos en los pagos y subtotales confirmar
+
+alquiler, agregar la informacion de los alquileres en bodega de proyecto (bodegas.show mostrar tabla de alquileres, similar a compras)
+
+compra, calculo de precios de compra y subtotales confirmar
+
+compra, el campo estado no esta siendo utilizado
+funcion de estado: compras activas, inactivas, finalizadas, pendientes, futuras (servira para controlar el seguimiento de las compras de forma rapida)
+
+compra, alertas de confirmacion de edicion, borrado y guardado revisar (al eliminar aparece)
+
+compra, alertas de campos requeridos
+
+compra, aplicar a todos el modal de confirmacion de eliminacion
+
+producto, eliminacion de producto?
+
+todo, verificar los datos en donde se elimina informacion utilizada por otras tablas 
+
+entradas, cambiar la forma de realizar una entrada (se debe seleccionar desde que bodega viene el producto y dependiendo de la cantidad que se desee sacar,
+"Descontar cantidades de bodega proyecto y aumentar la cantidad en la bodega centrar (Producto)")
+
+entradas, agregar restricciones, no permitir realizar entrada provenientes de materiales con indice 0
+entradas, pueden entrar productos provenientes de (salidas, compras)
+entrada, metodo para la entrada (se debe seleccionar el proyecto, luego la bodega que se desea sacar, se mostrara el listado de productos en bodega con capacidad mayor a 0)
+
+para todo tipo de productos que reciba cambios en su cantidad, se debe tener la cantidad con la que inicio de forma fija, y la cantidad que se retire o ingrese de forma variante
+ejemplo (se compraron 10, se usaron 6, y se devuelven 4)
+
+para todo tipo de producto que reciba cambios en su cantidad, si inicialmente se realiza una entrada de 4 y esa entrada se elimina, se debera regresar la cantidad a su procedencia
+ejemplo (
+cantidad actual 10, 
+se realiza una entrada de 5, 
+cantidad actual 15, 
+se elimina la entrada de 5, 
+cantidad actual 10
+)
+
+salida, validar que la cantidad de producto no este en cero
+salida, no sacar cantidades inexistete
+salida, darle mas campo al estado
+
+
+reemplazar en todo 
+<div class="col-10  col-sm-10 col-md-10 col-lg-10"> linea 3
+<div class="">
+
+
+'''''''''''''''''''''''''''''''''''
+separar estado de cndición, triggers totales de alquiler, validaciones de los campos vacíos, bodega mostrar detalles de productos,
+ indice de proyecto no guarda, mostrar detalles de alquiler en bodegas, validar que no deje sacar cantidades mayores,
+ no deja realizar nueva entrada, validacion de cantidades en retorno, validaciones no aparecer cantidades en cero

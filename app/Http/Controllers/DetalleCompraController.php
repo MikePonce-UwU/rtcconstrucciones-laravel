@@ -41,7 +41,7 @@ class DetalleCompraController extends Controller
         ]);
         $input = $request->all();
         $detalle = DetalleCompra::create($input);
-        return redirect()->route('compras.show', $detalle->ID_COMPRA)->with('success', 'Detalles de compra registradas satisfactoriamente!!');
+        return redirect()->route('compras.show', $detalle->ID_COMPRA)->with('success', 'Detalles de Compra Creada Exitosamente!!');
     }
 
     /**
@@ -79,6 +79,6 @@ class DetalleCompraController extends Controller
         $detalle = DetalleCompra::find($id);
         $compraID = $detalle->ID_COMPRA;
         $detalle->delete();
-        return redirect()->route('compras.show', $compraID)->with('success', 'Detalle de compra eliminada satisfactoriamente!!');
+        return redirect()->route('compras.show', $compraID)->with('success', 'Detalle de Compra Eliminado Exitosamente!!');
     }
 }

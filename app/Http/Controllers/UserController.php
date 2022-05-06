@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use App\Models\User;
+use App\Models\Estado;
 
 class UserController extends Controller
 {
@@ -37,7 +38,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('users.create', compact('roles'));
+        $estados = Estado::select(['ID_ESTADO', 'NOMBRE'])->where('DESCRIPCION', 'LIKE','Usuario')->get();
+        return view('users.create', compact('roles', 'estados'));
     }
     /**
      * Store a newly created resource in storage.
@@ -51,7 +53,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
 
         $input = $request->all();
@@ -61,7 +64,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully');
+            ->with('success', 'Usuario Creado Exitosamente!!');
     }
     /**
      * Display the specified resource.
@@ -71,7 +74,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::with('estado')->find($id);
         return view('users.show', compact('user'));
     }
     /**
@@ -84,9 +87,10 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
+        $estados = Estado::select(['ID_ESTADO', 'NOMBRE'])->where('DESCRIPCION', 'LIKE','Usuario')->get();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit', compact('user', 'roles', 'userRole'));
+        return view('users.edit', compact('user', 'roles', 'userRole', 'estados'));
     }
     /**
      * Update the specified resource in storage.
@@ -101,7 +105,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'ID_ESTADO' => 'required',
         ]);
 
         $input = $request->all();
@@ -118,7 +123,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
 
         return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
+            ->with('success', 'Usuario Actualizado Exitosamente!!');
     }
     /**
      * Remove the specified resource from storage.
@@ -130,6 +135,6 @@ class UserController extends Controller
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Usuario Eliminado Exitosamente!!');
     }
 }

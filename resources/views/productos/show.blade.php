@@ -1,16 +1,17 @@
 @extends('layouts.app')
+@section('titulo', 'Ver Producto')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Mostrar detalles de producto') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Ver Producto') }}</h2>
                     </div>
                     <div class="col-auto">
 
                         <a href="{{ route('productos.index') }}" class="btn btn-primary" style="color:white">
-                            <span style="color:white"></span> {{ __('Back') }}
+                            <span style="color:white"></span> {{ __('Volver') }}
                         </a>
 
                     </div>
@@ -25,7 +26,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="{{ route('productos.index') }}">{{ __('Productos') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Mostrar producto') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Ver producto') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -39,7 +40,7 @@
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Cantidad total') }}:</strong>
+                                        <strong>{{ __('Cantidad Total') }}:</strong>
                                         {{ $producto->CANTIDAD }}{{ __(' ') }}{{ $producto->unidad_medida->ABREVIACION }}
                                     </div>
                                 </div>
@@ -57,5 +58,4 @@
             </div> <!-- .col-12 -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
-
 @endsection

@@ -1,16 +1,17 @@
 @extends('layouts.app')
+@section('titulo', 'Ver Rol')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Show Role') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Ver Rol') }}</h2>
                     </div>
                     <div class="col-auto">
 
                         <a href="{{ route('roles.index') }}" class="btn btn-primary" style="color:white">
-                            <span style="color:white"></span> {{ __('Back') }}
+                            <span style="color:white"></span> {{ __('Volver') }}
                         </a>
 
                     </div>
@@ -25,7 +26,7 @@
                                     <li class="breadcrumb-item"><a
                                             href="{{ route('roles.index') }}">{{ __('Roles') }}</a>
                                     </li>
-                                    <li class="breadcrumb-item active">{{ __('Show Role') }}</li>
+                                    <li class="breadcrumb-item active">{{ __('Ver Rol') }}</li>
                                 </ol>
                             </div>
                         </div>
@@ -34,17 +35,17 @@
                 <div class="row my-4">
                     <div class="col-md-12">
                         <div class="card shadow">
-                            <div class="card-header text-center h1">Role Description</div>
+                            <div class="card-header text-center h1">Descripción del Rol</div>
                             <div class="card-body">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Name') }}:</strong>
+                                        <strong>{{ __('Nombre') }}:</strong>
                                         {{ $role->name }}
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
-                                        <strong>{{ __('Permissions') }}:</strong>
+                                        <strong>{{ __('Permisos') }}:</strong>
                                         @if (!empty($rolePermissions))
                                             @foreach ($rolePermissions as $v)
                                                 <label class="badge bg-success">{{ $v->name }}</label>

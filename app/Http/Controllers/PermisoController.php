@@ -53,7 +53,7 @@ class PermisoController extends Controller
         ]);
         $input = $request->all();
         Permission::create($input);
-        return redirect()->route('permisos.index')->with('success', 'Permiso creado satisfactoriamente!');
+        return redirect()->route('permisos.index')->with('success', 'Permiso Creado Exitosamente!!');
     }
 
     /**
@@ -81,6 +81,6 @@ class PermisoController extends Controller
     {
         //
         $permiso = Permission::find($id)->delete();
-        return redirect()->route('permisos.index')->with('success', 'Permiso eliminado satisfactoriamente!');
+        return redirect()->route('permisos.index')->with('success', 'Permiso Eliminado Exitosamente!!');
     }
 }

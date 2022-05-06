@@ -6,7 +6,7 @@
             <div class="col-10 col-xs-10 col-sm-10 col-md-10 col-lg-10">
                 <div class="row align-items-center my-4">
                     <div class="col">
-                        <h2 class="h3 mb-0 page-title">{{ __('Administracion de usuarios') }}</h2>
+                        <h2 class="h3 mb-0 page-title">{{ __('Administración de usuarios') }}</h2>
                     </div>
                     <div class="col-auto">
                         @can('user-create')
@@ -48,13 +48,16 @@
                                 <table class="table table-bordered mx-auto mx-md-0" id="dataTable-1">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">{{ __('#') }}</th>
                                             <th class="text-center">{{ __('Nombre') }}</th>
                                             <th class="text-center">{{ __('Correo') }}</th>
                                             <th class="text-center">{{ __('Rol') }}</th>
+                                            <th class="text-center">{{ __('Estado') }}</th>
                                             <th class="text-center">{{ __('Fecha de Creación') }}</th>
                                             <th class="text-center">{{ __('Fecha de Modificación') }}</th>
                                             @if (!empty($user->email_verified_at))
-                                                <th class="text-center">{{ __('Fecha de Verificación de correo') }}</th>
+                                                <th class="text-center">{{ __('Fecha de Verificación de correo') }}
+                                                </th>
                                             @endif
                                             <th class="text-center">{{ __('Acción') }}</th>
                                         </tr class="text-center">
@@ -62,6 +65,7 @@
                                     <tbody>
                                         @foreach ($data as $user)
                                             <tr>
+                                                <td class="text-center">{{ $user->id }}</td>
                                                 <td class="text-center">{{ $user->name }}</td>
                                                 <td class="text-center">{{ $user->email }}</td>
                                                 <td class="text-center">
@@ -71,6 +75,14 @@
                                                         @endforeach
                                                     @endif
                                                 </td>
+                                                @if ($user->estado->NOMBRE == 'Habilitado')
+                                                    <td class="text-center text-success">{{ $user->estado->NOMBRE }}
+                                                    </td>
+                                                @else
+                                                    <td class="text-center text-danger">{{ $user->estado->NOMBRE }}
+                                                    </td>
+                                                @endif
+
                                                 <td class="text-center">{{ $user->created_at->format('M. d, Y') }}
                                                 </td>
                                                 <td class="text-center">
@@ -80,26 +92,33 @@
                                                         {{ $user->email_verified_at->format('M. d, Y') }}</td>
                                                 @endif
                                                 <td class="text-center">
-                                                    <button type="button" class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                                    <button type="button"
+                                                        class="btn btn-default btn-sm btn-flat border-info wave-effect text-info dropdown-toggle"
+                                                        data-toggle="dropdown" aria-expanded="true">
                                                         Acción
                                                     </button>
                                                     <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item btn btn-secondary" href="{{ route('users.show', $user->id) }}">{{ __('Ver') }}</a>
-                                                    <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item btn btn-secondary"
+                                                            href="{{ route('users.show', $user->id) }}">{{ __('Ver') }}</a>
+                                                        <div class="dropdown-divider"></div>
                                                         @can('user-edit')
-                                                            <a class="dropdown-item btn btn-primary" href="{{ route('users.edit', $user->id) }}">{{ __('Editar') }}</a>
+                                                            <a class="dropdown-item btn btn-primary"
+                                                                href="{{ route('users.edit', $user->id) }}">{{ __('Editar') }}</a>
                                                         @endcan
-                                                    <div class="dropdown-divider"></div>
+                                                        {{--
+                                                        <div class="dropdown-divider"></div>
                                                         @if (Route::has('users.delete'))
                                                             <a href="{{ route('users.delete', [$user->id]) }}"
                                                                 class="dropdown-item btn btn-warning">{{ __('Eliminar') }}</a>
                                                         @endif
+                                                        
                                                         @can('user-delete')
                                                             {!! Form::open(['method' => 'DELETE', 'route' => ['users.destroy', $user->id], 'style' => 'display:inline']) !!}
                                                             {!! Form::submit('Eliminar', ['class' => 'dropdown-item btn btn-danger']) !!}
                                                             {!! Form::close() !!}
                                                         @endcan
-                                                    </div>                                                                                                        
+                                                        --}}
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -114,17 +133,4 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
-@endsection
-@section('css-content')
-    <link rel="stylesheet" href="{{ asset('DataTables/datatables.min.css') }}">
-@endsection
-@section('js-content')
-    <script src="{{ asset('DataTables/datatables.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTable-1').dataTable({
-                responsive: true,
-            });
-        });
-    </script>
 @endsection

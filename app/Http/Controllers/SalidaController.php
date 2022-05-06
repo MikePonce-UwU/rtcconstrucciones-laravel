@@ -55,7 +55,7 @@ class SalidaController extends Controller
         $input = $request->all();
         $input['ID_USUARIO'] = Auth::id();
         $salida = Salida::create($input);
-        return redirect()->route('salidas.show', $salida->ID_SALIDA)->with('success', 'Salida registrada satisfactoriamente');
+        return redirect()->route('salidas.show', $salida->ID_SALIDA)->with('success', 'Salida Creada Exitosamente!!');
     }
 
     /**
@@ -106,7 +106,7 @@ class SalidaController extends Controller
         $input = $request->all();
         $salida = Salida::find($id);
         $salida->update($input);
-        return redirect()->route('salidas.show', [$salida->ID_SALIDA])->with('success', 'Salida registrada satisfactoriamente');
+        return redirect()->route('salidas.show', [$salida->ID_SALIDA])->with('success', 'Salida Actualizada Exitosamente!!');
     }
 
     /**
@@ -119,6 +119,6 @@ class SalidaController extends Controller
     {
         //
         $salida = Salida::find($id)->delete();
-        return redirect()->route('salidas.index')->with('success', 'Salida eliminada!');
+        return redirect()->route('salidas.index')->with('success', 'Salida Eliminada Exitosamente!!');
     }
 }

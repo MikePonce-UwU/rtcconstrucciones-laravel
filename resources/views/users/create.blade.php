@@ -73,7 +73,18 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong>{{ __('Rol') }}:</strong>
-                                {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'multiple']) !!}
+                                {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', '']) !!}
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>{{ __('Estado') }}:</strong>
+                                    {{-- dd($estados) --}}
+                                <select name="ID_ESTADO" id="ID_ESTADO" class="form-control">
+                                    @foreach ($estados as $estado)
+                                        <option value="{{ $estado->ID_ESTADO }}">{{ $estado->NOMBRE }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
