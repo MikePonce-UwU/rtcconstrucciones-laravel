@@ -329,7 +329,10 @@ final class Environment implements EnvironmentInterface, EnvironmentBuilderInter
         return $this;
     }
 
-    public function dispatch(object $event): object
+    /**
+     * {@inheritDoc}
+     */
+    public function dispatch(object $event)
     {
         if (! $this->extensionsInitialized) {
             $this->initializeExtensions();
@@ -365,7 +368,6 @@ final class Environment implements EnvironmentInterface, EnvironmentBuilderInter
         foreach ($this->listenerData as $listenerData) {
             \assert($listenerData instanceof ListenerData);
 
-            /** @psalm-suppress ArgumentTypeCoercion */
             if (! \is_a($event, $listenerData->getEvent())) {
                 continue;
             }

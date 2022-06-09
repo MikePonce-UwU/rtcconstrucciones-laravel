@@ -4,7 +4,6 @@ namespace Spatie\Permission\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Contracts\Role;
@@ -17,7 +16,6 @@ use Spatie\Permission\WildcardPermission;
 
 trait HasPermissions
 {
-    /** @var string */
     private $permissionClass;
 
     public static function bootHasPermissions()
@@ -45,26 +43,25 @@ trait HasPermissions
      */
     public function permissions(): BelongsToMany
     {
-        $relation = $this->morphToMany(
+        return $this->morphToMany(
             config('permission.models.permission'),
             'model',
             config('permission.table_names.model_has_permissions'),
             config('permission.column_names.model_morph_key'),
             PermissionRegistrar::$pivotPermission
-        );
-
-        if (! PermissionRegistrar::$teams) {
-            return $relation;
-        }
-
-        return $relation->wherePivot(PermissionRegistrar::$teamsKey, getPermissionsTeamId());
+        )
+        ->where(function ($q) {
+            $q->when(PermissionRegistrar::$teams, function ($q) {
+                $q->where(PermissionRegistrar::$teamsKey, app(PermissionRegistrar::class)->getPermissionsTeamId());
+            });
+        });
     }
 
     /**
      * Scope the model query to certain permissions only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -78,25 +75,20 @@ trait HasPermissions
 
         return $query->where(function (Builder $query) use ($permissions, $rolesWithPermissions) {
             $query->whereHas('permissions', function (Builder $subQuery) use ($permissions) {
-                $permissionClass = $this->getPermissionClass();
-                $key = (new $permissionClass())->getKeyName();
-                $subQuery->whereIn(config('permission.table_names.permissions').".$key", \array_column($permissions, $key));
+                $subQuery->whereIn(config('permission.table_names.permissions').'.id', \array_column($permissions, 'id'));
             });
             if (count($rolesWithPermissions) > 0) {
                 $query->orWhereHas('roles', function (Builder $subQuery) use ($rolesWithPermissions) {
-                    $roleClass = $this->getRoleClass();
-                    $key = (new $roleClass())->getKeyName();
-                    $subQuery->whereIn(config('permission.table_names.roles').".$key", \array_column($rolesWithPermissions, $key));
+                    $subQuery->whereIn(config('permission.table_names.roles').'.id', \array_column($rolesWithPermissions, 'id'));
                 });
             }
         });
     }
 
     /**
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return array
-     * @throws \Spatie\Permission\Exceptions\PermissionDoesNotExist
      */
     protected function convertToPermissionModels($permissions): array
     {
@@ -104,14 +96,15 @@ trait HasPermissions
             $permissions = $permissions->all();
         }
 
+        $permissions = is_array($permissions) ? $permissions : [$permissions];
+
         return array_map(function ($permission) {
             if ($permission instanceof Permission) {
                 return $permission;
             }
-            $method = is_string($permission) ? 'findByName' : 'findById';
 
-            return $this->getPermissionClass()->{$method}($permission, $this->getDefaultGuardName());
-        }, Arr::wrap($permissions));
+            return $this->getPermissionClass()->findByName($permission, $this->getDefaultGuardName());
+        }, $permissions);
     }
 
     /**
@@ -146,7 +139,7 @@ trait HasPermissions
         }
 
         if (! $permission instanceof Permission) {
-            throw new PermissionDoesNotExist();
+            throw new PermissionDoesNotExist;
         }
 
         return $this->hasDirectPermission($permission) || $this->hasPermissionViaRole($permission);
@@ -192,6 +185,15 @@ trait HasPermissions
     }
 
     /**
+     * @deprecated since 2.35.0
+     * @alias of hasPermissionTo()
+     */
+    public function hasUncachedPermissionTo($permission, $guardName = null): bool
+    {
+        return $this->hasPermissionTo($permission, $guardName);
+    }
+
+    /**
      * An alias to hasPermissionTo(), but avoids throwing an exception.
      *
      * @param string|int|\Spatie\Permission\Contracts\Permission $permission
@@ -211,9 +213,10 @@ trait HasPermissions
     /**
      * Determine if the model has any of the given permissions.
      *
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param array ...$permissions
      *
      * @return bool
+     * @throws \Exception
      */
     public function hasAnyPermission(...$permissions): bool
     {
@@ -231,7 +234,7 @@ trait HasPermissions
     /**
      * Determine if the model has all of the given permissions.
      *
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param array ...$permissions
      *
      * @return bool
      * @throws \Exception
@@ -282,10 +285,10 @@ trait HasPermissions
         }
 
         if (! $permission instanceof Permission) {
-            throw new PermissionDoesNotExist();
+            throw new PermissionDoesNotExist;
         }
 
-        return $this->permissions->contains($permission->getKeyName(), $permission->getKey());
+        return $this->permissions->contains('id', $permission->id);
     }
 
     /**
@@ -317,7 +320,7 @@ trait HasPermissions
     /**
      * Grant the given permission(s) to a role.
      *
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -325,28 +328,34 @@ trait HasPermissions
     {
         $permissions = collect($permissions)
             ->flatten()
-            ->reduce(function ($array, $permission) {
+            ->map(function ($permission) {
                 if (empty($permission)) {
-                    return $array;
+                    return false;
                 }
 
-                $permission = $this->getStoredPermission($permission);
-                if (! $permission instanceof Permission) {
-                    return $array;
-                }
-
+                return $this->getStoredPermission($permission);
+            })
+            ->filter(function ($permission) {
+                return $permission instanceof Permission;
+            })
+            ->each(function ($permission) {
                 $this->ensureModelSharesGuard($permission);
-
-                $array[$permission->getKey()] = PermissionRegistrar::$teams && ! is_a($this, Role::class) ?
-                    [PermissionRegistrar::$teamsKey => getPermissionsTeamId()] : [];
-
-                return $array;
-            }, []);
+            })
+            ->map(function ($permission) {
+                return ['id' => $permission->id, 'values' => PermissionRegistrar::$teams && ! is_a($this, Role::class) ?
+                    [PermissionRegistrar::$teamsKey => app(PermissionRegistrar::class)->getPermissionsTeamId()] : [],
+                ];
+            })
+            ->pluck('values', 'id')->toArray();
 
         $model = $this->getModel();
 
         if ($model->exists) {
-            $this->permissions()->sync($permissions, false);
+            if (PermissionRegistrar::$teams && ! is_a($this, Role::class)) {
+                $this->permissions()->wherePivot(PermissionRegistrar::$teamsKey, app(PermissionRegistrar::class)->getPermissionsTeamId())->sync($permissions, false);
+            } else {
+                $this->permissions()->sync($permissions, false);
+            }
             $model->load('permissions');
         } else {
             $class = \get_class($model);
@@ -372,7 +381,7 @@ trait HasPermissions
     /**
      * Remove all current permissions and set the given ones.
      *
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -384,7 +393,7 @@ trait HasPermissions
     }
 
     /**
-     * Revoke the given permission(s).
+     * Revoke the given permission.
      *
      * @param \Spatie\Permission\Contracts\Permission|\Spatie\Permission\Contracts\Permission[]|string|string[] $permission
      *
@@ -409,7 +418,7 @@ trait HasPermissions
     }
 
     /**
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return \Spatie\Permission\Contracts\Permission|\Spatie\Permission\Contracts\Permission[]|\Illuminate\Support\Collection
      */
@@ -426,10 +435,6 @@ trait HasPermissions
         }
 
         if (is_array($permissions)) {
-            $permissions = array_map(function ($permission) use ($permissionClass) {
-                return is_a($permission, get_class($permissionClass)) ? $permission->name : $permission;
-            }, $permissions);
-
             return $permissionClass
                 ->whereIn('name', $permissions)
                 ->whereIn('guard_name', $this->getGuardNames())
@@ -471,7 +476,7 @@ trait HasPermissions
 
     /**
      * Check if the model has All of the requested Direct permissions.
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param array ...$permissions
      * @return bool
      */
     public function hasAllDirectPermissions(...$permissions): bool
@@ -489,7 +494,7 @@ trait HasPermissions
 
     /**
      * Check if the model has Any of the requested Direct permissions.
-     * @param string|int|array|\Spatie\Permission\Contracts\Permission|\Illuminate\Support\Collection ...$permissions
+     * @param array ...$permissions
      * @return bool
      */
     public function hasAnyDirectPermission(...$permissions): bool

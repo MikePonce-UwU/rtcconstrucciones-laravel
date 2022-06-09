@@ -17,15 +17,11 @@ use League\CommonMark\Output\RenderedContentInterface;
 
 /**
  * Interface for a service which converts Markdown to HTML.
- *
- * @deprecated since 2.2; use {@link ConverterInterface} instead
  */
 interface MarkdownConverterInterface
 {
     /**
      * Converts Markdown to HTML.
-     *
-     * @deprecated since 2.2; use {@link ConverterInterface::convert()} instead
      *
      * @throws \RuntimeException
      */

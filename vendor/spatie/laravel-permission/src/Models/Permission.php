@@ -18,15 +18,13 @@ class Permission extends Model implements PermissionContract
     use HasRoles;
     use RefreshesPermissionCache;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function __construct(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? config('auth.defaults.guard');
 
         parent::__construct($attributes);
-
-        $this->guarded[] = $this->primaryKey;
     }
 
     public function getTable()
@@ -108,7 +106,7 @@ class Permission extends Model implements PermissionContract
     public static function findById(int $id, $guardName = null): PermissionContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
-        $permission = static::getPermission([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
+        $permission = static::getPermission(['id' => $id, 'guard_name' => $guardName]);
 
         if (! $permission) {
             throw PermissionDoesNotExist::withId($id, $guardName);

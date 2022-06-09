@@ -18,15 +18,13 @@ class Role extends Model implements RoleContract
     use HasPermissions;
     use RefreshesPermissionCache;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function __construct(array $attributes = [])
     {
         $attributes['guard_name'] = $attributes['guard_name'] ?? config('auth.defaults.guard');
 
         parent::__construct($attributes);
-
-        $this->guarded[] = $this->primaryKey;
     }
 
     public function getTable()
@@ -43,7 +41,7 @@ class Role extends Model implements RoleContract
             if (array_key_exists(PermissionRegistrar::$teamsKey, $attributes)) {
                 $params[PermissionRegistrar::$teamsKey] = $attributes[PermissionRegistrar::$teamsKey];
             } else {
-                $attributes[PermissionRegistrar::$teamsKey] = getPermissionsTeamId();
+                $attributes[PermissionRegistrar::$teamsKey] = app(PermissionRegistrar::class)->getPermissionsTeamId();
             }
         }
         if (static::findByParam($params)) {
@@ -103,19 +101,11 @@ class Role extends Model implements RoleContract
         return $role;
     }
 
-    /**
-     * Find a role by its id (and optionally guardName).
-     *
-     * @param int $id
-     * @param string|null $guardName
-     *
-     * @return \Spatie\Permission\Contracts\Role|\Spatie\Permission\Models\Role
-     */
     public static function findById(int $id, $guardName = null): RoleContract
     {
         $guardName = $guardName ?? Guard::getDefaultName(static::class);
 
-        $role = static::findByParam([(new static())->getKeyName() => $id, 'guard_name' => $guardName]);
+        $role = static::findByParam(['id' => $id, 'guard_name' => $guardName]);
 
         if (! $role) {
             throw RoleDoesNotExist::withId($id);
@@ -130,7 +120,7 @@ class Role extends Model implements RoleContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \Spatie\Permission\Contracts\Role|\Spatie\Permission\Models\Role
+     * @return \Spatie\Permission\Contracts\Role
      */
     public static function findOrCreate(string $name, $guardName = null): RoleContract
     {
@@ -139,7 +129,7 @@ class Role extends Model implements RoleContract
         $role = static::findByParam(['name' => $name, 'guard_name' => $guardName]);
 
         if (! $role) {
-            return static::query()->create(['name' => $name, 'guard_name' => $guardName] + (PermissionRegistrar::$teams ? [PermissionRegistrar::$teamsKey => getPermissionsTeamId()] : []));
+            return static::query()->create(['name' => $name, 'guard_name' => $guardName] + (PermissionRegistrar::$teams ? [PermissionRegistrar::$teamsKey => app(PermissionRegistrar::class)->getPermissionsTeamId()] : []));
         }
 
         return $role;
@@ -147,16 +137,13 @@ class Role extends Model implements RoleContract
 
     protected static function findByParam(array $params = [])
     {
-        $query = static::query();
-
-        if (PermissionRegistrar::$teams) {
-            $query->where(function ($q) use ($params) {
+        $query = static::when(PermissionRegistrar::$teams, function ($q) use ($params) {
+            $q->where(function ($q) use ($params) {
                 $q->whereNull(PermissionRegistrar::$teamsKey)
-                    ->orWhere(PermissionRegistrar::$teamsKey, $params[PermissionRegistrar::$teamsKey] ?? getPermissionsTeamId());
+                    ->orWhere(PermissionRegistrar::$teamsKey, $params[PermissionRegistrar::$teamsKey] ?? app(PermissionRegistrar::class)->getPermissionsTeamId());
             });
-            unset($params[PermissionRegistrar::$teamsKey]);
-        }
-
+        });
+        unset($params[PermissionRegistrar::$teamsKey]);
         foreach ($params as $key => $value) {
             $query->where($key, $value);
         }

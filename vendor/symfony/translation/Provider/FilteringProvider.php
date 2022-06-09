@@ -18,12 +18,14 @@ use Symfony\Component\Translation\TranslatorBagInterface;
  * Filters domains and locales between the Translator config values and those specific to each provider.
  *
  * @author Mathieu Santostefano <msantostefano@protonmail.com>
+ *
+ * @experimental in 5.3
  */
 class FilteringProvider implements ProviderInterface
 {
-    private ProviderInterface $provider;
-    private array $locales;
-    private array $domains;
+    private $provider;
+    private $locales;
+    private $domains;
 
     public function __construct(ProviderInterface $provider, array $locales, array $domains = [])
     {

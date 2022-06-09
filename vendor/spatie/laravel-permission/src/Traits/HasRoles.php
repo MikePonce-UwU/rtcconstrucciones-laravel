@@ -4,7 +4,6 @@ namespace Spatie\Permission\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Contracts\Role;
@@ -14,7 +13,6 @@ trait HasRoles
 {
     use HasPermissions;
 
-    /** @var string */
     private $roleClass;
 
     public static function bootHasRoles()
@@ -42,23 +40,25 @@ trait HasRoles
      */
     public function roles(): BelongsToMany
     {
-        $relation = $this->morphToMany(
+        $model_has_roles = config('permission.table_names.model_has_roles');
+
+        return $this->morphToMany(
             config('permission.models.role'),
             'model',
-            config('permission.table_names.model_has_roles'),
+            $model_has_roles,
             config('permission.column_names.model_morph_key'),
             PermissionRegistrar::$pivotRole
-        );
-
-        if (! PermissionRegistrar::$teams) {
-            return $relation;
-        }
-
-        return $relation->wherePivot(PermissionRegistrar::$teamsKey, getPermissionsTeamId())
-            ->where(function ($q) {
-                $teamField = config('permission.table_names.roles').'.'.PermissionRegistrar::$teamsKey;
-                $q->whereNull($teamField)->orWhere($teamField, getPermissionsTeamId());
+        )
+        ->where(function ($q) use ($model_has_roles) {
+            $q->when(PermissionRegistrar::$teams, function ($q) use ($model_has_roles) {
+                $teamId = app(PermissionRegistrar::class)->getPermissionsTeamId();
+                $q->where($model_has_roles.'.'.PermissionRegistrar::$teamsKey, $teamId)
+                    ->where(function ($q) use ($teamId) {
+                        $teamField = config('permission.table_names.roles').'.'.PermissionRegistrar::$teamsKey;
+                        $q->whereNull($teamField)->orWhere($teamField, $teamId);
+                    });
             });
+        });
     }
 
     /**
@@ -76,27 +76,30 @@ trait HasRoles
             $roles = $roles->all();
         }
 
+        if (! is_array($roles)) {
+            $roles = [$roles];
+        }
+
         $roles = array_map(function ($role) use ($guard) {
             if ($role instanceof Role) {
                 return $role;
             }
 
             $method = is_numeric($role) ? 'findById' : 'findByName';
+            $guard = $guard ?: $this->getDefaultGuardName();
 
-            return $this->getRoleClass()->{$method}($role, $guard ?: $this->getDefaultGuardName());
-        }, Arr::wrap($roles));
+            return $this->getRoleClass()->{$method}($role, $guard);
+        }, $roles);
 
         return $query->whereHas('roles', function (Builder $subQuery) use ($roles) {
-            $roleClass = $this->getRoleClass();
-            $key = (new $roleClass())->getKeyName();
-            $subQuery->whereIn(config('permission.table_names.roles').".$key", \array_column($roles, $key));
+            $subQuery->whereIn(config('permission.table_names.roles').'.id', \array_column($roles, 'id'));
         });
     }
 
     /**
      * Assign the given role to the model.
      *
-     * @param array|string|int|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection ...$roles
+     * @param array|string|int|\Spatie\Permission\Contracts\Role ...$roles
      *
      * @return $this
      */
@@ -104,28 +107,34 @@ trait HasRoles
     {
         $roles = collect($roles)
             ->flatten()
-            ->reduce(function ($array, $role) {
+            ->map(function ($role) {
                 if (empty($role)) {
-                    return $array;
+                    return false;
                 }
 
-                $role = $this->getStoredRole($role);
-                if (! $role instanceof Role) {
-                    return $array;
-                }
-
+                return $this->getStoredRole($role);
+            })
+            ->filter(function ($role) {
+                return $role instanceof Role;
+            })
+            ->each(function ($role) {
                 $this->ensureModelSharesGuard($role);
-
-                $array[$role->getKey()] = PermissionRegistrar::$teams && ! is_a($this, Permission::class) ?
-                    [PermissionRegistrar::$teamsKey => getPermissionsTeamId()] : [];
-
-                return $array;
-            }, []);
+            })
+            ->map(function ($role) {
+                return ['id' => $role->id, 'values' => PermissionRegistrar::$teams && ! is_a($this, Permission::class) ?
+                    [PermissionRegistrar::$teamsKey => app(PermissionRegistrar::class)->getPermissionsTeamId()] : [],
+                ];
+            })
+            ->pluck('values', 'id')->toArray();
 
         $model = $this->getModel();
 
         if ($model->exists) {
-            $this->roles()->sync($roles, false);
+            if (PermissionRegistrar::$teams && ! is_a($this, Permission::class)) {
+                $this->roles()->wherePivot(PermissionRegistrar::$teamsKey, app(PermissionRegistrar::class)->getPermissionsTeamId())->sync($roles, false);
+            } else {
+                $this->roles()->sync($roles, false);
+            }
             $model->load('roles');
         } else {
             $class = \get_class($model);
@@ -169,7 +178,7 @@ trait HasRoles
     /**
      * Remove all current roles and set the given ones.
      *
-     * @param  array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection|string|int  ...$roles
+     * @param  array|\Spatie\Permission\Contracts\Role|string|int  ...$roles
      *
      * @return $this
      */
@@ -200,16 +209,13 @@ trait HasRoles
         }
 
         if (is_int($roles)) {
-            $roleClass = $this->getRoleClass();
-            $key = (new $roleClass())->getKeyName();
-
             return $guard
-                ? $this->roles->where('guard_name', $guard)->contains($key, $roles)
-                : $this->roles->contains($key, $roles);
+                ? $this->roles->where('guard_name', $guard)->contains('id', $roles)
+                : $this->roles->contains('id', $roles);
         }
 
         if ($roles instanceof Role) {
-            return $this->roles->contains($roles->getKeyName(), $roles->getKey());
+            return $this->roles->contains('id', $roles->id);
         }
 
         if (is_array($roles)) {
@@ -259,7 +265,7 @@ trait HasRoles
         }
 
         if ($roles instanceof Role) {
-            return $this->roles->contains($roles->getKeyName(), $roles->getKey());
+            return $this->roles->contains('id', $roles->id);
         }
 
         $roles = collect()->make($roles)->map(function ($role) {

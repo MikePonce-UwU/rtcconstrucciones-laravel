@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\ErrorLogHandler;
-use Monolog\Handler\FingersCrossedHandler;
 use Monolog\Handler\FormattableHandlerInterface;
 use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\RotatingFileHandler;
@@ -63,19 +62,6 @@ class LogManager implements LoggerInterface
     }
 
     /**
-     * Build an on-demand log channel.
-     *
-     * @param  array  $config
-     * @return \Psr\Log\LoggerInterface
-     */
-    public function build(array $config)
-    {
-        unset($this->channels['ondemand']);
-
-        return $this->get('ondemand', $config);
-    }
-
-    /**
      * Create a new, on-demand aggregate logger instance.
      *
      * @param  array  $channels
@@ -113,16 +99,23 @@ class LogManager implements LoggerInterface
     }
 
     /**
+     * @return array
+     */
+    public function getChannels()
+    {
+        return $this->channels;
+    }
+
+    /**
      * Attempt to get the log from the local cache.
      *
      * @param  string  $name
-     * @param  array|null  $config
      * @return \Psr\Log\LoggerInterface
      */
-    protected function get($name, ?array $config = null)
+    protected function get($name)
     {
         try {
-            return $this->channels[$name] ?? with($this->resolve($name, $config), function ($logger) use ($name) {
+            return $this->channels[$name] ?? with($this->resolve($name), function ($logger) use ($name) {
                 return $this->channels[$name] = $this->tap($name, new Logger($logger, $this->app['events']));
             });
         } catch (Throwable $e) {
@@ -187,14 +180,13 @@ class LogManager implements LoggerInterface
      * Resolve the given log instance by name.
      *
      * @param  string  $name
-     * @param  array|null  $config
      * @return \Psr\Log\LoggerInterface
      *
      * @throws \InvalidArgumentException
      */
-    protected function resolve($name, ?array $config = null)
+    protected function resolve($name)
     {
-        $config = $config ?? $this->configurationFor($name);
+        $config = $this->configurationFor($name);
 
         if (is_null($config)) {
             throw new InvalidArgumentException("Log [{$name}] is not defined.");
@@ -250,15 +242,11 @@ class LogManager implements LoggerInterface
         }
 
         $handlers = collect($config['channels'])->flatMap(function ($channel) {
-            return $channel instanceof LoggerInterface
-                ? $channel->getHandlers()
-                : $this->channel($channel)->getHandlers();
+            return $this->channel($channel)->getHandlers();
         })->all();
 
         $processors = collect($config['channels'])->flatMap(function ($channel) {
-            return $channel instanceof LoggerInterface
-                ? $channel->getProcessors()
-                : $this->channel($channel)->getProcessors();
+            return $this->channel($channel)->getProcessors();
         })->all();
 
         if ($config['ignore_exceptions'] ?? false) {
@@ -409,17 +397,17 @@ class LogManager implements LoggerInterface
      */
     protected function prepareHandler(HandlerInterface $handler, array $config = [])
     {
-        if (isset($config['action_level'])) {
-            $handler = new FingersCrossedHandler($handler, $this->actionLevel($config));
+        $isHandlerFormattable = false;
+
+        if (Monolog::API === 1) {
+            $isHandlerFormattable = true;
+        } elseif (Monolog::API === 2 && $handler instanceof FormattableHandlerInterface) {
+            $isHandlerFormattable = true;
         }
 
-        if (Monolog::API !== 1 && (Monolog::API !== 2 || ! $handler instanceof FormattableHandlerInterface)) {
-            return $handler;
-        }
-
-        if (! isset($config['formatter'])) {
+        if ($isHandlerFormattable && ! isset($config['formatter'])) {
             $handler->setFormatter($this->formatter());
-        } elseif ($config['formatter'] !== 'default') {
+        } elseif ($isHandlerFormattable && $config['formatter'] !== 'default') {
             $handler->setFormatter($this->app->make($config['formatter'], $config['formatter_with'] ?? []));
         }
 
@@ -524,16 +512,6 @@ class LogManager implements LoggerInterface
         }
 
         return $driver;
-    }
-
-    /**
-     * Get all of the resolved log channels.
-     *
-     * @return array
-     */
-    public function getChannels()
-    {
-        return $this->channels;
     }
 
     /**

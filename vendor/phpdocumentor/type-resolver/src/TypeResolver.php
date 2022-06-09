@@ -15,10 +15,7 @@ namespace phpDocumentor\Reflection;
 
 use ArrayIterator;
 use InvalidArgumentException;
-use phpDocumentor\Reflection\PseudoTypes\IntegerRange;
-use phpDocumentor\Reflection\PseudoTypes\List_;
 use phpDocumentor\Reflection\Types\Array_;
-use phpDocumentor\Reflection\Types\ArrayKey;
 use phpDocumentor\Reflection\Types\ClassString;
 use phpDocumentor\Reflection\Types\Collection;
 use phpDocumentor\Reflection\Types\Compound;
@@ -39,10 +36,8 @@ use function array_values;
 use function class_exists;
 use function class_implements;
 use function count;
-use function current;
 use function end;
 use function in_array;
-use function is_numeric;
 use function key;
 use function preg_split;
 use function strpos;
@@ -85,12 +80,10 @@ final class TypeResolver
         'non-empty-lowercase-string' => PseudoTypes\NonEmptyLowercaseString::class,
         'non-empty-string' => PseudoTypes\NonEmptyString::class,
         'numeric-string' => PseudoTypes\NumericString::class,
-        'numeric' => PseudoTypes\Numeric_::class,
         'trait-string' => PseudoTypes\TraitString::class,
         'int' => Types\Integer::class,
         'integer' => Types\Integer::class,
         'positive-int' => PseudoTypes\PositiveInteger::class,
-        'negative-int' => PseudoTypes\NegativeInteger::class,
         'bool' => Types\Boolean::class,
         'boolean' => Types\Boolean::class,
         'real' => Types\Float_::class,
@@ -109,14 +102,12 @@ final class TypeResolver
         'callable-string' => PseudoTypes\CallableString::class,
         'false' => PseudoTypes\False_::class,
         'true' => PseudoTypes\True_::class,
-        'literal-string' => PseudoTypes\LiteralString::class,
         'self' => Types\Self_::class,
         '$this' => Types\This::class,
         'static' => Types\Static_::class,
         'parent' => Types\Parent_::class,
         'iterable' => Types\Iterable_::class,
         'never' => Types\Never_::class,
-        'list' => PseudoTypes\List_::class,
     ];
 
     /**
@@ -262,8 +253,6 @@ final class TypeResolver
                 if ($classType !== null) {
                     if ((string) $classType === 'class-string') {
                         $types[] = $this->resolveClassString($tokens, $context);
-                    } elseif ((string) $classType === 'int') {
-                        $types[] = $this->resolveIntRange($tokens);
                     } elseif ((string) $classType === 'interface-string') {
                         $types[] = $this->resolveInterfaceString($tokens, $context);
                     } else {
@@ -280,10 +269,6 @@ final class TypeResolver
             } elseif ($token === self::OPERATOR_ARRAY) {
                 end($types);
                 $last = key($types);
-                if ($last === null) {
-                    throw new InvalidArgumentException('Unexpected array operator');
-                }
-
                 $lastItem = $types[$last];
                 if ($lastItem instanceof Expression) {
                     $lastItem = $lastItem->getValueType();
@@ -328,7 +313,7 @@ final class TypeResolver
                 );
             }
         } elseif (count($types) === 1) {
-            return current($types);
+            return $types[0];
         }
 
         if ($compoundToken === '|') {
@@ -491,75 +476,6 @@ final class TypeResolver
     }
 
     /**
-     * Resolves integer ranges
-     *
-     * @param ArrayIterator<int, (string|null)> $tokens
-     */
-    private function resolveIntRange(ArrayIterator $tokens): Type
-    {
-        $tokens->next();
-
-        $token = '';
-        $minValue = null;
-        $maxValue = null;
-        $commaFound = false;
-        $tokenCounter = 0;
-        while ($tokens->valid()) {
-            $tokenCounter++;
-            $token = $tokens->current();
-            if ($token === null) {
-                throw new RuntimeException(
-                    'Unexpected nullable character'
-                );
-            }
-
-            $token = trim($token);
-
-            if ($token === '>') {
-                break;
-            }
-
-            if ($token === ',') {
-                $commaFound = true;
-            }
-
-            if ($commaFound === false && $minValue === null) {
-                if (is_numeric($token) || $token === 'max' || $token === 'min') {
-                    $minValue = $token;
-                }
-            }
-
-            if ($commaFound === true && $maxValue === null) {
-                if (is_numeric($token) || $token === 'max' || $token === 'min') {
-                    $maxValue = $token;
-                }
-            }
-
-            $tokens->next();
-        }
-
-        if ($token !== '>') {
-            if (empty($token)) {
-                throw new RuntimeException(
-                    'interface-string: ">" is missing'
-                );
-            }
-
-            throw new RuntimeException(
-                'Unexpected character "' . $token . '", ">" is missing'
-            );
-        }
-
-        if ($minValue === null || $maxValue === null || $tokenCounter > 4) {
-            throw new RuntimeException(
-                'int<min,max> has not the correct format'
-            );
-        }
-
-        return new IntegerRange($minValue, $maxValue);
-    }
-
-    /**
      * Resolves class string
      *
      * @param ArrayIterator<int, (string|null)> $tokens
@@ -603,11 +519,10 @@ final class TypeResolver
     {
         $isArray    = ((string) $classType === 'array');
         $isIterable = ((string) $classType === 'iterable');
-        $isList     = ((string) $classType === 'list');
 
         // allow only "array", "iterable" or class name before "<"
         if (
-            !$isArray && !$isIterable && !$isList
+            !$isArray && !$isIterable
             && (!$classType instanceof Object_ || $classType->getFqsen() === null)
         ) {
             throw new RuntimeException(
@@ -621,14 +536,13 @@ final class TypeResolver
         $keyType   = null;
 
         $token = $tokens->current();
-        if ($token !== null && trim($token) === ',' && !$isList) {
+        if ($token !== null && trim($token) === ',') {
             // if we have a comma, then we just parsed the key type, not the value type
             $keyType = $valueType;
             if ($isArray) {
                 // check the key type for an "array" collection. We allow only
                 // strings or integers.
                 if (
-                    !$keyType instanceof ArrayKey &&
                     !$keyType instanceof String_ &&
                     !$keyType instanceof Integer &&
                     !$keyType instanceof Compound
@@ -641,7 +555,6 @@ final class TypeResolver
                 if ($keyType instanceof Compound) {
                     foreach ($keyType->getIterator() as $item) {
                         if (
-                            !$item instanceof ArrayKey &&
                             !$item instanceof String_ &&
                             !$item instanceof Integer
                         ) {
@@ -677,10 +590,6 @@ final class TypeResolver
 
         if ($isIterable) {
             return new Iterable_($valueType, $keyType);
-        }
-
-        if ($isList) {
-            return new List_($valueType);
         }
 
         if ($classType instanceof Object_) {

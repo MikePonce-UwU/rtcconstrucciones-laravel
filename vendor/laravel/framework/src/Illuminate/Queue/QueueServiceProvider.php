@@ -17,12 +17,9 @@ use Illuminate\Queue\Failed\DynamoDbFailedJobProvider;
 use Illuminate\Queue\Failed\NullFailedJobProvider;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
-use Laravel\SerializableClosure\SerializableClosure;
 
 class QueueServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    use SerializesAndRestoresModelIdentifiers;
-
     /**
      * Register the service provider.
      *
@@ -30,37 +27,11 @@ class QueueServiceProvider extends ServiceProvider implements DeferrableProvider
      */
     public function register()
     {
-        $this->configureSerializableClosureUses();
-
         $this->registerManager();
         $this->registerConnection();
         $this->registerWorker();
         $this->registerListener();
         $this->registerFailedJobServices();
-    }
-
-    /**
-     * Configure serializable closures uses.
-     *
-     * @return void
-     */
-    protected function configureSerializableClosureUses()
-    {
-        SerializableClosure::transformUseVariablesUsing(function ($data) {
-            foreach ($data as $key => $value) {
-                $data[$key] = $this->getSerializedPropertyValue($value);
-            }
-
-            return $data;
-        });
-
-        SerializableClosure::resolveUseVariablesUsing(function ($data) {
-            foreach ($data as $key => $value) {
-                $data[$key] = $this->getRestoredPropertyValue($value);
-            }
-
-            return $data;
-        });
     }
 
     /**
@@ -234,11 +205,6 @@ class QueueServiceProvider extends ServiceProvider implements DeferrableProvider
     {
         $this->app->singleton('queue.failer', function ($app) {
             $config = $app['config']['queue.failed'];
-
-            if (array_key_exists('driver', $config) &&
-                (is_null($config['driver']) || $config['driver'] === 'null')) {
-                return new NullFailedJobProvider;
-            }
 
             if (isset($config['driver']) && $config['driver'] === 'dynamodb') {
                 return $this->dynamoFailedJobProvider($config);

@@ -15,14 +15,16 @@ use Symfony\Component\Translation\Exception\UnsupportedSchemeException;
 
 /**
  * @author Mathieu Santostefano <msantostefano@protonmail.com>
+ *
+ * @experimental in 5.3
  */
 class TranslationProviderCollectionFactory
 {
-    private iterable $factories;
-    private array $enabledLocales;
+    private $factories;
+    private $enabledLocales;
 
     /**
-     * @param iterable<mixed, ProviderFactoryInterface> $factories
+     * @param ProviderFactoryInterface[] $factories
      */
     public function __construct(iterable $factories, array $enabledLocales)
     {

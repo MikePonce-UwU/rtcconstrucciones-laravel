@@ -525,9 +525,7 @@ class Base
         }, $regex);
         // All [ABC] become B (or A or C)
         $regex = preg_replace_callback('/\[([^\]]+)\]/', static function ($matches) {
-            // remove backslashes (that are not followed by another backslash) because they are escape characters
-            $match = preg_replace('/\\\(?!\\\)/', '', $matches[1]);
-            $randomElement = Base::randomElement(str_split($match));
+            $randomElement = Base::randomElement(str_split($matches[1]));
             //[.] should not be a random character, but a literal .
             return str_replace('.', '\.', $randomElement);
         }, $regex);

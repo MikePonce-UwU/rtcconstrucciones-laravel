@@ -272,10 +272,6 @@ class ComponentTagCompiler
             return $view;
         }
 
-        if ($viewFactory->exists($view = $this->guessViewName($component).'.index')) {
-            return $view;
-        }
-
         throw new InvalidArgumentException(
             "Unable to locate a class or view for component [{$component}]."
         );

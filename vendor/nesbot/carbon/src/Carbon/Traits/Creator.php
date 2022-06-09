@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Carbon\Traits;
 
 use Carbon\Carbon;
@@ -95,7 +94,7 @@ trait Creator
             setlocale(LC_NUMERIC, $locale);
         }
 
-        self::setLastErrors(parent::getLastErrors());
+        static::setLastErrors(parent::getLastErrors());
     }
 
     /**
@@ -339,7 +338,7 @@ trait Creator
             return $now(static::now($tz));
         }
 
-        return $now->avoidMutation()->tz($tz);
+        return $now;
     }
 
     /**
@@ -368,7 +367,7 @@ trait Creator
      */
     public static function create($year = 0, $month = 1, $day = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)
     {
-        if ((\is_string($year) && !is_numeric($year)) || $year instanceof DateTimeInterface) {
+        if (\is_string($year) && !is_numeric($year) || $year instanceof DateTimeInterface) {
             return static::parse($year, $tz ?: (\is_string($month) || $month instanceof DateTimeZone ? $month : null));
         }
 
@@ -932,8 +931,6 @@ trait Creator
 
     /**
      * {@inheritdoc}
-     *
-     * @return array
      */
     #[ReturnTypeWillChange]
     public static function getLastErrors()

@@ -31,7 +31,6 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 				? static::from($value, true)
 				: $value;
 		}
-
 		return $obj;
 	}
 
@@ -65,7 +64,6 @@ class ArrayHash extends \stdClass implements \ArrayAccess, \Countable, \Iterator
 		if (!is_scalar($key)) { // prevents null
 			throw new Nette\InvalidArgumentException(sprintf('Key must be either a string or an integer, %s given.', gettype($key)));
 		}
-
 		$this->$key = $value;
 	}
 

@@ -747,9 +747,6 @@ class Mock implements MockInterface
             case 'void':
                 return null;
 
-            case 'static':
-                return $this;
-
             case 'object':
                 $mock = \Mockery::mock();
                 if ($this->_mockery_ignoreMissingRecursive) {

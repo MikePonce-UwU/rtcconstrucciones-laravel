@@ -55,7 +55,7 @@ trait ConfirmsPasswords
     protected function rules()
     {
         return [
-            'password' => 'required|current_password:web',
+            'password' => 'required|password',
         ];
     }
 
